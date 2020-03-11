@@ -15,7 +15,7 @@ public class ElevatorSimulation
     Button travelDown;
     Button numberOfFloors;
     Button floorSetup;
-    Elevator elevator = new Elevator();
+    Button currentElevatorPosition;
     
     int currentFloor = 0;
     
@@ -79,13 +79,17 @@ public class ElevatorSimulation
     	travelDown =  new Button("Down");
         //Show number of floors in the Building
     	numberOfFloors = new Button( "All Floors");
-        
+    	//Show current position of the Elevator in the building
+        currentElevatorPosition = new Button("Current Elevator Postion");
+    	
         //Add the buttons to the VBox's
-        layout.getChildren().addAll(travelUp, travelDown, numberOfFloors);
+        layout.getChildren().addAll(travelUp, travelDown, numberOfFloors, currentElevatorPosition);
         layout2.getChildren().addAll(floorSetup);
         //Align buttons in the CENTER
         layout.setAlignment(Pos.CENTER);
         layout2.setAlignment(Pos.CENTER);
+        
+        Building.addElevators(1);
         
         floorSetup.setOnAction(e -> 
         {
@@ -96,18 +100,24 @@ public class ElevatorSimulation
         // e = lambda expression
         travelUp.setOnAction(e ->
         {
-        	elevator.elevatorUp();
+        	Building.getElevator("e1").elevatorUp();
         });
         
         //Tell button 1 to print to console 1 floor lower than current or inform using that minimum floor has been reached
         travelDown.setOnAction(e ->
         {
-        	elevator.elevatorDown();
+        	Building.getElevator("e1").elevatorDown();
         });
         
         numberOfFloors.setOnAction(e ->
         {
-        	System.out.println("There are" + " " + Building.returnArraySize() + " " + "Floors");
+        	System.out.println("There are " + Building.getSizeOfFloors() + " floors in the building");
+        });
+        
+        currentElevatorPosition.setOnAction(e ->
+        {
+        	//System.out.println("There are" + " " + Building.returnArraySize() + " " + "Floors");
+        	System.out.println("The elevator is on floor " + Building.getElevator("e1").getCurrentFloor());
         });
         
         //Add the VBox to the window and show the window
