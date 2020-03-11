@@ -20,9 +20,9 @@ public class ElevatorSimulation
     int currentFloor = 0;
     
     //Create UI for Number of floors
-	VBox layout2 = new VBox(10);
+	VBox startWindow = new VBox(10);
     //Create UI for elevator movement
-    VBox layout = new VBox(10);
+    VBox mainWindow = new VBox(10);
     
     public Stage mStage;
 	
@@ -31,36 +31,48 @@ public class ElevatorSimulation
     	launch(args);    
     }
     
-    public void display(String title)
+    public void setFloors(String title)
 	{
-		Stage window =  new Stage();
-		window.initModality(Modality.APPLICATION_MODAL);
-		window.setTitle(title);
-		window.setMinWidth(250);
-		Label label = new Label();
-		//label.setText(message);
+		Stage floorSetStage =  new Stage();
 		Button button;
-		
-		button = new Button("Submit");
+		Label setFloorsLabel = new Label();
 		TextField numberInput = new TextField();
+		
+		floorSetStage.initModality(Modality.APPLICATION_MODAL);
+		floorSetStage.setTitle(title);
+		floorSetStage.setMinWidth(250);
+		setFloorsLabel.setText("Set the buildings floors");
+		button = new Button("Submit");
 		
 		button.setOnAction(e ->
 		{
-
-	    	Building.setFloors(numberInput.getText());
-			window.close();
+			try
+			{
+			String number = numberInput.getText();
+			if(number.equals("0"))
+			{
+				throw new Exception();
+			}
+	    	Building.setFloors(number);
+			floorSetStage.close();
 			mStage.close();
-			Scene scene = new Scene(layout, 300, 250);
+			Scene scene = new Scene(mainWindow, 300, 250);
 	        mStage.setScene(scene);
 	        mStage.show();
+			}
+			catch(Exception f)
+			{
+				System.out.println("Insert a postive number");
+			}
 		});
 		
-		VBox layout = new VBox(10);
-		layout.getChildren().addAll(label, numberInput, button);
-		layout.setAlignment(Pos.CENTER);
-		Scene scene = new Scene(layout, 200, 200);
-		window.setScene(scene);
-		window.showAndWait();
+		VBox floorWindow = new VBox(10);
+		Scene floorStage = new Scene(floorWindow, 200, 200);
+		
+		floorWindow.getChildren().addAll(setFloorsLabel, numberInput, button);
+		floorWindow.setAlignment(Pos.CENTER);
+		floorSetStage.setScene(floorStage);
+		floorSetStage.showAndWait();
 	}
     
 	@Override
@@ -83,17 +95,17 @@ public class ElevatorSimulation
         currentElevatorPosition = new Button("Current Elevator Postion");
     	
         //Add the buttons to the VBox's
-        layout.getChildren().addAll(travelUp, travelDown, numberOfFloors, currentElevatorPosition);
-        layout2.getChildren().addAll(floorSetup);
+        mainWindow.getChildren().addAll(travelUp, travelDown, numberOfFloors, currentElevatorPosition);
+        startWindow.getChildren().addAll(floorSetup);
         //Align buttons in the CENTER
-        layout.setAlignment(Pos.CENTER);
-        layout2.setAlignment(Pos.CENTER);
+        mainWindow.setAlignment(Pos.CENTER);
+        startWindow.setAlignment(Pos.CENTER);
         
         Building.addElevators(1);
         
         floorSetup.setOnAction(e -> 
         {
-        	display("Set Number Of Floors");
+        	setFloors("Set Number Of Floors");
         });
         
         //Tell button 1 to print to console 1 floor higher than current or inform using that maximum floor has been reached
@@ -121,8 +133,8 @@ public class ElevatorSimulation
         });
         
         //Add the VBox to the window and show the window
-        Scene scene = new Scene(layout2, 300, 250);
-        mainStage.setScene(scene);
+        Scene startStage = new Scene(startWindow, 300, 250);
+        mainStage.setScene(startStage);
         mainStage.show();
 	}
 }
