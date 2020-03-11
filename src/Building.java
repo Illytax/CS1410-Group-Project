@@ -2,42 +2,53 @@ import java.util.ArrayList;
 
 final class Building
 {
-	private static int[] Floors;
+	private static int[] floorsInBuilding;
 	
-	static ArrayList<Elevator> elevatorList = new ArrayList<Elevator>(); 
-	//private static ArrayList<Integer> FloorList = new ArrayList<Integer>();
+	static ArrayList<Elevator> elevators = new ArrayList<Elevator>();
 	
-	public static int[] returnArray()
+	public static int[] getNumberOfFloors()
 	{
-		return Floors;
+		return floorsInBuilding;
 	}
 	
-	public static int returnArraySize()
+	public static int getSizeOfFloors()
 	{
-		return Floors.length;
+		return floorsInBuilding.length;
 	}
 	
-	public static void addElevators(int e)
+	public static void addElevators(int Elevators)
 	{
-		for(int i = 0; i < e; i++)
+		for(int i = 0; i < Elevators; i++)
 		{
-			Elevator currentElevator = new Elevator();
-			elevatorList.add(currentElevator);
+			Elevator currentElevator = new Elevator("e" + (i + 1));
+			elevators.add(currentElevator);
 		}
 	}
 	
 	public static ArrayList<Elevator> returnList()
 	{
-		return elevatorList;
+		return elevators;
 	}
 	
 	public static void setFloors(String floorString)
 	{
 		int floorNumbers = Integer.parseInt(floorString);
-		Floors = new int[floorNumbers];
+		floorsInBuilding = new int[floorNumbers];
 		for(int i = 0; i < floorNumbers; i++)
 		{
-			Floors[i] = i + 1;
+			floorsInBuilding[i] = i + 1;
 		}
+	}
+	
+	public static Elevator getElevator(String name)
+	{
+		for(Elevator e : elevators)
+		{
+			if(e.getElevatorName().equals(name))
+			{
+				return e;
+			}
+		}
+		return null;
 	}
 }
