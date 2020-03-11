@@ -57,7 +57,8 @@ public class ElevatorSimulation
 		
 		VBox layout = new VBox(10);
 		layout.getChildren().addAll(label, numberInput, button);
-		Scene scene = new Scene(layout);
+		layout.setAlignment(Pos.CENTER);
+		Scene scene = new Scene(layout, 200, 200);
 		window.setScene(scene);
 		window.showAndWait();
 	}
