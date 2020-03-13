@@ -137,4 +137,5 @@ public class ElevatorSimulation
         mainStage.setScene(startStage);
         mainStage.show();
 	}
-}
+}        
+
