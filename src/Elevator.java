@@ -1,7 +1,7 @@
 public class Elevator 
 {    
-	int currentFloor = 0;
-	String elevatorName;
+	private int currentFloor = 0;
+	private String elevatorName;
 	
 	public Elevator(String elevatorName)
 	{
