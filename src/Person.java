@@ -2,7 +2,6 @@ public class Person
 {
 	protected int[] accessLevel;
 	protected int priorityLevel;
-	protected int startingFloor; 
 	protected int capacityNeeded;
 	protected int currentFloor; 
 	protected float probabilityP;

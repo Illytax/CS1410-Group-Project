@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 public class ElevatorSimulation
  extends Application
 {
+	//Initialise all buttons
 	Button travelUpElevator1;
 	Button travelUpElevator2;
     Button travelDownElevator1;
@@ -98,10 +99,13 @@ public class ElevatorSimulation
     	
     	//Set the number of floors in the Building
     	floorSetup =  new Button("Set Number Of Floors");
-        
+        //move elevator 1 up
     	travelUpElevator1 = new Button("Elevator 1 Up");
+    	//move elevator 1 down
     	travelDownElevator1 =  new Button("Elevator 1 Down");
+    	//move elevator 2 up
     	travelUpElevator2 = new Button("Elevator 2 Up");
+    	//move elevator 2 down
     	travelDownElevator2 = new Button("Elevator 1 Down");
         //Show number of floors in the Building
     	numberOfFloors = new Button( "All Floors");
@@ -112,7 +116,7 @@ public class ElevatorSimulation
         //Show the amount of elevators in the building
         numberOfElevators = new Button("All Elevators");
     	
-        //Add the buttons to the VBox's
+        //Add the buttons to the main window
         mainWindow.getChildren().addAll(
         		travelUpElevator1, 
         		travelDownElevator1, 
@@ -123,6 +127,7 @@ public class ElevatorSimulation
         		numberOfFloors,
         		numberOfElevators);
         
+        //add Buttons to the start window
         startWindow.getChildren().addAll(floorSetup);
         //Align buttons in the CENTER
         mainWindow.setAlignment(Pos.CENTER);
