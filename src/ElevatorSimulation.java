@@ -40,6 +40,8 @@ public class ElevatorSimulation
 		Button submitFloors;
 		Label setFloorsLabel = new Label();
 		TextField numberInput = new TextField();
+		Label setElevatorsLabel = new Label();
+		TextField elevatorInput = new TextField();
 		
 		floorSetStage.initModality(Modality.APPLICATION_MODAL);
 		floorSetStage.setTitle(title);
@@ -72,7 +74,7 @@ public class ElevatorSimulation
 		VBox floorWindow = new VBox(10);
 		Scene floorStage = new Scene(floorWindow, 200, 200);
 		
-		floorWindow.getChildren().addAll(setFloorsLabel, numberInput, submitFloors);
+		floorWindow.getChildren().addAll(setFloorsLabel, numberInput, setElevatorsLabel, elevatorInput, submitFloors);
 		floorWindow.setAlignment(Pos.CENTER);
 		floorSetStage.setScene(floorStage);
 		floorSetStage.showAndWait();
