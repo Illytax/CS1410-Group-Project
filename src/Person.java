@@ -9,9 +9,17 @@ public class Person
 	protected int maxWaitTime;
 	protected int currentWaitTime;
 	protected String company;
+	protected String personName;
 	
-	public Person()
+	public Person(String personName, int currentFloor)
 	{
-		
+		this.personName = personName;
+		this.currentFloor =  currentFloor;
+	}
+	
+	
+	public String getPeopleName()
+	{
+		return personName;
 	}
 }

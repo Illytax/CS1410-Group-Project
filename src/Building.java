@@ -3,10 +3,10 @@ import java.util.ArrayList;
 final class Building
 {
 	private static int[] floorsInBuilding;
-	
-	static ArrayList<Elevator> elevators = new ArrayList<Elevator>();
-	
-	static int elevatorList;
+	private static ArrayList<Elevator> elevators = new ArrayList<Elevator>();
+	private static ArrayList<Person> peopleInBuilding = new ArrayList<Person>();
+	private static int elevatorList;
+	private static int peopleList;
 	
 	public static int[] getNumberOfFloors()
 	{
@@ -28,6 +28,16 @@ final class Building
 		}
 	}
 	
+	public static void setPeopleInBuilding(String buildingPeople)
+	{
+		int buildingPeeps = Integer.parseInt(buildingPeople);
+		for(int i = 0; i < buildingPeeps; i++)
+		{
+			Person currentPeopleInBuilding = new Person("P" + (i + 1), 1);
+			peopleInBuilding.add(currentPeopleInBuilding);
+		}
+	}
+	
 	public static int getElevators()
 	{
 		for(int elevList = 0; elevList < elevators.size(); elevList++)
@@ -36,7 +46,15 @@ final class Building
 		}
 		return elevatorList;
 	}
-
+	
+	public static int getPeopleInBuilding()
+	{
+		for(int peepList = 0; peepList < peopleInBuilding.size(); peepList++)
+		{
+			peopleList = peepList + 1;
+		}
+		return peopleList;
+	}
 	
 	public static void setFloors(String floorString)
 	{

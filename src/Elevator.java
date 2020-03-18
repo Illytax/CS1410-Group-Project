@@ -1,8 +1,10 @@
+import java.util.ArrayList;
+
 public class Elevator 
 {    
 	private int currentFloor = 0;
 	private String elevatorName;
-	
+	private ArrayList<Person> peopleInElevator = new ArrayList<Person>();
 	public Elevator(String elevatorName)
 	{
 		this.elevatorName = elevatorName;
@@ -32,6 +34,18 @@ public class Elevator
     		currentFloor--;
     		System.out.println("You've gone down to floor" + " " + Building.getNumberOfFloors()[currentFloor]);
     	}
+	}
+	
+	public Person addPeopleToElevator(String floor)
+	{
+		for(Person p : peopleInElevator)
+		{
+			if(p.getPeopleName().equals(floor))
+			{
+				return p;
+			}
+		}
+		return null;
 	}
 	
 	public int getCurrentFloor()

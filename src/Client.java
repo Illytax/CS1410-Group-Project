@@ -1,7 +1,9 @@
 public class Client extends Person
 {
-	public Client()
+	public Client(String clientName, int currentFloor)
 	{
+		super(clientName, currentFloor);
+		
 		accessLevel = new int[] {1, 2, 3};
 		capacityNeeded = 1;
 		currentFloor = 1;
