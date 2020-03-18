@@ -6,6 +6,8 @@ final class Building
 	
 	static ArrayList<Elevator> elevators = new ArrayList<Elevator>();
 	
+	static int elevatorList;
+	
 	public static int[] getNumberOfFloors()
 	{
 		return floorsInBuilding;
@@ -16,19 +18,25 @@ final class Building
 		return floorsInBuilding.length;
 	}
 	
-	public static void addElevators(int Elevators)
+	public static void setElevators(String Elevators)
 	{
-		for(int i = 0; i < Elevators; i++)
+		int elevatorNumbers = Integer.parseInt(Elevators);
+		for(int i = 0; i < elevatorNumbers; i++)
 		{
 			Elevator currentElevator = new Elevator("e" + (i + 1));
 			elevators.add(currentElevator);
 		}
 	}
 	
-	public static ArrayList<Elevator> returnList()
+	public static int getElevators()
 	{
-		return elevators;
+		for(int elevList = 0; elevList < elevators.size(); elevList++)
+		{
+			elevatorList = elevList + 1;
+		}
+		return elevatorList;
 	}
+
 	
 	public static void setFloors(String floorString)
 	{
@@ -40,7 +48,7 @@ final class Building
 		}
 	}
 	
-	public static Elevator getElevator(String name)
+	public static Elevator getAnElevator(String name)
 	{
 		for(Elevator e : elevators)
 		{
