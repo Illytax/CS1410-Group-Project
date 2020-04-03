@@ -3,38 +3,41 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public interface Visitor {
 	
-	private static void getProbP()
-	{
-		Random random=new Random();
-		 
-		int rangeMin=1;
-		int rangeMax=7;
 	
-		
-		for (int i = 0; i < 5; i++) {
-			double randomDouble = rangeMin + (rangeMax - rangeMin) * random.nextDouble();
-			System.out.println(randomDouble);
-		}
-		for (int i = 0; i < 5; i++) {
-			double randomNumber = ThreadLocalRandom.current().nextDouble(rangeMin, rangeMax);
-			System.out.println(randomNumber);
-		}
 
+	private static void setProbabilityQ()
+	{
 		
+		
+		
+		if( new Random().nextDouble() <= 0.005 ) { 
+			// 0.005 prob of maintenance will arrive
+			
+			
+			  
+			}
 	}
 	
-	private static void getProbQ()
+	private static void setProbabilityP()
 	{
-		Random rand = new Random();
+		//for each tick
+		double p = new Random().nextDouble();
+		//p = prob between 0-1
 		
-		int probabilityQ = rand.nextInt((7 - 1) + 1) + 1; 
+	}
+		
+	
+	private static void getProbP()
+	{
+		return  ;
+		
 				
 	}
 	
-	private static void gotoFloor()
-	{
+	private static void goToFloor() {
 		
-		return ;
+		= currentFloor;
+		
 	}
 	
 
