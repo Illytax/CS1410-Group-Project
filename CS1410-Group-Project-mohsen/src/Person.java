@@ -1,4 +1,4 @@
-public class Person 
+public class Person implements Visitor
 {
 	protected int[] accessLevel;
 	protected int priorityLevel;
@@ -21,5 +21,20 @@ public class Person
 	public String getPeopleName()
 	{
 		return personName;
+	}
+	
+	
+	
+	public double getprobP() {
+		
+		return probabilityP;
+		
+	}
+	
+	
+	public double getprobQ() {
+		
+		return probabilityQ;
+		
 	}
 }

@@ -1,44 +1,23 @@
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public interface Visitor {
 	
 	
-
-	private static void setProbabilityQ()
+	public static void setprobabilityP(double probP)
 	{
+		probP = new Random().nextDouble();			
+	}
+	
+	
+	public static void setprobabilityQ(double probabilityQ)
+	{
+		probabilityQ = new Random().nextDouble();			
+	}
 		
 		
-		
-		if( new Random().nextDouble() <= 0.005 ) { 
-			// 0.005 prob of maintenance will arrive
+	
+	public static void goToFloor() {
 			
-			
-			  
-			}
 	}
 	
-	private static void setProbabilityP()
-	{
-		//for each tick
-		double p = new Random().nextDouble();
-		//p = prob between 0-1
-		
-	}
-		
-	
-	private static void getProbP()
-	{
-		return  ;
-		
-				
-	}
-	
-	private static void goToFloor() {
-		
-		= currentFloor;
-		
-	}
-	
-
 }
