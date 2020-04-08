@@ -1,4 +1,4 @@
-public class Person 
+public class Person implements Comparable
 {
 	protected int[] accessLevel;
 	protected int priorityLevel;
@@ -21,5 +21,12 @@ public class Person
 	public String getPeopleName()
 	{
 		return personName;
+	}
+
+
+	@Override
+	public int compareTo(Object o) 
+	{
+		return 0;
 	}
 }

@@ -1,16 +1,16 @@
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 final class Building
 {
 	private static int[] floorsInBuilding;
 	private static ArrayList<Elevator> elevators = new ArrayList<Elevator>();
-	private static ArrayList<Person> peopleInBuilding = new ArrayList<Person>();
+	private static ArrayList<PriorityQueue<Person>> floors = new ArrayList<PriorityQueue<Person>>();
 	private static int elevatorList;
-	private static int peopleList;
 	
 	public static int[] getNumberOfFloors()
 	{
-		return floorsInBuilding;
+	  return floorsInBuilding;
 	}
 	
 	public static int getSizeOfFloors()
@@ -28,13 +28,18 @@ final class Building
 		}
 	}
 	
-	public static void setPeopleInBuilding(String buildingPeople)
+	public static void createPeopleInBuilding(int totalPeople)
 	{
-		int buildingPeeps = Integer.parseInt(buildingPeople);
-		for(int i = 0; i < buildingPeeps; i++)
+		for(int i = 0; i < getSizeOfFloors(); i++) 
 		{
-			Person currentPeopleInBuilding = new Person("P" + (i + 1), 1);
-			peopleInBuilding.add(currentPeopleInBuilding);
+		  //add an empty floor
+		   floors.add(new PriorityQueue<Person>());
+		}
+		
+		for(Integer i = 0; i < totalPeople; i++)
+		{
+			PriorityQueue<Person> tempQueue = floors.get(0);
+			tempQueue.add(new Person(i.toString(), 0));
 		}
 	}
 	
@@ -47,22 +52,13 @@ final class Building
 		return elevatorList;
 	}
 	
-	public static int getPeopleInBuilding()
-	{
-		for(int peepList = 0; peepList < peopleInBuilding.size(); peepList++)
-		{
-			peopleList = peepList + 1;
-		}
-		return peopleList;
-	}
-	
 	public static void setFloors(String floorString)
 	{
 		int floorNumbers = Integer.parseInt(floorString);
 		floorsInBuilding = new int[floorNumbers];
 		for(int i = 0; i < floorNumbers; i++)
 		{
-			floorsInBuilding[i] = i + 1;
+			floorsInBuilding[i] = i;
 		}
 	}
 	
@@ -76,5 +72,15 @@ final class Building
 			}
 		}
 		return null;
+	}
+
+	public static int getPeopleInBuilding()
+	{
+		int count = 0;
+		for( PriorityQueue<Person> currentQueue : floors)
+		{
+			count += currentQueue.size();
+		}
+		return count;
 	}
 }

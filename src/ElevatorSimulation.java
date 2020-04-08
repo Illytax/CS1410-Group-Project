@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -41,35 +44,49 @@ public class ElevatorSimulation
     public void setParameters(String title)
 	{
 		Stage floorSetStage =  new Stage();
-		Button submitFloors;
+		Button submitParameters;
 		Label setFloorsLabel = new Label();
 		TextField numberInput = new TextField();
 		Label setElevatorsLabel = new Label();
 		TextField elevatorInput = new TextField();
+		Label setPeopleLabel = new Label();
+		TextField peopleInput = new TextField();
 		
-		floorSetStage.initModality(Modality.APPLICATION_MODAL);
 		floorSetStage.setTitle(title);
 		floorSetStage.setMinWidth(250);
 		setFloorsLabel.setText("Set the buildings floors");
 		setElevatorsLabel.setText("Set the buildings elevators");
-		submitFloors = new Button("Submit");
+		setPeopleLabel.setText("Set the buildings people");
+		submitParameters = new Button("Submit");
 		
-		submitFloors.setOnAction(e ->
+		submitParameters.setOnAction(e ->
 		{
 			try
 			{
-				String number = numberInput.getText();
+				String floorsNumber = numberInput.getText();
 				String setElevators =  elevatorInput.getText();
-				if(number.equals("0"))
+				String setPeople = peopleInput.getText();
+				
+				if(floorsNumber.equals("0"))
 				{
 					throw new Exception();
 				}
-				Building.setFloors(number);
+				Building.setFloors(floorsNumber);
+				
 				if(setElevators.equals("0"))
 				{
 					throw new Exception();
 				}
 				Building.setElevators(setElevators);
+				
+				if(setPeople.equals("0"))
+				{
+					throw new Exception();
+				}
+				int peopleInt = Integer.parseInt(setPeople);
+	            Building.createPeopleInBuilding(peopleInt);
+	            System.out.println(peopleInt);
+	            
 				floorSetStage.close();
 				mStage.close();
 				Scene scene = new Scene(mainWindow, 400, 400);
@@ -85,7 +102,14 @@ public class ElevatorSimulation
 		VBox floorWindow = new VBox(10);
 		Scene floorStage = new Scene(floorWindow, 300, 300);
 		
-		floorWindow.getChildren().addAll(setFloorsLabel, numberInput, setElevatorsLabel, elevatorInput, submitFloors);
+		floorWindow.getChildren().addAll(
+				setFloorsLabel, 
+				numberInput, 
+				setElevatorsLabel, 
+				elevatorInput,
+				setPeopleLabel,
+				peopleInput,
+				submitParameters);
 		floorWindow.setAlignment(Pos.CENTER);
 		floorSetStage.setScene(floorStage);
 		floorSetStage.showAndWait();
@@ -140,8 +164,7 @@ public class ElevatorSimulation
         //Align buttons in the CENTER
         mainWindow.setAlignment(Pos.CENTER);
         startWindow.setAlignment(Pos.CENTER);
-        
-        Building.setPeopleInBuilding("4");
+
         
         floorSetup.setOnAction(e -> 
         {

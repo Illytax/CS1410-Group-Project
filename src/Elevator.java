@@ -1,10 +1,11 @@
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class Elevator 
 {    
 	private int currentFloor = 0;
 	private String elevatorName;
-	private ArrayList<Person> peopleInElevator = new ArrayList<Person>();
+	//private ArrayList<PriorityQueue<Person>> elevatorOccupancy= new ArrayList<PriorityQueue<Person>>();
 	public Elevator(String elevatorName)
 	{
 		this.elevatorName = elevatorName;
@@ -38,13 +39,7 @@ public class Elevator
 	
 	public Person addPeopleToElevator(String floor)
 	{
-		for(Person p : peopleInElevator)
-		{
-			if(p.getPeopleName().equals(floor))
-			{
-				return p;
-			}
-		}
+		//elevatorOccupancy
 		return null;
 	}
 	
