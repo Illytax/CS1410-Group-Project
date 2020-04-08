@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.PriorityQueue;
-
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -8,7 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ElevatorSimulation
@@ -25,7 +21,12 @@ public class ElevatorSimulation
     Button currentElevator2Position;
     Button numberOfElevators;
     Button numberOfPeople;
-    Button movePeopleIntoElevator;
+    Button currentPeopleInElevator;
+    Button currentPeopleOnEachFloor;
+    Button movePeopleIntoElevator1;
+    Button movePeopleOutOfElevator1;
+    Button movePeopleIntoElevator2;
+    Button movePeopleOutOfElevator2;
     
     int currentFloor = 0;
     
@@ -71,7 +72,7 @@ public class ElevatorSimulation
 				{
 					throw new Exception();
 				}
-				Building.setFloors(floorsNumber);
+				Building.setFloors(Integer.parseInt(floorsNumber));
 				
 				if(setElevators.equals("0"))
 				{
@@ -123,28 +124,38 @@ public class ElevatorSimulation
     	//Set window name
     	mainStage.setTitle("Elevator Management");
     	
-    	//Set the number of floors in the Building
+    	//Set the number of Floors in the Building
     	floorSetup =  new Button("Set Number Of Floors");
-        //move elevator 1 up
+        //Move Elevator 1 up
     	travelUpElevator1 = new Button("Elevator 1 Up");
-    	//move elevator 1 down
+    	//Move Elevator 1 down
     	travelDownElevator1 =  new Button("Elevator 1 Down");
-    	//move elevator 2 up
+    	//Move Elevator 2 up
     	travelUpElevator2 = new Button("Elevator 2 Up");
-    	//move elevator 2 down
+    	//Move Elevator 2 down
     	travelDownElevator2 = new Button("Elevator 1 Down");
-        //Show number of floors in the Building
+        //Show number of Floors in the Building
     	numberOfFloors = new Button( "All Floors");
-    	//Show current position of the Elevator in the building
+    	//Show current position of the Elevator in the Building
         currentElevatorPosition = new Button("Current First Elevator Position");
-        //Show current position of the 2nd Elevator in the building
+        //Show current position of the 2nd Elevator in the Building
         currentElevator2Position = new Button("Current Second Elevator Position");
-        //Show the amount of elevators in the building
+        //Show the amount of Elevators in the Building
         numberOfElevators = new Button("All Elevators");
-        //Show the number of created people
+        //Show the number of created People
         numberOfPeople =  new Button("All People");
-        //move people into the 1st elevator
-        movePeopleIntoElevator = new Button("Move Into Elevator");
+        //Move People into the 1st Elevator
+        movePeopleIntoElevator1 = new Button("Move Into Elevator 1");
+        //Move People out of the 1sr Elevator
+        movePeopleOutOfElevator1 = new Button("Move Out Of Elevator 1");
+        //Move People into the 2st Elevator
+        movePeopleIntoElevator2 = new Button("Move Into Elevator 2");
+        //Move People out of the 2sr Elevator
+        movePeopleOutOfElevator2 = new Button("Move Out Of Elevator 2");
+        //Show all People in the Elevator
+        currentPeopleInElevator = new Button("Show Elevator Population");
+        //Show the People on each Floor
+        currentPeopleOnEachFloor = new Button("Show All People");
     	
         //Add the buttons to the main window
         mainWindow.getChildren().addAll(
@@ -157,9 +168,14 @@ public class ElevatorSimulation
         		numberOfFloors,
         		numberOfElevators,
         		numberOfPeople,
-        		movePeopleIntoElevator);
+        		movePeopleIntoElevator1,
+        		movePeopleOutOfElevator1,
+        		movePeopleIntoElevator2,
+        		movePeopleOutOfElevator2,
+        		currentPeopleInElevator,
+        		currentPeopleOnEachFloor);
         
-        //add Buttons to the start window
+        //Add Buttons to the start window
         startWindow.getChildren().addAll(floorSetup);
         //Align buttons in the CENTER
         mainWindow.setAlignment(Pos.CENTER);
@@ -171,66 +187,95 @@ public class ElevatorSimulation
         	setParameters("Set Building Parameters");
         });
         
-        //Tell button to print to console 1 floor higher than current or inform using maximum floor has been reached for elevator 1
+        //Tell Button to print to console 1 Floor higher than current or inform using maximum Floor has been reached for Elevator 1
         // e = lambda expression
         travelUpElevator1.setOnAction(e ->
         {
         	Building.getAnElevator("e1").elevatorUp();
         });
         
-        //Tell button to print to console 1 floor lower than current or inform that minimum floor has been reached for elevator 1
+        //Tell Button to print to console 1 Floor lower than current or inform that minimum Floor has been reached for Elevator 1
         travelDownElevator1.setOnAction(e ->
         {
         	Building.getAnElevator("e1").elevatorDown();
         });
         
-        //Tell button to print to console 1 floor higher than current or inform using maximum floor has been reached for elevator 2
-        // e = lambda expression
+        //Tell Button to print to console 1 Floor higher than current or inform using maximum Floor has been reached for Elevator 2
         travelUpElevator2.setOnAction(e ->
         {
         	Building.getAnElevator("e2").elevatorUp();
         });
         
-        //Tell button to print to console 1 floor lower than current or inform that minimum floor has been reached for elevator 2
+        //Tell Button to print to console 1 Floor lower than current or inform that minimum Floor has been reached for Elevator 2
         travelDownElevator2.setOnAction(e ->
         {
         	Building.getAnElevator("e2").elevatorDown();
         });
         
-        //get the number of floors in the building
+        //Get the number of Floors in the Building
         numberOfFloors.setOnAction(e ->
         {
         	System.out.println("There are " + Building.getSizeOfFloors() + " floors in the building");
         });
         
-        //get the number of elevators in the building
+        //Get the number of Elevators in the Building
         
         numberOfElevators.setOnAction(e ->
         {
         	System.out.println("There are " + Building.getElevators() + " elevators in the building");
         });
-        //get the current floor for elevator 1
+        //Get the current Floor for Elevator 1
         currentElevatorPosition.setOnAction(e ->
         {
         	System.out.println("Elevator 1 is on floor " + Building.getAnElevator("e1").getCurrentFloor());
         });
         
-        //get the current floor for elevator 2
+        //Get the current Floor for Elevator 2
         currentElevator2Position.setOnAction(e ->
         {
         	System.out.println("Elevator 2 is on floor " + Building.getAnElevator("e2").getCurrentFloor());
         });
         
-        //get the current number of people in the building
+        //Get the current number of People in the Building
         numberOfPeople.setOnAction(e ->
         {
         	System.out.println("There are " + Building.getPeopleInBuilding() + " people in the Building");
         });
         
-        //move people into the first elevator
-        movePeopleIntoElevator.setOnAction(e ->
+        //Move People into the first Elevator
+        movePeopleIntoElevator1.setOnAction(e ->
         {
-        	
+        	Building.getAnElevator("e1").addPeopleToElevator();
+        });
+        
+        //Move People out of the Elevator
+        movePeopleOutOfElevator1.setOnAction(e ->
+        {
+        	Building.getAnElevator("e1").removePeopleFromElevator();
+        });
+        
+        //Move People into the first Elevator
+        movePeopleIntoElevator2.setOnAction(e ->
+        {
+        	Building.getAnElevator("e2").addPeopleToElevator();
+        });
+        
+        //Move People out of the Elevator
+        movePeopleOutOfElevator2.setOnAction(e ->
+        {
+        	Building.getAnElevator("e2").removePeopleFromElevator();
+        });
+        
+        //Show the occupants of the Elevator
+        currentPeopleInElevator.setOnAction(e ->
+        {
+        	System.out.println("There are " + Elevator.getPeopleInElevator() + " people in the elevator");
+        });
+        
+        //Show the People on each floor
+        currentPeopleOnEachFloor.setOnAction(e ->
+        {
+        	Building.showPeopleOnEachFloor();
         });
         
         //Add the VBox to the window and show the window

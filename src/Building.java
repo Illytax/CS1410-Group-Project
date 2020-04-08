@@ -3,19 +3,25 @@ import java.util.PriorityQueue;
 
 final class Building
 {
-	private static int[] floorsInBuilding;
+	private static int floorsInBuilding;
 	private static ArrayList<Elevator> elevators = new ArrayList<Elevator>();
 	private static ArrayList<PriorityQueue<Person>> floors = new ArrayList<PriorityQueue<Person>>();
 	private static int elevatorList;
-	
-	public static int[] getNumberOfFloors()
-	{
-	  return floorsInBuilding;
-	}
+
 	
 	public static int getSizeOfFloors()
 	{
-		return floorsInBuilding.length;
+		return floorsInBuilding;
+	}
+	
+	public static ArrayList<PriorityQueue<Person>> getFloors()
+	{
+		return floors;
+	}
+
+	public static PriorityQueue<Person> getPeople(int floorNumber)
+	{
+		return floors.get(floorNumber);
 	}
 	
 	public static void setElevators(String Elevators)
@@ -32,10 +38,8 @@ final class Building
 	{
 		for(int i = 0; i < getSizeOfFloors(); i++) 
 		{
-		  //add an empty floor
 		   floors.add(new PriorityQueue<Person>());
 		}
-		
 		for(Integer i = 0; i < totalPeople; i++)
 		{
 			PriorityQueue<Person> tempQueue = floors.get(0);
@@ -52,14 +56,9 @@ final class Building
 		return elevatorList;
 	}
 	
-	public static void setFloors(String floorString)
+	public static void setFloors(int floorNumbers)
 	{
-		int floorNumbers = Integer.parseInt(floorString);
-		floorsInBuilding = new int[floorNumbers];
-		for(int i = 0; i < floorNumbers; i++)
-		{
-			floorsInBuilding[i] = i;
-		}
+		floorsInBuilding =floorNumbers;
 	}
 	
 	public static Elevator getAnElevator(String name)
@@ -77,10 +76,20 @@ final class Building
 	public static int getPeopleInBuilding()
 	{
 		int count = 0;
-		for( PriorityQueue<Person> currentQueue : floors)
+		for(PriorityQueue<Person> currentQueue : floors)
 		{
 			count += currentQueue.size();
 		}
 		return count;
+	}
+	
+	public static void showPeopleOnEachFloor()
+	{
+		int floorNumber = 0;
+		for(PriorityQueue<Person> peopleInFloors : floors)
+		{
+			System.out.println("There are " + peopleInFloors.size() + " People on floor " + floorNumber);
+			floorNumber++;
+		}
 	}
 }

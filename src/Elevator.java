@@ -1,11 +1,11 @@
-import java.util.ArrayList;
 import java.util.PriorityQueue;
 
-public class Elevator 
+public class Elevator
 {    
 	private int currentFloor = 0;
 	private String elevatorName;
-	//private ArrayList<PriorityQueue<Person>> elevatorOccupancy= new ArrayList<PriorityQueue<Person>>();
+	static PriorityQueue<Person> elevatorOccupancy= new PriorityQueue<Person>();
+	
 	public Elevator(String elevatorName)
 	{
 		this.elevatorName = elevatorName;
@@ -20,7 +20,7 @@ public class Elevator
     	else
     	{
     		currentFloor++;
-    		System.out.println("You've gone up to floor" + " " + Building.getNumberOfFloors()[currentFloor]);
+    		System.out.println("You've gone up to floor" + " " + currentFloor);
     	}
 	}
 	
@@ -33,19 +33,38 @@ public class Elevator
     	else
     	{
     		currentFloor--;
-    		System.out.println("You've gone down to floor" + " " + Building.getNumberOfFloors()[currentFloor]);
+    		System.out.println("You've gone down to floor" + " " + currentFloor);
     	}
 	}
 	
-	public Person addPeopleToElevator(String floor)
+	public void addPeopleToElevator()
 	{
-		//elevatorOccupancy
-		return null;
+		PriorityQueue<Person> peopleToAdd = Building.getPeople(currentFloor);
+		while(!peopleToAdd.isEmpty())
+		{
+			elevatorOccupancy.add(peopleToAdd.remove());
+		}
 	}
+	
+	public void removePeopleFromElevator()
+	{
+		PriorityQueue<Person> peopleToRemove = elevatorOccupancy;
+		PriorityQueue<Person> peopleToAdd = Building.getPeople(currentFloor);
+		while(!peopleToRemove.isEmpty())
+		{
+			peopleToAdd.add(peopleToRemove.remove());
+		}
+	}
+	
+	
+	public static int getPeopleInElevator()
+	{
+		return elevatorOccupancy.size();
+	}		
 	
 	public int getCurrentFloor()
 	{
-		return Building.getNumberOfFloors()[currentFloor];
+		return currentFloor;
 	}
 	
 	public String getElevatorName()

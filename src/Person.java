@@ -1,3 +1,4 @@
+@SuppressWarnings("rawtypes")
 public class Person implements Comparable
 {
 	protected int[] accessLevel;
