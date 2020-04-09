@@ -23,6 +23,16 @@ public class Person implements Comparable
 	{
 		return personName;
 	}
+	
+	public double getprobabilityP() {
+		
+		return probabilityP;
+	}
+	
+public double getprobabilityQ() {
+		
+		return probabilityQ;
+	}
 
 
 	@Override
