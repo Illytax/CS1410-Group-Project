@@ -16,7 +16,7 @@ public class ElevatorSimulation
     Button travelDownElevator1;
     Button travelDownElevator2;
     Button numberOfFloors;
-    Button floorSetup;
+    Button buildingSetup;
     Button currentElevatorPosition;
     Button currentElevator2Position;
     Button numberOfElevators;
@@ -50,14 +50,24 @@ public class ElevatorSimulation
 		TextField numberInput = new TextField();
 		Label setElevatorsLabel = new Label();
 		TextField elevatorInput = new TextField();
-		Label setPeopleLabel = new Label();
-		TextField peopleInput = new TextField();
+		Label setClientLabel = new Label();
+		TextField clientInput = new TextField();
+		Label setDeveloperLabel = new Label();
+		TextField developerInput = new TextField();
+		Label setEmployeeLabel = new Label();
+		TextField employeeInput = new TextField();
+		Label setMaintananceLabel = new Label();
+		TextField maintananceInput = new TextField();
 		
 		floorSetStage.setTitle(title);
 		floorSetStage.setMinWidth(250);
 		setFloorsLabel.setText("Set the buildings floors");
 		setElevatorsLabel.setText("Set the buildings elevators");
-		setPeopleLabel.setText("Set the buildings people");
+		setClientLabel.setText("Set the buildings Clients");
+		setDeveloperLabel.setText("Set the buildings Developers");
+		setEmployeeLabel.setText("Set the buildings Employees");
+		setMaintananceLabel.setText("Set the buildings Maintanance Crews");
+		
 		submitParameters = new Button("Submit");
 		
 		submitParameters.setOnAction(e ->
@@ -66,7 +76,10 @@ public class ElevatorSimulation
 			{
 				String floorsNumber = numberInput.getText();
 				String setElevators =  elevatorInput.getText();
-				String setPeople = peopleInput.getText();
+				String setClient = clientInput.getText();
+				String setDeveloper = developerInput.getText();
+				String setEmployee = employeeInput.getText();
+				String setMaintanance = maintananceInput.getText();
 				
 				if(floorsNumber.equals("0"))
 				{
@@ -80,16 +93,38 @@ public class ElevatorSimulation
 				}
 				Building.setElevators(setElevators);
 				
-				if(setPeople.equals("0"))
+				if(setClient.equals("0"))
 				{
 					throw new Exception();
 				}
-				int peopleInt = Integer.parseInt(setPeople);
-	            Building.createPeopleInBuilding(peopleInt);
+				int clientInt = Integer.parseInt(setClient);
+				Building.createClientsInBuilding(clientInt);
+				
+				if(setDeveloper.equals("0"))
+				{
+					throw new Exception();
+				}
+				int developerInt = Integer.parseInt(setDeveloper);
+				Building.createDevelopersInBuilding(developerInt);
+				
+				if(setEmployee.equals("0"))
+				{
+					throw new Exception();
+				}
+				int employeeInt = Integer.parseInt(setEmployee);
+				Building.createEmployeesInBuilding(employeeInt);
+				
+				if(setMaintanance.equals("0"))
+				{
+					throw new Exception();
+				}
+				int maintananceInt = Integer.parseInt(setMaintanance);
+				Building.createMaintananceInBuilding(maintananceInt);
 	            
+				Building.createPeopleInBuilding();
 				floorSetStage.close();
 				mStage.close();
-				Scene scene = new Scene(mainWindow, 400, 400);
+				Scene scene = new Scene(mainWindow, 400, 600);
 				mStage.setScene(scene);
 				mStage.show();
 			}
@@ -100,15 +135,21 @@ public class ElevatorSimulation
 		});
 		
 		VBox floorWindow = new VBox(10);
-		Scene floorStage = new Scene(floorWindow, 300, 300);
+		Scene floorStage = new Scene(floorWindow, 400, 600);
 		
 		floorWindow.getChildren().addAll(
 				setFloorsLabel, 
 				numberInput, 
 				setElevatorsLabel, 
 				elevatorInput,
-				setPeopleLabel,
-				peopleInput,
+				setClientLabel,
+				clientInput,
+				setDeveloperLabel,
+				developerInput,
+				setEmployeeLabel,
+				employeeInput,
+				setMaintananceLabel,
+				maintananceInput,
 				submitParameters);
 		floorWindow.setAlignment(Pos.CENTER);
 		floorSetStage.setScene(floorStage);
@@ -124,7 +165,7 @@ public class ElevatorSimulation
     	mainStage.setTitle("Elevator Management");
     	
     	//Set the number of Floors in the Building
-    	floorSetup =  new Button("Set Number Of Floors");
+    	buildingSetup =  new Button("Set Number Of Floors");
         //Move Elevator 1 up
     	travelUpElevator1 = new Button("Elevator 1 Up");
     	//Move Elevator 1 down
@@ -175,13 +216,13 @@ public class ElevatorSimulation
         		currentPeopleOnEachFloor);
         
         //Add Buttons to the start window
-        startWindow.getChildren().addAll(floorSetup);
+        startWindow.getChildren().addAll(buildingSetup);
         //Align buttons in the CENTER
         mainWindow.setAlignment(Pos.CENTER);
         startWindow.setAlignment(Pos.CENTER);
 
         
-        floorSetup.setOnAction(e -> 
+        buildingSetup.setOnAction(e -> 
         {
         	setParameters("Set Building Parameters");
         });

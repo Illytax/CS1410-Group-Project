@@ -1,10 +1,12 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 final class Building
 {
 	private static int floorsInBuilding;
 	private static ArrayList<Elevator> elevators = new ArrayList<Elevator>();
+	private static ArrayList<Person> personList = new ArrayList<Person>();
 	private static ArrayList<PriorityQueue<Person>> floors = new ArrayList<PriorityQueue<Person>>();
 	
 	public static int getSizeOfFloors()
@@ -32,16 +34,55 @@ final class Building
 		}
 	}
 	
-	public static void createPeopleInBuilding(int totalPeople)
+	public static void createPeopleInBuilding()
 	{
+		
 		for(int i = 0; i < getSizeOfFloors(); i++) 
 		{
 		   floors.add(new PriorityQueue<Person>());
 		}
-		for(Integer i = 0; i < totalPeople; i++)
+		PriorityQueue<Person> tempQueue = floors.get(0);
+		Collections.shuffle(personList);
+		System.out.println(personList.toString());
+		for(Person allPeople : personList)
 		{
-			PriorityQueue<Person> tempQueue = floors.get(0);
-			tempQueue.add(new Person(i.toString(), 0));
+			tempQueue.add(allPeople);
+		}
+	}
+	
+	public static void createClientsInBuilding(int totalClients)
+	{
+		for(Integer i = 0; i < totalClients; i++)
+		{
+			Person newClient = new Client(i.toString(), 0);
+			personList.add(newClient);
+		}
+	}
+	
+	public static void createDevelopersInBuilding(int totalDevelopers)
+	{
+		for(Integer i = 0; i < totalDevelopers; i++)
+		{
+			Person newDevelopers = new Developer(i.toString(), 0, "Mugtome");
+			personList.add(newDevelopers);
+		}
+	}
+	
+	public static void createEmployeesInBuilding(int totalEmployees)
+	{
+		for(Integer i = 0; i < totalEmployees; i++)
+		{
+			Person newEmployees = new Employee(i.toString(), 0);
+			personList.add(newEmployees);
+		}
+	}
+	
+	public static void createMaintananceInBuilding(int totalMaintanance)
+	{
+		for(Integer i = 0; i < totalMaintanance; i++)
+		{
+			Person newMaintanance = new Maintanance(i.toString(), 0);
+			personList.add(newMaintanance);
 		}
 	}
 	
