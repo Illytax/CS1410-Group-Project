@@ -44,10 +44,10 @@ public class ElevatorSimulation
     
     public void setParameters(String title)
 	{
-		Stage floorSetStage =  new Stage();
+		Stage parameterSetStage =  new Stage();
 		Button submitParameters;
 		Label setFloorsLabel = new Label();
-		TextField numberInput = new TextField();
+		TextField floorInput = new TextField();
 		Label setElevatorsLabel = new Label();
 		TextField elevatorInput = new TextField();
 		Label setClientLabel = new Label();
@@ -59,14 +59,20 @@ public class ElevatorSimulation
 		Label setMaintananceLabel = new Label();
 		TextField maintananceInput = new TextField();
 		
-		floorSetStage.setTitle(title);
-		floorSetStage.setMinWidth(250);
+		parameterSetStage.setTitle(title);
+		parameterSetStage.setMinWidth(250);
 		setFloorsLabel.setText("Set the buildings floors");
+		floorInput.setText("7");
 		setElevatorsLabel.setText("Set the buildings elevators");
+		elevatorInput.setText("2");
 		setClientLabel.setText("Set the buildings Clients");
+		clientInput.setText("4");
 		setDeveloperLabel.setText("Set the buildings Developers");
+		developerInput.setText("4");
 		setEmployeeLabel.setText("Set the buildings Employees");
+		employeeInput.setText("4");
 		setMaintananceLabel.setText("Set the buildings Maintanance Crews");
+		maintananceInput.setText("1");
 		
 		submitParameters = new Button("Submit");
 		
@@ -74,7 +80,7 @@ public class ElevatorSimulation
 		{
 			try
 			{
-				String floorsNumber = numberInput.getText();
+				String floorsNumber = floorInput.getText();
 				String setElevators =  elevatorInput.getText();
 				String setClient = clientInput.getText();
 				String setDeveloper = developerInput.getText();
@@ -122,7 +128,7 @@ public class ElevatorSimulation
 				Building.createMaintananceInBuilding(maintananceInt);
 	            
 				Building.createPeopleInBuilding();
-				floorSetStage.close();
+				parameterSetStage.close();
 				mStage.close();
 				Scene scene = new Scene(mainWindow, 400, 600);
 				mStage.setScene(scene);
@@ -134,12 +140,12 @@ public class ElevatorSimulation
 			}
 		});
 		
-		VBox floorWindow = new VBox(10);
-		Scene floorStage = new Scene(floorWindow, 400, 600);
+		VBox parameterWindow = new VBox(10);
+		Scene parameterStage = new Scene(parameterWindow, 400, 600);
 		
-		floorWindow.getChildren().addAll(
+		parameterWindow.getChildren().addAll(
 				setFloorsLabel, 
-				numberInput, 
+				floorInput, 
 				setElevatorsLabel, 
 				elevatorInput,
 				setClientLabel,
@@ -151,9 +157,9 @@ public class ElevatorSimulation
 				setMaintananceLabel,
 				maintananceInput,
 				submitParameters);
-		floorWindow.setAlignment(Pos.CENTER);
-		floorSetStage.setScene(floorStage);
-		floorSetStage.showAndWait();
+		parameterWindow.setAlignment(Pos.CENTER);
+		parameterSetStage.setScene(parameterStage);
+		parameterSetStage.showAndWait();
 	}
     
 	@Override
@@ -255,7 +261,7 @@ public class ElevatorSimulation
         //Get the number of Floors in the Building
         numberOfFloors.setOnAction(e ->
         {
-        	System.out.println("There are " + Building.getSizeOfFloors() + " floors in the building");
+        	System.out.println("There are " + Building.getSizeOfFloors() + " Floors in the building");
         });
         
         //Get the number of Elevators in the Building
