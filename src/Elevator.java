@@ -3,6 +3,7 @@ import java.util.PriorityQueue;
 public class Elevator
 {    
 	private int currentFloor = 0;
+	private int maxCapacity = 4;
 	private String elevatorName;
 	private PriorityQueue<Person> elevatorOccupancy = new PriorityQueue<Person>();
 	
@@ -10,7 +11,22 @@ public class Elevator
 	{
 		this.elevatorName = elevatorName;
 	}
+
+	public int getPeopleInElevator()
+	{
+		return elevatorOccupancy.size();
+	}		
 	
+	public int getCurrentFloor()
+	{
+		return currentFloor;
+	}
+	
+	public String getElevatorName()
+	{
+		return elevatorName;
+	}
+
 	public void elevatorUp()
 	{
     	if(currentFloor == Building.getSizeOfFloors() - 1)
@@ -40,7 +56,7 @@ public class Elevator
 	public void addPeopleToElevator()
 	{
 		PriorityQueue<Person> peopleToAdd = Building.getPeople(currentFloor);
-		while(elevatorOccupancy.size() < 4)
+		while(elevatorOccupancy.size() < maxCapacity)
 		{
 			Person currentPoll = peopleToAdd.poll();
 			if(currentPoll == null)
@@ -62,21 +78,5 @@ public class Elevator
 		{
 			peopleToAdd.add(peopleToRemove.remove());
 		}
-	}
-	
-	
-	public int getPeopleInElevator()
-	{
-		return elevatorOccupancy.size();
-	}		
-	
-	public int getCurrentFloor()
-	{
-		return currentFloor;
-	}
-	
-	public String getElevatorName()
-	{
-		return elevatorName;
 	}
 }

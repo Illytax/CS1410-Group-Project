@@ -9,7 +9,6 @@ public class Person implements Comparable
 	protected float probabilityQ;
 	protected int maxWaitTime;
 	protected int currentWaitTime;
-	protected String company;
 	protected String personName;
 	
 	public Person(String personName, int currentFloor)
