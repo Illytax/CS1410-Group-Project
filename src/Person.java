@@ -1,5 +1,5 @@
 @SuppressWarnings("rawtypes")
-public class Person implements Visitor
+public class Person implements Comparable, Visitor
 {
 	protected int[] accessLevel;
 	protected int priorityLevel;
@@ -29,10 +29,11 @@ public class Person implements Visitor
 		return probabilityP;
 	}
 	
-public double getprobabilityQ() {
+	public double getprobabilityQ() {
 		
 		return probabilityQ;
 	}
+
 
 
 	@Override
@@ -40,4 +41,5 @@ public double getprobabilityQ() {
 	{
 		return 0;
 	}
+	
 }
