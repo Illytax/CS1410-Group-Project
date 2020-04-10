@@ -86,7 +86,6 @@ public class ElevatorSimulation
 				}
 				int peopleInt = Integer.parseInt(setPeople);
 	            Building.createPeopleInBuilding(peopleInt);
-	            System.out.println(peopleInt);
 	            
 				floorSetStage.close();
 				mStage.close();

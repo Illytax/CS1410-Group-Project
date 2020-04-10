@@ -4,7 +4,7 @@ public class Elevator
 {    
 	private int currentFloor = 0;
 	private String elevatorName;
-	static PriorityQueue<Person> elevatorOccupancy= new PriorityQueue<Person>();
+	static PriorityQueue<Person> elevatorOccupancy = new PriorityQueue<Person>();
 	
 	public Elevator(String elevatorName)
 	{
@@ -40,9 +40,9 @@ public class Elevator
 	public void addPeopleToElevator()
 	{
 		PriorityQueue<Person> peopleToAdd = Building.getPeople(currentFloor);
-		while(!peopleToAdd.isEmpty())
+		while(elevatorOccupancy.size() < 4)
 		{
-			elevatorOccupancy.add(peopleToAdd.remove());
+			elevatorOccupancy.add(peopleToAdd.poll());
 		}
 	}
 	
