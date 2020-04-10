@@ -6,8 +6,6 @@ final class Building
 	private static int floorsInBuilding;
 	private static ArrayList<Elevator> elevators = new ArrayList<Elevator>();
 	private static ArrayList<PriorityQueue<Person>> floors = new ArrayList<PriorityQueue<Person>>();
-	private static int elevatorList;
-
 	
 	public static int getSizeOfFloors()
 	{
@@ -49,16 +47,12 @@ final class Building
 	
 	public static int getElevators()
 	{
-		for(int elevList = 0; elevList < elevators.size(); elevList++)
-		{
-			elevatorList = elevList + 1;
-		}
-		return elevatorList;
+		return elevators.size();
 	}
 	
 	public static void setFloors(int floorNumbers)
 	{
-		floorsInBuilding =floorNumbers;
+		floorsInBuilding = floorNumbers;
 	}
 	
 	public static Elevator getAnElevator(String name)

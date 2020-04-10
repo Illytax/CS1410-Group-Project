@@ -132,7 +132,7 @@ public class ElevatorSimulation
     	//Move Elevator 2 up
     	travelUpElevator2 = new Button("Elevator 2 Up");
     	//Move Elevator 2 down
-    	travelDownElevator2 = new Button("Elevator 1 Down");
+    	travelDownElevator2 = new Button("Elevator 2 Down");
         //Show number of Floors in the Building
     	numberOfFloors = new Button( "All Floors");
     	//Show current position of the Elevator in the Building
@@ -268,7 +268,8 @@ public class ElevatorSimulation
         //Show the occupants of the Elevator
         currentPeopleInElevator.setOnAction(e ->
         {
-        	System.out.println("There are " + Elevator.getPeopleInElevator() + " people in the elevator");
+        	System.out.println("There are " + Building.getAnElevator("e1").getPeopleInElevator() + " people in first the elevator");
+        	System.out.println("There are " + Building.getAnElevator("e2").getPeopleInElevator() + " people in second the elevator");
         });
         
         //Show the People on each floor

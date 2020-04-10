@@ -4,7 +4,7 @@ public class Elevator
 {    
 	private int currentFloor = 0;
 	private String elevatorName;
-	static PriorityQueue<Person> elevatorOccupancy = new PriorityQueue<Person>();
+	private PriorityQueue<Person> elevatorOccupancy = new PriorityQueue<Person>();
 	
 	public Elevator(String elevatorName)
 	{
@@ -42,7 +42,15 @@ public class Elevator
 		PriorityQueue<Person> peopleToAdd = Building.getPeople(currentFloor);
 		while(elevatorOccupancy.size() < 4)
 		{
-			elevatorOccupancy.add(peopleToAdd.poll());
+			Person currentPoll = peopleToAdd.poll();
+			if(currentPoll == null)
+			{
+				break;
+			}
+			else
+			{
+				elevatorOccupancy.add(currentPoll);
+			}
 		}
 	}
 	
@@ -57,7 +65,7 @@ public class Elevator
 	}
 	
 	
-	public static int getPeopleInElevator()
+	public int getPeopleInElevator()
 	{
 		return elevatorOccupancy.size();
 	}		
