@@ -1,12 +1,12 @@
 @SuppressWarnings("rawtypes")
-public class Person implements Comparable
+public class Person implements Visitor
 {
 	protected int[] accessLevel;
 	protected int priorityLevel;
 	protected int capacityNeeded;
 	protected int currentFloor; 
-	protected float probabilityP;
-	protected float probabilityQ;
+	protected double probabilityP;
+	protected double probabilityQ;
 	protected int maxWaitTime;
 	protected int currentWaitTime;
 	protected String company;
