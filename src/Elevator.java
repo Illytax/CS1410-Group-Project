@@ -92,19 +92,18 @@ public class Elevator
 	
 	public void removePeopleFromElevator()
 	{
-		PriorityQueue<Person> peopleToRemove = elevatorOccupancy;
+		PriorityQueue<Person> peopleInElevator = new PriorityQueue<>(elevatorOccupancy);
 		PriorityQueue<Person> peopleToAdd = Building.getPeople(currentFloor);
-		while(!peopleToRemove.isEmpty())
+		for(Person person : peopleInElevator)
 		{
-			Person currentPoll = peopleToRemove.peek();
-			if(currentPoll instanceof Maintenance)
+			if(person.getCurrentGoal() == currentFloor)
 			{
-				peopleToAdd.add(peopleToRemove.remove());
-				maxCapacity = 4;
-			}
-			else
-			{
-				peopleToAdd.add(peopleToRemove.remove());
+				if(person instanceof Maintenance)
+				{
+					maxCapacity = 4;
+				}
+				elevatorOccupancy.remove(person);
+				peopleToAdd.add(person);
 			}
 		}
 	}

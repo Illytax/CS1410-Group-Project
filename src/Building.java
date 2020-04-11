@@ -59,11 +59,20 @@ final class Building
 		}
 	}
 	
-	public static void createDevelopersInBuilding(int totalDevelopers)
+	public static void createMugtomeDevelopersInBuilding(int totalDevelopers)
 	{
 		for(Integer i = 0; i < totalDevelopers; i++)
 		{
 			Person newDevelopers = new Developer(i.toString(), 0, "Mugtome");
+			personList.add(newDevelopers);
+		}
+	}
+	
+	public static void createGogglesDevelopersInBuilding(int totalDevelopers)
+	{
+		for(Integer i = 0; i < totalDevelopers; i++)
+		{
+			Person newDevelopers = new Developer(i.toString(), 0, "Goggles");
 			personList.add(newDevelopers);
 		}
 	}
@@ -83,6 +92,17 @@ final class Building
 		{
 			Person newMaintenance = new Maintenance(i.toString(), 0);
 			personList.add(newMaintenance);
+		}
+	}
+	
+	public static void leaveBuilding(String personLeaving)
+	{
+		for(Person checkPerson : floors.get(0))
+		{
+			if(checkPerson == new Client(personLeaving, 0))
+			{
+				floors.get(0).remove(checkPerson);	
+			}
 		}
 	}
 	

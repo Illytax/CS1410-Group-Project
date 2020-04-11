@@ -4,10 +4,9 @@ public class Developer extends Person
 
 	public Developer(String developerName, int currentFloor, String companyName)
 	{
-		super(developerName, currentFloor);
+		super(developerName, currentFloor, new int[] {4, 5, 6});
 		
 		this.companyName =  companyName;
-		accessLevel = new int[] {5, 6, 7};
 		capacityNeeded = 1;
 		currentFloor = 1;
 	}

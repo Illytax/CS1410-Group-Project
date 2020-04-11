@@ -111,7 +111,7 @@ public class ElevatorSimulation
 					throw new Exception();
 				}
 				int developerInt = Integer.parseInt(setDeveloper);
-				Building.createDevelopersInBuilding(developerInt);
+				Building.createMugtomeDevelopersInBuilding(developerInt);
 				
 				if(setEmployee.equals("0"))
 				{
