@@ -12,9 +12,9 @@ public class Elevator
 		this.elevatorName = elevatorName;
 	}
 
-	public int getPeopleInElevator()
+	public String getPeopleInElevator()
 	{
-		return elevatorOccupancy.size();
+		return elevatorOccupancy.toString();
 	}		
 	
 	public int getCurrentFloor()
@@ -59,13 +59,33 @@ public class Elevator
 		while(elevatorOccupancy.size() < maxCapacity)
 		{
 			Person currentPoll = peopleToAdd.poll();
-			if(currentPoll == null)
+			if((currentPoll instanceof Maintenance) && (elevatorOccupancy.size() == 0))
 			{
-				break;
+				elevatorOccupancy.add(currentPoll);
+				maxCapacity = 1;
+			}
+			else if((currentPoll instanceof Maintenance) && (elevatorOccupancy.size() > 0))
+			{
+				if(peopleToAdd.size() < 2)
+				{
+					peopleToAdd.add(currentPoll);
+					break;
+				}
+				else
+				{
+					peopleToAdd.add(currentPoll);
+				}
 			}
 			else
 			{
-				elevatorOccupancy.add(currentPoll);
+				if(currentPoll == null)
+				{
+					break;
+				}
+					else
+				{
+					elevatorOccupancy.add(currentPoll);
+				}
 			}
 		}
 	}
@@ -76,7 +96,16 @@ public class Elevator
 		PriorityQueue<Person> peopleToAdd = Building.getPeople(currentFloor);
 		while(!peopleToRemove.isEmpty())
 		{
-			peopleToAdd.add(peopleToRemove.remove());
+			Person currentPoll = peopleToRemove.peek();
+			if(currentPoll instanceof Maintenance)
+			{
+				peopleToAdd.add(peopleToRemove.remove());
+				maxCapacity = 4;
+			}
+			else
+			{
+				peopleToAdd.add(peopleToRemove.remove());
+			}
 		}
 	}
 }

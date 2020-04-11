@@ -77,12 +77,12 @@ final class Building
 		}
 	}
 	
-	public static void createMaintananceInBuilding(int totalMaintanance)
+	public static void createMaintenanceInBuilding(int totalMaintenance)
 	{
-		for(Integer i = 0; i < totalMaintanance; i++)
+		for(Integer i = 0; i < totalMaintenance; i++)
 		{
-			Person newMaintanance = new Maintanance(i.toString(), 0);
-			personList.add(newMaintanance);
+			Person newMaintenance = new Maintenance(i.toString(), 0);
+			personList.add(newMaintenance);
 		}
 	}
 	
@@ -98,11 +98,11 @@ final class Building
 	
 	public static Elevator getAnElevator(String name)
 	{
-		for(Elevator e : elevators)
+		for(Elevator allElevators : elevators)
 		{
-			if(e.getElevatorName().equals(name))
+			if(allElevators.getElevatorName().equals(name))
 			{
-				return e;
+				return allElevators;
 			}
 		}
 		return null;
@@ -123,7 +123,8 @@ final class Building
 		int floorNumber = 0;
 		for(PriorityQueue<Person> peopleInFloors : floors)
 		{
-			System.out.println("There are " + peopleInFloors.size() + " People on floor " + floorNumber);
+			//Change from .toString() to .size() to see absolute numbers instead of element identities
+			System.out.println("There are " + peopleInFloors.toString() + " People on floor " + floorNumber);
 			floorNumber++;
 		}
 	}

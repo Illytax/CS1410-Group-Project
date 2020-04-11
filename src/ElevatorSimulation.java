@@ -56,8 +56,8 @@ public class ElevatorSimulation
 		TextField developerInput = new TextField();
 		Label setEmployeeLabel = new Label();
 		TextField employeeInput = new TextField();
-		Label setMaintananceLabel = new Label();
-		TextField maintananceInput = new TextField();
+		Label setMaintenanceLabel = new Label();
+		TextField maintenanceInput = new TextField();
 		
 		parameterSetStage.setTitle(title);
 		parameterSetStage.setMinWidth(250);
@@ -71,8 +71,8 @@ public class ElevatorSimulation
 		developerInput.setText("4");
 		setEmployeeLabel.setText("Set the buildings Employees");
 		employeeInput.setText("4");
-		setMaintananceLabel.setText("Set the buildings Maintanance Crews");
-		maintananceInput.setText("1");
+		setMaintenanceLabel.setText("Set the buildings Maintanance Crews");
+		maintenanceInput.setText("1");
 		
 		submitParameters = new Button("Submit");
 		
@@ -85,7 +85,7 @@ public class ElevatorSimulation
 				String setClient = clientInput.getText();
 				String setDeveloper = developerInput.getText();
 				String setEmployee = employeeInput.getText();
-				String setMaintanance = maintananceInput.getText();
+				String setMaintenance = maintenanceInput.getText();
 				
 				if(floorsNumber.equals("0"))
 				{
@@ -120,12 +120,12 @@ public class ElevatorSimulation
 				int employeeInt = Integer.parseInt(setEmployee);
 				Building.createEmployeesInBuilding(employeeInt);
 				
-				if(setMaintanance.equals("0"))
+				if(setMaintenance.equals("0"))
 				{
 					throw new Exception();
 				}
-				int maintananceInt = Integer.parseInt(setMaintanance);
-				Building.createMaintananceInBuilding(maintananceInt);
+				int maintenanceInt = Integer.parseInt(setMaintenance);
+				Building.createMaintenanceInBuilding(maintenanceInt);
 	            
 				Building.createPeopleInBuilding();
 				parameterSetStage.close();
@@ -154,8 +154,8 @@ public class ElevatorSimulation
 				developerInput,
 				setEmployeeLabel,
 				employeeInput,
-				setMaintananceLabel,
-				maintananceInput,
+				setMaintenanceLabel,
+				maintenanceInput,
 				submitParameters);
 		parameterWindow.setAlignment(Pos.CENTER);
 		parameterSetStage.setScene(parameterStage);
