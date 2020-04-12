@@ -14,12 +14,5 @@ public interface Visitor
 	{
 		probabilityQ = new Random().nextDouble();			
 	}
-		
-		
-	
-	public static void goToFloor() 
-	{
-			
-	}
 	
 }
