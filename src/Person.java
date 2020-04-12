@@ -31,6 +31,12 @@ public class Person implements Comparable
 		return floorGoals.peek();
 	}
 	
+	public void newGoal()
+	{
+		floorGoals.poll();
+		floorGoals.add(accessLevel[random.nextInt(accessLevel.length)]);
+	}
+	
 	@Override
 	public int compareTo(Object o) 
 	{

@@ -6,6 +6,7 @@ public class Elevator
 	private int maxCapacity = 4;
 	private String elevatorName;
 	private PriorityQueue<Person> elevatorOccupancy = new PriorityQueue<Person>();
+	private Boolean isElevatorUp = true;
 	
 	public Elevator(String elevatorName)
 	{
@@ -53,6 +54,34 @@ public class Elevator
     	}
 	}
 	
+	public void elavatorMove()
+	{
+		if(isElevatorUp)
+			if(Building.getAnElevator("e1").getCurrentFloor() == Building.getSizeOfFloors() - 1)
+			{
+				isElevatorUp = false;
+			}
+			else
+			{
+				currentFloor++;
+				Building.getAnElevator("e1").addPeopleToElevator();
+				Building.getAnElevator("e1").removePeopleFromElevator();
+			}
+		else
+		{
+			if(Building.getAnElevator("e1").getCurrentFloor() == 0)
+			{
+				isElevatorUp = true;
+			}
+			else
+			{
+				currentFloor--;
+				Building.getAnElevator("e1").addPeopleToElevator();
+				Building.getAnElevator("e1").removePeopleFromElevator();
+			}
+		}
+	}
+	
 	public void addPeopleToElevator()
 	{
 		PriorityQueue<Person> peopleToAdd = Building.getPeople(currentFloor);
@@ -90,7 +119,6 @@ public class Elevator
 		}
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public void removePeopleFromElevator()
 	{
 		PriorityQueue<Person> peopleInElevator = new PriorityQueue<>(elevatorOccupancy);
@@ -103,7 +131,9 @@ public class Elevator
 				{
 					maxCapacity = 4;
 				}
-				elevatorOccupancy.remove(peopleToAdd.add(person));
+				elevatorOccupancy.remove(person);
+				peopleToAdd.add(person);
+				person.newGoal();
 			}
 		}
 	}

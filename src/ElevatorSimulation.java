@@ -25,6 +25,8 @@ public class ElevatorSimulation
     Button currentPeopleOnEachFloor;
     Button movePeopleIntoElevator1;
     Button movePeopleIntoElevator2;
+    Button tickButton;
+    static int tickInt = 2880;
     
     //Create UI for Number of floors
 	VBox startWindow = new VBox(10);
@@ -37,6 +39,21 @@ public class ElevatorSimulation
     {
     	launch(args);    
     }
+	
+	public static void tickButton()
+	{
+		//for(int i = 0; i < tickInt; i++)
+		//{
+			if(Building.getAnElevator("e1").getCurrentFloor() == 0)
+			{
+				Building.getAnElevator("e1").addPeopleToElevator();
+			}
+			Building.getAnElevator("e1").elavatorMove();
+	        System.out.println("There are " + Building.getAnElevator("e1").getPeopleInElevator() + " people in first the elevator"); 
+	        Building.showPeopleOnEachFloor();
+	        System.out.println("The elevator is at floor " + Building.getAnElevator("e1").getCurrentFloor());
+		//}
+	}
     
     public void setParameters(String title)
 	{
@@ -85,6 +102,7 @@ public class ElevatorSimulation
 			try
 			{
 				String seedNumber = seedInput.getText();
+				Integer.parseInt(seedNumber);
 				String tickNumber = ticksInput.getText();	
 				String floorsNumber = floorInput.getText();
 				String setElevators =  elevatorInput.getText();
@@ -93,17 +111,11 @@ public class ElevatorSimulation
 				String setEmployee = employeeInput.getText();
 				String setMaintenance = maintenanceInput.getText();
 				
-				if(seedNumber.equals("0"))
-				{
-					throw new Exception();
-				}
-				Integer.parseInt(seedNumber);
-				
 				if(tickNumber.equals("0"))
 				{
 					throw new Exception();
 				}
-				Integer.parseInt(tickNumber);
+				//int tickInterger = Integer.parseInt(tickNumber);
 				
 				if(floorsNumber.equals("0"))
 				{
@@ -217,6 +229,8 @@ public class ElevatorSimulation
         currentPeopleInElevator = new Button("Show Elevator Population");
         //Show the People on each Floor
         currentPeopleOnEachFloor = new Button("Show All People");
+        //Simulation Tick Button
+        tickButton = new Button("+1 Tick");
     	
         //Add the buttons to the main window
         mainWindow.getChildren().addAll(
@@ -232,7 +246,8 @@ public class ElevatorSimulation
         		movePeopleIntoElevator1,
         		movePeopleIntoElevator2,
         		currentPeopleInElevator,
-        		currentPeopleOnEachFloor);
+        		currentPeopleOnEachFloor,
+        		tickButton);
         
         //Align buttons in the CENTER
         mainWindow.setAlignment(Pos.CENTER);
@@ -319,6 +334,11 @@ public class ElevatorSimulation
         currentPeopleOnEachFloor.setOnAction(e ->
         {
         	Building.showPeopleOnEachFloor();
+        });
+        
+        tickButton.setOnAction(e ->
+        {
+        	tickButton();
         });
 	}
 }
