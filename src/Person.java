@@ -14,13 +14,11 @@ public class Person implements Comparable<Person>, Visitor
 	protected static float probabilityQ;
 	protected int maxWaitTime;
 	protected int currentWaitTime;
-	protected String personName;
 	protected Queue<Integer> floorGoals;
 	protected static Random random = new Random();
 	
-	public Person(String personName, int currentFloor, int[] accessLevel)
+	public Person(int currentFloor, int[] accessLevel)
 	{
-		this.personName = personName;
 		this.currentFloor =  currentFloor;
 		this.accessLevel = accessLevel;
 		floorGoals = new LinkedList<Integer>();

@@ -38,6 +38,7 @@ public class ElevatorSimulation
     	{
     		tickInt++;
     		System.out.println("--- Tick " + tickInt);
+    		Building.createClientInBuilding();
     		for(Person person : Building.getAllPeopleInAllFloors())
     		{
     			person.updateGoals();
@@ -87,8 +88,6 @@ public class ElevatorSimulation
 		TextField floorInput = new TextField();
 		Label setElevatorsLabel = new Label();
 		TextField elevatorInput = new TextField();
-		Label setClientLabel = new Label();
-		TextField clientInput = new TextField();
 		Label setDeveloperLabel = new Label();
 		TextField developerInput = new TextField();
 		Label setEmployeeLabel = new Label();
@@ -100,7 +99,7 @@ public class ElevatorSimulation
 		parameterSetStage.setMinWidth(250);
 		pProbabilityInput.setText("0.05");
 		setpProbabilityLabel.setText("Set the q Probability");
-		qProbabilityInput.setText("0.05");
+		qProbabilityInput.setText("0.01");
 		setqProbabilityLabel.setText("Set the q Probability");
 		setSeedsLabel.setText("Set the Seed");
 		seedInput.setText("0");
@@ -110,12 +109,10 @@ public class ElevatorSimulation
 		floorInput.setText("7");
 		setElevatorsLabel.setText("Set the buildings Elevators");
 		elevatorInput.setText("2");
-		setClientLabel.setText("Set the buildings Clients");
-		clientInput.setText("4");
 		setDeveloperLabel.setText("Set the buildings Developers");
-		developerInput.setText("4");
+		developerInput.setText("10");
 		setEmployeeLabel.setText("Set the buildings Employees");
-		employeeInput.setText("4");
+		employeeInput.setText("10");
 		setMaintenanceLabel.setText("Set the buildings Maintanance Crews");
 		maintenanceInput.setText("1");
 		
@@ -132,7 +129,6 @@ public class ElevatorSimulation
 				String tickNumber = ticksInput.getText();	
 				String floorsNumber = floorInput.getText();
 				String setElevators =  elevatorInput.getText();
-				String setClient = clientInput.getText();
 				String setDeveloper = developerInput.getText();
 				String setEmployee = employeeInput.getText();
 				String setMaintenance = maintenanceInput.getText();
@@ -169,13 +165,6 @@ public class ElevatorSimulation
 					throw new Exception();
 				}
 				Building.setElevators(setElevators);
-				
-				if(setClient.equals("0"))
-				{
-					throw new Exception();
-				}
-				int clientInt = Integer.parseInt(setClient);
-				Building.createClientsInBuilding(clientInt);
 				
 				if(setDeveloper.equals("0"))
 				{
@@ -229,8 +218,6 @@ public class ElevatorSimulation
 				floorInput, 
 				setElevatorsLabel, 
 				elevatorInput,
-				setClientLabel,
-				clientInput,
 				setDeveloperLabel,
 				developerInput,
 				setEmployeeLabel,
@@ -252,6 +239,8 @@ public class ElevatorSimulation
         tickButton10 =  new Button("+10 Tick");
         tickButton100 =  new Button("+100 Tick");
     	
+        
+        mStage.setTitle("Tick Buttons");
         //Add the tick buttons to the main window
         mainWindow.getChildren().addAll(tickButton, tickButton10, tickButton100);
         

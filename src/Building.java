@@ -51,12 +51,12 @@ final class Building
 		}
 	}
 	
-	public static void createClientsInBuilding(int totalClients)
+	public static void createClientInBuilding()
 	{
-		for(Integer i = 0; i < totalClients; i++)
+		if(Client.newQ() < Person.returnProbQ())
 		{
-			Person newClient = new Client(i.toString(), 0);
-			personList.add(newClient);
+			Person newClient = new Client(0);
+			floors.get(0).add(newClient);
 		}
 	}
 	
@@ -64,7 +64,7 @@ final class Building
 	{
 		for(Integer i = 0; i < totalDevelopers; i++)
 		{
-			Person newDevelopers = new Developer(i.toString(), 0, "Mugtome");
+			Person newDevelopers = new Developer(0, "Mugtome");
 			personList.add(newDevelopers);
 		}
 	}
@@ -73,7 +73,7 @@ final class Building
 	{
 		for(Integer i = 0; i < totalDevelopers; i++)
 		{
-			Person newDevelopers = new Developer(i.toString(), 0, "Goggles");
+			Person newDevelopers = new Developer(0, "Goggles");
 			personList.add(newDevelopers);
 		}
 	}
@@ -82,7 +82,7 @@ final class Building
 	{
 		for(Integer i = 0; i < totalEmployees; i++)
 		{
-			Person newEmployees = new Employee(i.toString(), 0);
+			Person newEmployees = new Employee(0);
 			personList.add(newEmployees);
 		}
 	}
@@ -91,7 +91,7 @@ final class Building
 	{
 		for(Integer i = 0; i < totalMaintenance; i++)
 		{
-			Person newMaintenance = new Maintenance(i.toString(), 0);
+			Person newMaintenance = new Maintenance(0);
 			personList.add(newMaintenance);
 		}
 	}
@@ -100,7 +100,7 @@ final class Building
 	{
 		for(Person checkPerson : floors.get(0))
 		{
-			if(checkPerson == new Client(personLeaving, 0))
+			if(checkPerson == new Client(0))
 			{
 				floors.get(0).remove(checkPerson);	
 			}
