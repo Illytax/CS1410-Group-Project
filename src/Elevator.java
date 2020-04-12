@@ -96,13 +96,13 @@ public class Elevator
 			{
 				if(person.getCurrentGoal() != null && person.getCurrentGoal() == currentFloor)
 				{
+					person.removeGoal();
+					elevatorOccupancy.remove(person);
+					peopleToAdd.add(person);
 					if(person instanceof Maintenance)
 					{
 						maxCapacity = 4;
 					}
-					person.removeGoal();
-					elevatorOccupancy.remove(person);
-					peopleToAdd.add(person);
 				}
 			}		
 		}
@@ -122,7 +122,6 @@ public class Elevator
 					{
 						if((person instanceof Maintenance) && (elevatorOccupancy.size() == 0))
 						{
-							elevatorOccupancy.add(person);
 							maxCapacity = 1;
 						}
 						else if((person instanceof Maintenance) && (elevatorOccupancy.size() > 0))
