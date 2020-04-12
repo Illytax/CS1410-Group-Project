@@ -42,4 +42,15 @@ public class Person implements Comparable
 	{
 		return 0;
 	}
+	
+	public double getprobP() 
+	{
+		return probabilityP;
+	}
+	
+	public double getprobQ() 
+	{
+		return probabilityQ;
+	}
+
 }
