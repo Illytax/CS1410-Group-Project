@@ -90,6 +90,7 @@ public class Elevator
 		}
 	}
 	
+	@SuppressWarnings("unlikely-arg-type")
 	public void removePeopleFromElevator()
 	{
 		PriorityQueue<Person> peopleInElevator = new PriorityQueue<>(elevatorOccupancy);
@@ -102,8 +103,7 @@ public class Elevator
 				{
 					maxCapacity = 4;
 				}
-				elevatorOccupancy.remove(person);
-				peopleToAdd.add(person);
+				elevatorOccupancy.remove(peopleToAdd.add(person));
 			}
 		}
 	}

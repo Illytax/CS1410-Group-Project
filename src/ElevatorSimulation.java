@@ -24,11 +24,7 @@ public class ElevatorSimulation
     Button currentPeopleInElevator;
     Button currentPeopleOnEachFloor;
     Button movePeopleIntoElevator1;
-    Button movePeopleOutOfElevator1;
     Button movePeopleIntoElevator2;
-    Button movePeopleOutOfElevator2;
-    
-    int currentFloor = 0;
     
     //Create UI for Number of floors
 	VBox startWindow = new VBox(10);
@@ -46,6 +42,10 @@ public class ElevatorSimulation
 	{
 		Stage parameterSetStage =  new Stage();
 		Button submitParameters;
+		Label setSeedsLabel = new Label();
+		TextField seedInput = new TextField();
+		Label setTicksLabel = new Label();
+		TextField ticksInput = new TextField();
 		Label setFloorsLabel = new Label();
 		TextField floorInput = new TextField();
 		Label setElevatorsLabel = new Label();
@@ -61,9 +61,13 @@ public class ElevatorSimulation
 		
 		parameterSetStage.setTitle(title);
 		parameterSetStage.setMinWidth(250);
-		setFloorsLabel.setText("Set the buildings floors");
+		setSeedsLabel.setText("Set the Seed");
+		seedInput.setText("0");
+		setTicksLabel.setText("Set the Tickrate");
+		ticksInput.setText("2880");
+		setFloorsLabel.setText("Set the buildings Floors");
 		floorInput.setText("7");
-		setElevatorsLabel.setText("Set the buildings elevators");
+		setElevatorsLabel.setText("Set the buildings Elevators");
 		elevatorInput.setText("2");
 		setClientLabel.setText("Set the buildings Clients");
 		clientInput.setText("4");
@@ -80,12 +84,26 @@ public class ElevatorSimulation
 		{
 			try
 			{
+				String seedNumber = seedInput.getText();
+				String tickNumber = ticksInput.getText();	
 				String floorsNumber = floorInput.getText();
 				String setElevators =  elevatorInput.getText();
 				String setClient = clientInput.getText();
 				String setDeveloper = developerInput.getText();
 				String setEmployee = employeeInput.getText();
 				String setMaintenance = maintenanceInput.getText();
+				
+				if(seedNumber.equals("0"))
+				{
+					throw new Exception();
+				}
+				Integer.parseInt(seedNumber);
+				
+				if(tickNumber.equals("0"))
+				{
+					throw new Exception();
+				}
+				Integer.parseInt(tickNumber);
 				
 				if(floorsNumber.equals("0"))
 				{
@@ -144,6 +162,10 @@ public class ElevatorSimulation
 		Scene parameterStage = new Scene(parameterWindow, 400, 600);
 		
 		parameterWindow.getChildren().addAll(
+				setSeedsLabel,
+				seedInput,
+				setTicksLabel,
+				ticksInput,
 				setFloorsLabel, 
 				floorInput, 
 				setElevatorsLabel, 
@@ -167,9 +189,6 @@ public class ElevatorSimulation
 	{
     	mStage = mainStage;
     	
-    	//Set window name
-    	mainStage.setTitle("Elevator Management");
-    	
     	//Set the number of Floors in the Building
     	buildingSetup =  new Button("Set Number Of Floors");
         //Move Elevator 1 up
@@ -192,12 +211,8 @@ public class ElevatorSimulation
         numberOfPeople =  new Button("All People");
         //Move People into the 1st Elevator
         movePeopleIntoElevator1 = new Button("Move Into Elevator 1");
-        //Move People out of the 1sr Elevator
-        movePeopleOutOfElevator1 = new Button("Move Out Of Elevator 1");
         //Move People into the 2st Elevator
         movePeopleIntoElevator2 = new Button("Move Into Elevator 2");
-        //Move People out of the 2sr Elevator
-        movePeopleOutOfElevator2 = new Button("Move Out Of Elevator 2");
         //Show all People in the Elevator
         currentPeopleInElevator = new Button("Show Elevator Population");
         //Show the People on each Floor
@@ -215,29 +230,20 @@ public class ElevatorSimulation
         		numberOfElevators,
         		numberOfPeople,
         		movePeopleIntoElevator1,
-        		movePeopleOutOfElevator1,
         		movePeopleIntoElevator2,
-        		movePeopleOutOfElevator2,
         		currentPeopleInElevator,
         		currentPeopleOnEachFloor);
         
-        //Add Buttons to the start window
-        startWindow.getChildren().addAll(buildingSetup);
         //Align buttons in the CENTER
         mainWindow.setAlignment(Pos.CENTER);
-        startWindow.setAlignment(Pos.CENTER);
 
-        
-        buildingSetup.setOnAction(e -> 
-        {
-        	setParameters("Set Building Parameters");
-        });
-        
+        setParameters("Set Building Parameters");
         //Tell Button to print to console 1 Floor higher than current or inform using maximum Floor has been reached for Elevator 1
         // e = lambda expression
         travelUpElevator1.setOnAction(e ->
         {
         	Building.getAnElevator("e1").elevatorUp();
+        	Building.getAnElevator("e1").removePeopleFromElevator();
         });
         
         //Tell Button to print to console 1 Floor lower than current or inform that minimum Floor has been reached for Elevator 1
@@ -250,6 +256,7 @@ public class ElevatorSimulation
         travelUpElevator2.setOnAction(e ->
         {
         	Building.getAnElevator("e2").elevatorUp();
+        	Building.getAnElevator("e2").removePeopleFromElevator();
         });
         
         //Tell Button to print to console 1 Floor lower than current or inform that minimum Floor has been reached for Elevator 2
@@ -294,23 +301,12 @@ public class ElevatorSimulation
         	Building.getAnElevator("e1").addPeopleToElevator();
         });
         
-        //Move People out of the Elevator
-        movePeopleOutOfElevator1.setOnAction(e ->
-        {
-        	Building.getAnElevator("e1").removePeopleFromElevator();
-        });
-        
         //Move People into the first Elevator
         movePeopleIntoElevator2.setOnAction(e ->
         {
         	Building.getAnElevator("e2").addPeopleToElevator();
         });
         
-        //Move People out of the Elevator
-        movePeopleOutOfElevator2.setOnAction(e ->
-        {
-        	Building.getAnElevator("e2").removePeopleFromElevator();
-        });
         
         //Show the occupants of the Elevator
         currentPeopleInElevator.setOnAction(e ->
@@ -324,10 +320,5 @@ public class ElevatorSimulation
         {
         	Building.showPeopleOnEachFloor();
         });
-        
-        //Add the VBox to the window and show the window
-        Scene startStage = new Scene(startWindow, 400, 400);
-        mainStage.setScene(startStage);
-        mainStage.show();
 	}
 }
