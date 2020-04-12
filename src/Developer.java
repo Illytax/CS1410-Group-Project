@@ -10,4 +10,18 @@ public class Developer extends Person
 		capacityNeeded = 1;
 		currentFloor = 1;
 	}
+	
+	@Override
+	public void updateGoals()
+	{
+		if(getCurrentGoal() == null)
+		{
+			double p = random.nextDouble();
+			if(p < returnProbP())
+			{
+				newGoal();
+			}
+		}
+	}
+
 }

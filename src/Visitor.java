@@ -2,8 +2,6 @@ import java.util.Random;
 
 public interface Visitor 
 {
-	
-	
 	public static void setprobabilityP(double probP)
 	{
 		probP = new Random().nextDouble();			

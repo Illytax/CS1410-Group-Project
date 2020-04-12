@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 final class Building
@@ -127,15 +128,18 @@ final class Building
 		}
 		return null;
 	}
-
-	public static int getPeopleInBuilding()
+	
+	public static LinkedList<Person> getAllPeopleInAllFloors()
 	{
-		int count = 0;
-		for(PriorityQueue<Person> currentQueue : floors)
+		LinkedList<Person> allPeople = new LinkedList<Person>();
+		for(PriorityQueue<Person> peopleInFloors : floors)
 		{
-			count += currentQueue.size();
+			for(Person people : peopleInFloors)
+			{
+				allPeople.add(people);
+			}
 		}
-		return count;
+		return allPeople;
 	}
 	
 	public static void showPeopleOnEachFloor()

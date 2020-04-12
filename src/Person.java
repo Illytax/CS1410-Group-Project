@@ -2,15 +2,16 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
-@SuppressWarnings("rawtypes")
-public class Person implements Comparable
+
+public class Person implements Comparable<Person>, Visitor
 {
+	protected int tick;
 	protected int[] accessLevel;
 	protected int priorityLevel;
 	protected int capacityNeeded;
 	protected int currentFloor; 
-	protected float probabilityP;
-	protected float probabilityQ;
+	protected static float probabilityP;
+	protected static float probabilityQ;
 	protected int maxWaitTime;
 	protected int currentWaitTime;
 	protected String personName;
@@ -26,31 +27,55 @@ public class Person implements Comparable
 		floorGoals.add(accessLevel[random.nextInt(accessLevel.length)]);
 	}
 	
-	public int getCurrentGoal()
+	public Integer getCurrentGoal()
 	{
 		return floorGoals.peek();
 	}
 	
-	public void newGoal()
+	public int getGoalsSize()
+	{
+		return floorGoals.size();
+	}
+	
+	public void removeGoal()
 	{
 		floorGoals.poll();
+	}
+	
+	public void updateGoals()
+	{
+		
+	}
+	
+	public void newGoal()
+	{
 		floorGoals.add(accessLevel[random.nextInt(accessLevel.length)]);
 	}
 	
-	@Override
-	public int compareTo(Object o) 
+	public static void setProbP(float p) 
 	{
-		return 0;
+		probabilityP = p;
 	}
 	
-	public double getprobP() 
+	public static float returnProbP() 
 	{
 		return probabilityP;
 	}
 	
-	public double getprobQ() 
+	public static void setProbQ(float q) 
+	{
+		probabilityQ = q;
+	}
+	
+	public static float returnProbQ() 
 	{
 		return probabilityQ;
+	}
+
+	@Override
+	public int compareTo(Person o) 
+	{
+		return 0;
 	}
 
 }

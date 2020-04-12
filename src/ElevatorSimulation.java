@@ -38,6 +38,10 @@ public class ElevatorSimulation
     	{
     		tickInt++;
     		System.out.println("--- Tick " + tickInt);
+    		for(Person person : Building.getAllPeopleInAllFloors())
+    		{
+    			person.updateGoals();
+    		}
     		if(tickCounter == 0)
     		{
     			Building.getAnElevator("e1").elavatorMove();
@@ -48,8 +52,8 @@ public class ElevatorSimulation
     		
     		else if(tickCounter == 1)
     		{
-				Building.getAnElevator("e1").addPeopleToElevator();
 				Building.getAnElevator("e1").removePeopleFromElevator();
+				Building.getAnElevator("e1").addPeopleFromBuilding();
 				tickCounter++;
 				System.out.println("Elevator Moving People");
     		}
@@ -71,6 +75,10 @@ public class ElevatorSimulation
 	{
 		Stage parameterSetStage =  new Stage();
 		Button submitParameters;
+		Label setpProbabilityLabel = new Label();
+		TextField pProbabilityInput = new TextField();
+		Label setqProbabilityLabel = new Label();
+		TextField qProbabilityInput = new TextField();
 		Label setSeedsLabel = new Label();
 		TextField seedInput = new TextField();
 		Label setTicksLabel = new Label();
@@ -90,6 +98,10 @@ public class ElevatorSimulation
 		
 		parameterSetStage.setTitle(title);
 		parameterSetStage.setMinWidth(250);
+		pProbabilityInput.setText("0.05");
+		setpProbabilityLabel.setText("Set the q Probability");
+		qProbabilityInput.setText("0.05");
+		setqProbabilityLabel.setText("Set the q Probability");
 		setSeedsLabel.setText("Set the Seed");
 		seedInput.setText("0");
 		setTicksLabel.setText("Set the Tickrate");
@@ -113,6 +125,8 @@ public class ElevatorSimulation
 		{
 			try
 			{
+				String pNumber = pProbabilityInput.getText();
+				String qNumber = qProbabilityInput.getText();
 				String seedNumber = seedInput.getText();
 				Integer.parseInt(seedNumber);
 				String tickNumber = ticksInput.getText();	
@@ -122,6 +136,20 @@ public class ElevatorSimulation
 				String setDeveloper = developerInput.getText();
 				String setEmployee = employeeInput.getText();
 				String setMaintenance = maintenanceInput.getText();
+				
+				if(pNumber.equals("0"))
+				{
+					throw new Exception();
+				}
+				float pInteger = Float.parseFloat(pNumber);
+				Person.setProbP(pInteger);
+				
+				if(qNumber.equals("0"))
+				{
+					throw new Exception();
+				}
+				float qInteger = Float.parseFloat(qNumber);
+				Person.setProbQ(qInteger);
 				
 				if(tickNumber.equals("0"))
 				{
@@ -181,13 +209,18 @@ public class ElevatorSimulation
 			catch(Exception f)
 			{
 				System.out.println("Insert a postive number");
+			
 			}
 		});
 		
 		VBox parameterWindow = new VBox(10);
-		Scene parameterStage = new Scene(parameterWindow, 400, 600);
+		Scene parameterStage = new Scene(parameterWindow, 400, 700);
 		
 		parameterWindow.getChildren().addAll(
+				setpProbabilityLabel,
+				pProbabilityInput,
+				setqProbabilityLabel,
+				qProbabilityInput,
 				setSeedsLabel,
 				seedInput,
 				setTicksLabel,

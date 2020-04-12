@@ -1,3 +1,4 @@
+
 public class Employee extends Person
 {
 	public Employee(String employeeName, int currentFloor)
@@ -7,4 +8,18 @@ public class Employee extends Person
 		capacityNeeded = 4;
 		currentFloor = 1;
 	}
+	
+	@Override
+	public void updateGoals()
+	{
+		if(getCurrentGoal() == null)
+		{
+			double p = random.nextDouble();
+			if(p < returnProbP())
+			{
+				newGoal();
+			}
+		}
+	}
+	
 }

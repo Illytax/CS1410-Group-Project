@@ -86,46 +86,6 @@ public class Elevator
 		}
 	}
 	
-	public void addPeopleToElevator()
-	{
-		if(doorsOpen)
-		{
-			PriorityQueue<Person> peopleToAdd = Building.getPeople(currentFloor);
-			while(elevatorOccupancy.size() < maxCapacity)
-			{
-				Person currentPoll = peopleToAdd.poll();
-				if((currentPoll instanceof Maintenance) && (elevatorOccupancy.size() == 0))
-				{
-					elevatorOccupancy.add(currentPoll);
-					maxCapacity = 1;
-				}
-				else if((currentPoll instanceof Maintenance) && (elevatorOccupancy.size() > 0))
-				{
-					if(peopleToAdd.size() < 2)
-					{
-						peopleToAdd.add(currentPoll);
-						break;
-					}
-					else
-					{
-						peopleToAdd.add(currentPoll);
-					}
-				}
-				else
-				{
-					if(currentPoll == null)
-					{
-						break;
-					}
-					else
-					{
-						elevatorOccupancy.add(currentPoll);
-					}
-				}
-			}
-		}
-	}
-	
 	public void removePeopleFromElevator()
 	{
 		if(doorsOpen)
@@ -134,17 +94,53 @@ public class Elevator
 			PriorityQueue<Person> peopleToAdd = Building.getPeople(currentFloor);
 			for(Person person : peopleInElevator)
 			{
-				if(person.getCurrentGoal() == currentFloor)
+				if(person.getCurrentGoal() != null && person.getCurrentGoal() == currentFloor)
 				{
 					if(person instanceof Maintenance)
 					{
 						maxCapacity = 4;
 					}
+					person.removeGoal();
 					elevatorOccupancy.remove(person);
 					peopleToAdd.add(person);
-					person.newGoal();
 				}
 			}		
+		}
+	}
+	
+	public void addPeopleFromBuilding()
+	{
+		if(doorsOpen)
+		{
+			PriorityQueue<Person> peopleOnFloor = new PriorityQueue<>(Building.getPeople(currentFloor));
+			PriorityQueue<Person> peopleToAdd = elevatorOccupancy;
+			for(Person person : peopleOnFloor)
+			{
+				if(person.getCurrentGoal() != null)
+				{
+					if(elevatorOccupancy.size() < maxCapacity)
+					{
+						if((person instanceof Maintenance) && (elevatorOccupancy.size() == 0))
+						{
+							elevatorOccupancy.add(person);
+							maxCapacity = 1;
+						}
+						else if((person instanceof Maintenance) && (elevatorOccupancy.size() > 0))
+						{
+							if(peopleToAdd.size() < 2)
+							{
+								break;
+							}
+						}
+						elevatorOccupancy.add(person);
+						Building.getPeople(currentFloor).remove(person);
+					}
+					else
+					{
+						break;
+					}
+				}		
+			}
 		}
 	}
 
