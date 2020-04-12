@@ -7,6 +7,7 @@ public class Elevator
 	private String elevatorName;
 	private PriorityQueue<Person> elevatorOccupancy = new PriorityQueue<Person>();
 	private Boolean isElevatorUp = true;
+	private boolean doorsOpen = true;
 	
 	public Elevator(String elevatorName)
 	{
@@ -26,6 +27,11 @@ public class Elevator
 	public String getElevatorName()
 	{
 		return elevatorName;
+	}
+	
+	public void setDoorStatus(Boolean newDoorStatus)
+	{
+		this.doorsOpen = newDoorStatus;
 	}
 
 	public void elevatorUp()
@@ -60,60 +66,61 @@ public class Elevator
 			if(Building.getAnElevator("e1").getCurrentFloor() == Building.getSizeOfFloors() - 1)
 			{
 				isElevatorUp = false;
+				currentFloor--;
 			}
 			else
 			{
 				currentFloor++;
-				Building.getAnElevator("e1").addPeopleToElevator();
-				Building.getAnElevator("e1").removePeopleFromElevator();
 			}
 		else
 		{
 			if(Building.getAnElevator("e1").getCurrentFloor() == 0)
 			{
 				isElevatorUp = true;
+				currentFloor++;
 			}
 			else
 			{
 				currentFloor--;
-				Building.getAnElevator("e1").addPeopleToElevator();
-				Building.getAnElevator("e1").removePeopleFromElevator();
 			}
 		}
 	}
 	
 	public void addPeopleToElevator()
 	{
-		PriorityQueue<Person> peopleToAdd = Building.getPeople(currentFloor);
-		while(elevatorOccupancy.size() < maxCapacity)
+		if(doorsOpen)
 		{
-			Person currentPoll = peopleToAdd.poll();
-			if((currentPoll instanceof Maintenance) && (elevatorOccupancy.size() == 0))
+			PriorityQueue<Person> peopleToAdd = Building.getPeople(currentFloor);
+			while(elevatorOccupancy.size() < maxCapacity)
 			{
-				elevatorOccupancy.add(currentPoll);
-				maxCapacity = 1;
-			}
-			else if((currentPoll instanceof Maintenance) && (elevatorOccupancy.size() > 0))
-			{
-				if(peopleToAdd.size() < 2)
+				Person currentPoll = peopleToAdd.poll();
+				if((currentPoll instanceof Maintenance) && (elevatorOccupancy.size() == 0))
 				{
-					peopleToAdd.add(currentPoll);
-					break;
+					elevatorOccupancy.add(currentPoll);
+					maxCapacity = 1;
+				}
+				else if((currentPoll instanceof Maintenance) && (elevatorOccupancy.size() > 0))
+				{
+					if(peopleToAdd.size() < 2)
+					{
+						peopleToAdd.add(currentPoll);
+						break;
+					}
+					else
+					{
+						peopleToAdd.add(currentPoll);
+					}
 				}
 				else
 				{
-					peopleToAdd.add(currentPoll);
-				}
-			}
-			else
-			{
-				if(currentPoll == null)
-				{
-					break;
-				}
+					if(currentPoll == null)
+					{
+						break;
+					}
 					else
-				{
-					elevatorOccupancy.add(currentPoll);
+					{
+						elevatorOccupancy.add(currentPoll);
+					}
 				}
 			}
 		}
@@ -121,20 +128,24 @@ public class Elevator
 	
 	public void removePeopleFromElevator()
 	{
-		PriorityQueue<Person> peopleInElevator = new PriorityQueue<>(elevatorOccupancy);
-		PriorityQueue<Person> peopleToAdd = Building.getPeople(currentFloor);
-		for(Person person : peopleInElevator)
+		if(doorsOpen)
 		{
-			if(person.getCurrentGoal() == currentFloor)
+			PriorityQueue<Person> peopleInElevator = new PriorityQueue<>(elevatorOccupancy);
+			PriorityQueue<Person> peopleToAdd = Building.getPeople(currentFloor);
+			for(Person person : peopleInElevator)
 			{
-				if(person instanceof Maintenance)
+				if(person.getCurrentGoal() == currentFloor)
 				{
-					maxCapacity = 4;
+					if(person instanceof Maintenance)
+					{
+						maxCapacity = 4;
+					}
+					elevatorOccupancy.remove(person);
+					peopleToAdd.add(person);
+					person.newGoal();
 				}
-				elevatorOccupancy.remove(person);
-				peopleToAdd.add(person);
-				person.newGoal();
-			}
+			}		
 		}
 	}
+
 }

@@ -144,7 +144,7 @@ final class Building
 		for(PriorityQueue<Person> peopleInFloors : floors)
 		{
 			//Change from .toString() to .size() to see absolute numbers instead of element identities
-			System.out.println("There are " + peopleInFloors.toString() + " People on floor " + floorNumber);
+			System.out.println("Floor " + floorNumber + ": " + peopleInFloors.toString());
 			floorNumber++;
 		}
 	}
