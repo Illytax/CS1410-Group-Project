@@ -87,12 +87,12 @@ final class Building
 		}
 	}
 	
-	public static void createMaintenanceInBuilding(int totalMaintenance)
+	public static void createMaintenanceInBuilding()
 	{
-		for(Integer i = 0; i < totalMaintenance; i++)
+		if(Maintenance.newQ() < 0.005)
 		{
 			Person newMaintenance = new Maintenance(0);
-			personList.add(newMaintenance);
+			floors.get(0).add(newMaintenance);
 		}
 	}
 	

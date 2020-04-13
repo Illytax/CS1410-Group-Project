@@ -6,6 +6,7 @@ import java.util.Random;
 public class Person implements Comparable<Person>, Visitor
 {
 	protected int tick;
+	protected boolean toBeDisposed = false;
 	protected int[] accessLevel;
 	protected int priorityLevel;
 	protected int capacityNeeded;

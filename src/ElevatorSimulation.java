@@ -39,10 +39,12 @@ public class ElevatorSimulation
     		tickInt++;
     		System.out.println("--- Tick " + tickInt);
     		Building.createClientInBuilding();
+    		Building.createMaintenanceInBuilding();
     		for(Person person : Building.getAllPeopleInAllFloors())
     		{
     			person.updateGoals();
     		}
+    		
     		if(tickCounter == 0)
     		{
     			Building.getAnElevator("e1").elavatorMove();
@@ -92,14 +94,12 @@ public class ElevatorSimulation
 		TextField developerInput = new TextField();
 		Label setEmployeeLabel = new Label();
 		TextField employeeInput = new TextField();
-		Label setMaintenanceLabel = new Label();
-		TextField maintenanceInput = new TextField();
 		
 		parameterSetStage.setTitle(title);
 		parameterSetStage.setMinWidth(250);
-		pProbabilityInput.setText("0.05");
-		setpProbabilityLabel.setText("Set the q Probability");
-		qProbabilityInput.setText("0.01");
+		pProbabilityInput.setText("0.005");
+		setpProbabilityLabel.setText("Set the p Probability");
+		qProbabilityInput.setText("0.005");
 		setqProbabilityLabel.setText("Set the q Probability");
 		setSeedsLabel.setText("Set the Seed");
 		seedInput.setText("0");
@@ -113,8 +113,6 @@ public class ElevatorSimulation
 		developerInput.setText("10");
 		setEmployeeLabel.setText("Set the buildings Employees");
 		employeeInput.setText("10");
-		setMaintenanceLabel.setText("Set the buildings Maintanance Crews");
-		maintenanceInput.setText("1");
 		
 		submitParameters = new Button("Submit");
 		
@@ -131,7 +129,6 @@ public class ElevatorSimulation
 				String setElevators =  elevatorInput.getText();
 				String setDeveloper = developerInput.getText();
 				String setEmployee = employeeInput.getText();
-				String setMaintenance = maintenanceInput.getText();
 				
 				if(pNumber.equals("0"))
 				{
@@ -179,16 +176,8 @@ public class ElevatorSimulation
 				}
 				int employeeInt = Integer.parseInt(setEmployee);
 				Building.createEmployeesInBuilding(employeeInt);
-				
-				if(setMaintenance.equals("0"))
-				{
-					throw new Exception();
-				}
-				int maintenanceInt = Integer.parseInt(setMaintenance);
-				Building.createMaintenanceInBuilding(maintenanceInt);
 	            
 				Building.createPeopleInBuilding();
-				System.out.println(tickMax);
 				parameterSetStage.close();
 				mStage.close();
 				Scene scene = new Scene(mainWindow, 400, 200);
@@ -203,7 +192,7 @@ public class ElevatorSimulation
 		});
 		
 		VBox parameterWindow = new VBox(10);
-		Scene parameterStage = new Scene(parameterWindow, 400, 700);
+		Scene parameterStage = new Scene(parameterWindow, 400, 600);
 		
 		parameterWindow.getChildren().addAll(
 				setpProbabilityLabel,
@@ -222,8 +211,6 @@ public class ElevatorSimulation
 				developerInput,
 				setEmployeeLabel,
 				employeeInput,
-				setMaintenanceLabel,
-				maintenanceInput,
 				submitParameters);
 		parameterWindow.setAlignment(Pos.CENTER);
 		parameterSetStage.setScene(parameterStage);

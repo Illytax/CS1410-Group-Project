@@ -34,32 +34,6 @@ public class Elevator
 		this.doorsOpen = newDoorStatus;
 	}
 
-	public void elevatorUp()
-	{
-    	if(currentFloor == Building.getSizeOfFloors() - 1)
-    	{
-    		System.out.println("You're at the top floor");
-    	}
-    	else
-    	{
-    		currentFloor++;
-    		System.out.println("You've gone up to floor" + " " + currentFloor);
-    	}
-	}
-	
-	public void elevatorDown()
-	{
-    	if(currentFloor == 0)
-    	{
-    		System.out.println("You're at the bottom floor");
-    	}
-    	else
-    	{
-    		currentFloor--;
-    		System.out.println("You've gone down to floor" + " " + currentFloor);
-    	}
-	}
-	
 	public void elavatorMove()
 	{
 		if(isElevatorUp)
@@ -103,6 +77,10 @@ public class Elevator
 					{
 						maxCapacity = 4;
 					}
+				}
+				if(currentFloor == 0  && person.toBeDisposed)
+				{
+					peopleToAdd.remove(person);
 				}
 			}		
 		}
