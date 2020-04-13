@@ -102,7 +102,7 @@ public class ElevatorSimulation
 		qProbabilityInput.setText("0.005");
 		setqProbabilityLabel.setText("Set the q Probability");
 		setSeedsLabel.setText("Set the Seed");
-		seedInput.setText("0");
+		seedInput.setText("1");
 		setTicksLabel.setText("Set the Tickrate");
 		ticksInput.setText("2880");
 		setFloorsLabel.setText("Set the buildings Floors");
@@ -123,7 +123,8 @@ public class ElevatorSimulation
 				String pNumber = pProbabilityInput.getText();
 				String qNumber = qProbabilityInput.getText();
 				String seedNumber = seedInput.getText();
-				Integer.parseInt(seedNumber);
+				int sd = Integer.parseInt(seedNumber);
+				Person.newRandom(sd);
 				String tickNumber = ticksInput.getText();	
 				String floorsNumber = floorInput.getText();
 				String setElevators =  elevatorInput.getText();
@@ -177,7 +178,7 @@ public class ElevatorSimulation
 				int employeeInt = Integer.parseInt(setEmployee);
 				Building.createEmployeesInBuilding(employeeInt);
 	            
-				Building.createPeopleInBuilding();
+				Building.createPeopleInBuilding(sd);
 				parameterSetStage.close();
 				mStage.close();
 				Scene scene = new Scene(mainWindow, 400, 200);

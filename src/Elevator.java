@@ -1,11 +1,13 @@
+import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class Elevator
 {    
 	private int currentFloor = 0;
 	private int maxCapacity = 4;
 	private String elevatorName;
-	private PriorityQueue<Person> elevatorOccupancy = new PriorityQueue<Person>();
+	private Queue<Person> elevatorOccupancy = new LinkedList<Person>();
 	private Boolean isElevatorUp = true;
 	private boolean doorsOpen = true;
 	
@@ -64,8 +66,8 @@ public class Elevator
 	{
 		if(doorsOpen)
 		{
-			PriorityQueue<Person> peopleInElevator = new PriorityQueue<>(elevatorOccupancy);
-			PriorityQueue<Person> peopleToAdd = Building.getPeople(currentFloor);
+			Queue<Person> peopleInElevator = new LinkedList<>(elevatorOccupancy);
+			Queue<Person> peopleToAdd = Building.getPeople(currentFloor);
 			for(Person person : peopleInElevator)
 			{
 				if(person.getCurrentGoal() != null && person.getCurrentGoal() == currentFloor)
@@ -90,8 +92,8 @@ public class Elevator
 	{
 		if(doorsOpen)
 		{
-			PriorityQueue<Person> peopleOnFloor = new PriorityQueue<>(Building.getPeople(currentFloor));
-			PriorityQueue<Person> peopleToAdd = elevatorOccupancy;
+			Queue<Person> peopleOnFloor = new LinkedList<>(Building.getPeople(currentFloor));
+			Queue<Person> peopleToAdd = elevatorOccupancy;
 			for(Person person : peopleOnFloor)
 			{
 				if(person.getCurrentGoal() != null)

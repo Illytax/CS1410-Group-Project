@@ -16,7 +16,7 @@ public class Person implements Comparable<Person>, Visitor
 	protected int maxWaitTime;
 	protected int currentWaitTime;
 	protected Queue<Integer> floorGoals;
-	protected static Random random = new Random();
+	protected static Random random;
 	
 	public Person(int currentFloor, int[] accessLevel)
 	{
@@ -39,6 +39,11 @@ public class Person implements Comparable<Person>, Visitor
 	public void removeGoal()
 	{
 		floorGoals.poll();
+	}
+	
+	public static void newRandom(int seed)
+	{
+		random = new Random(seed);
 	}
 	
 	public void updateGoals()

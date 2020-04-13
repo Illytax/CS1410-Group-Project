@@ -2,25 +2,27 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Random;
 
 final class Building
 {
 	private static int floorsInBuilding;
 	private static ArrayList<Elevator> elevators = new ArrayList<Elevator>();
 	private static ArrayList<Person> personList = new ArrayList<Person>();
-	private static ArrayList<PriorityQueue<Person>> floors = new ArrayList<PriorityQueue<Person>>();
+	private static ArrayList<Queue<Person>> floors = new ArrayList<Queue<Person>>();
 	
 	public static int getSizeOfFloors()
 	{
 		return floorsInBuilding;
 	}
 	
-	public static ArrayList<PriorityQueue<Person>> getFloors()
+	public static ArrayList<Queue<Person>> getFloors()
 	{
 		return floors;
 	}
 
-	public static PriorityQueue<Person> getPeople(int floorNumber)
+	public static Queue<Person> getPeople(int floorNumber)
 	{
 		return floors.get(floorNumber);
 	}
@@ -35,15 +37,15 @@ final class Building
 		}
 	}
 	
-	public static void createPeopleInBuilding()
+	public static void createPeopleInBuilding(int seed)
 	{
 		
 		for(int i = 0; i < getSizeOfFloors(); i++) 
 		{
-		   floors.add(new PriorityQueue<Person>());
+		   floors.add(new LinkedList<Person>());
 		}
-		PriorityQueue<Person> tempQueue = floors.get(0);
-		Collections.shuffle(personList);
+		Queue<Person> tempQueue = floors.get(0);
+		Collections.shuffle(personList, new Random(seed));
 		System.out.println(personList.toString());
 		for(Person allPeople : personList)
 		{
@@ -132,7 +134,7 @@ final class Building
 	public static LinkedList<Person> getAllPeopleInAllFloors()
 	{
 		LinkedList<Person> allPeople = new LinkedList<Person>();
-		for(PriorityQueue<Person> peopleInFloors : floors)
+		for(Queue<Person> peopleInFloors : floors)
 		{
 			for(Person people : peopleInFloors)
 			{
@@ -145,7 +147,7 @@ final class Building
 	public static void showPeopleOnEachFloor()
 	{
 		int floorNumber = 0;
-		for(PriorityQueue<Person> peopleInFloors : floors)
+		for(Queue<Person> peopleInFloors : floors)
 		{
 			//Change from .toString() to .size() to see absolute numbers instead of element identities
 			System.out.println("Floor " + floorNumber + ": " + peopleInFloors.toString());
