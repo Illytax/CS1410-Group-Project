@@ -11,6 +11,7 @@ public class Elevator
 	private Queue<Person> elevatorOccupancy = new LinkedList<Person>();
 	private Boolean isElevatorUp = true;
 	private boolean doorsOpen = true;
+	private int tickCounter = 1;;
 	
 	public Elevator(String elevatorName)
 	{
@@ -175,6 +176,55 @@ public class Elevator
 					}
 				}		
 			}
+		}
+	}
+	
+	public boolean doesElevatorStop()
+	{
+		for(Person elevatorPeople : elevatorOccupancy)
+		{
+			if(elevatorPeople.getCurrentGoal() != null && elevatorPeople.getCurrentGoal() == currentFloor)
+			{
+				return true;
+			}
+		}
+		for(Person buildingPeople : Building.getPeople(currentFloor))
+		{
+			if(buildingPeople.getCurrentGoal() != null)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void elevatorTick()
+	{
+		if(tickCounter == 0)
+		{
+			elavatorMove();
+			setDoorStatus(doesElevatorStop());
+			tickCounter++;
+			if(!doorsOpen)
+			{
+				tickCounter = 0;
+			}
+			System.out.println("Elevator Moved");
+		}
+		
+		else if(tickCounter == 1)
+		{
+			removePeopleFromElevator();
+			addPeopleFromBuilding();
+			tickCounter++;
+			System.out.println("Elevator Moving People");
+		}
+		
+		else if(tickCounter == 2)
+		{
+			setDoorStatus(false);
+			tickCounter=0;
+			System.out.println("Elevator Closed");
 		}
 	}
 

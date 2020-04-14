@@ -45,27 +45,9 @@ public class ElevatorSimulation
     			person.updateGoals();
     		}
     		
-    		if(tickCounter == 0)
+    		for(Elevator elevators : Building.getElevators())
     		{
-    			Building.getAnElevator("e1").elavatorMove();
-    			Building.getAnElevator("e1").setDoorStatus(true);
-    			tickCounter++;
-    			System.out.println("Elevator Open");
-    		}
-    		
-    		else if(tickCounter == 1)
-    		{
-				Building.getAnElevator("e1").removePeopleFromElevator();
-				Building.getAnElevator("e1").addPeopleFromBuilding();
-				tickCounter++;
-				System.out.println("Elevator Moving People");
-    		}
-    		
-    		else if(tickCounter == 2)
-    		{
-    			Building.getAnElevator("e1").setDoorStatus(false);
-    			tickCounter=0;
-    			System.out.println("Elevator Closed");
+    			elevators.elevatorTick();
     		}
 
 	        System.out.println("Elevator (At floor " + Building.getAnElevator("e1").getCurrentFloor() + ")");

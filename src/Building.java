@@ -109,9 +109,9 @@ final class Building
 		}
 	}
 	
-	public static int getElevators()
+	public static ArrayList<Elevator> getElevators()
 	{
-		return elevators.size();
+		return elevators;
 	}
 	
 	public static void setFloors(int floorNumbers)
