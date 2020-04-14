@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -38,28 +39,82 @@ public class Elevator
 
 	public void elavatorMove()
 	{
+		System.out.println(getElevatorOccupancyGoalRequirements() + "  "  + doesElevatorContinueDirection());
+		if(!(getElevatorOccupancyGoalRequirements() 
+				|| doesElevatorContinueDirection())
+				|| (Building.getAnElevator("e1").getCurrentFloor() == Building.getSizeOfFloors() - 1 && isElevatorUp)
+				|| (Building.getAnElevator("e1").getCurrentFloor() == 0 && !isElevatorUp))
+		{
+			isElevatorUp =  !isElevatorUp;
+		}
 		if(isElevatorUp)
-			if(Building.getAnElevator("e1").getCurrentFloor() == Building.getSizeOfFloors() - 1)
-			{
-				isElevatorUp = false;
-				currentFloor--;
-			}
-			else
-			{
-				currentFloor++;
-			}
+		{
+			currentFloor++;
+		}
 		else
 		{
-			if(Building.getAnElevator("e1").getCurrentFloor() == 0)
+			currentFloor--;
+		}
+	}
+	
+	/**
+	 * 
+	 * @return 
+	 * true if there are people that want to continue travelling in the same direction
+	 */
+	
+	public boolean getElevatorOccupancyGoalRequirements()
+	{
+		for(Person people : elevatorOccupancy)
+		{
+			if(isElevatorUp)
 			{
-				isElevatorUp = true;
-				currentFloor++;
+				if(people.getCurrentGoal() > currentFloor)
+					return true;
 			}
 			else
 			{
-				currentFloor--;
+				if(people.getCurrentGoal() < currentFloor)
+					return true;
 			}
 		}
+		return false;
+	}
+	
+	public boolean doesElevatorContinueDirection()
+	{
+		ArrayList<Queue<Person>> floorsCheck = new ArrayList<Queue<Person>>();
+		if(isElevatorUp)
+		{
+			for(int i = currentFloor; i < Building.getFloors().size(); i++)
+			{
+				floorsCheck.add(Building.getFloors().get(i));
+			}
+		}
+		else
+		{
+			for(int i = currentFloor; i >= 0; i--)
+			{
+				floorsCheck.add(Building.getFloors().get(i));
+			}
+		}
+		for(Queue<Person> people : floorsCheck)
+		{
+			for(Person floorPeople : people)
+			{
+				if(isElevatorUp)
+				{
+					if(floorPeople.getCurrentGoal() != null)
+						return true;
+				}
+				else
+				{
+					if(floorPeople.getCurrentGoal() != null)
+						return true;
+				}
+			}
+		}
+		return false;	
 	}
 	
 	public void removePeopleFromElevator()
