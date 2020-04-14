@@ -50,7 +50,6 @@ public class ElevatorSimulation
     			elevators.elevatorTick();
     		}
 
-	        System.out.println("Elevator (At floor " + Building.getAnElevator("e1").getCurrentFloor() + ")");
 	        System.out.println("There are " + Building.getAnElevator("e1").getPeopleInElevator() + " people in first the elevator"); 
 	        Building.showPeopleOnEachFloor();
 		}
@@ -90,11 +89,14 @@ public class ElevatorSimulation
 		setFloorsLabel.setText("Set the buildings Floors");
 		floorInput.setText("7");
 		setElevatorsLabel.setText("Set the buildings Elevators");
-		elevatorInput.setText("2");
+		//Spec = 2
+		elevatorInput.setText("1");
 		setDeveloperLabel.setText("Set the buildings Developers");
-		developerInput.setText("10");
+		//Spec = 10
+		developerInput.setText("4");
 		setEmployeeLabel.setText("Set the buildings Employees");
-		employeeInput.setText("10");
+		//Spec = 10
+		employeeInput.setText("4");
 		
 		submitParameters = new Button("Submit");
 		

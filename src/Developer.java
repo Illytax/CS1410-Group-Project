@@ -20,6 +20,10 @@ public class Developer extends Person
 			if(p < returnProbP())
 			{
 				newGoal();
+				if(previousGoal.equals(getCurrentGoal()))
+				{
+					removeGoal();
+				}
 			}
 		}
 	}

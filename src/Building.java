@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Random;
 
@@ -46,7 +45,7 @@ final class Building
 		}
 		Queue<Person> tempQueue = floors.get(0);
 		Collections.shuffle(personList, new Random(seed));
-		System.out.println(personList.toString());
+		//System.out.println(personList.toString());
 		for(Person allPeople : personList)
 		{
 			tempQueue.add(allPeople);

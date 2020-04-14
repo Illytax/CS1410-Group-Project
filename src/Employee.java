@@ -18,6 +18,10 @@ public class Employee extends Person
 			if(p < returnProbP())
 			{
 				newGoal();
+				if(previousGoal.equals(getCurrentGoal()))
+				{
+					removeGoal();
+				}
 			}
 		}
 	}

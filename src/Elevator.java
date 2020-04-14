@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Elevator
@@ -40,7 +39,6 @@ public class Elevator
 
 	public void elavatorMove()
 	{
-		System.out.println(getElevatorOccupancyGoalRequirements() + "  "  + doesElevatorContinueDirection());
 		if(!(getElevatorOccupancyGoalRequirements() 
 				|| doesElevatorContinueDirection())
 				|| (Building.getAnElevator("e1").getCurrentFloor() == Building.getSizeOfFloors() - 1 && isElevatorUp)
@@ -198,33 +196,61 @@ public class Elevator
 		return false;
 	}
 	
+	public boolean doesAnyoneHaveAGoal()
+	{
+		for(Person allPeople : Building.getAllPeopleInAllFloors())
+		{
+			if(allPeople.getCurrentGoal() != null)
+			{
+				return true;
+			}
+		}
+		for(Person allPeople : elevatorOccupancy)
+		{
+			if(allPeople.getCurrentGoal() != null)
+			{
+				return true;
+			}
+		}	
+		return false;
+	}
+	
 	public void elevatorTick()
 	{
-		if(tickCounter == 0)
+		if(doesAnyoneHaveAGoal())
 		{
-			elavatorMove();
-			setDoorStatus(doesElevatorStop());
-			tickCounter++;
-			if(!doorsOpen)
+			if(tickCounter == 0)
 			{
-				tickCounter = 0;
+				elavatorMove();
+				setDoorStatus(doesElevatorStop());
+				tickCounter++;
+				if(!doorsOpen)
+				{
+					tickCounter = 0;
+				}
+				System.out.println("Elevator (At floor " + getCurrentFloor() + ", Elevator Closed)");
 			}
-			System.out.println("Elevator Moved");
+			
+			else if(tickCounter == 1)
+			{
+				removePeopleFromElevator();
+				addPeopleFromBuilding();
+				tickCounter++;
+				System.out.println("Elevator (At floor " + getCurrentFloor() + ", Elevator Open)");
+			}
+			
+			else if(tickCounter == 2)
+			{
+				setDoorStatus(false);
+				tickCounter=0;
+				System.out.println("Elevator (At Floor " + getCurrentFloor() + ", Elevator Closed)");
+			}
 		}
-		
-		else if(tickCounter == 1)
+		else if(currentFloor != 0)
 		{
-			removePeopleFromElevator();
-			addPeopleFromBuilding();
-			tickCounter++;
-			System.out.println("Elevator Moving People");
-		}
-		
-		else if(tickCounter == 2)
-		{
-			setDoorStatus(false);
-			tickCounter=0;
-			System.out.println("Elevator Closed");
+			isElevatorUp = false;
+			currentFloor--;
+			System.out.println("Elevator (At Floor " + getCurrentFloor() + ") ,Elevator Returning to 0)");
 		}
 	}
 
