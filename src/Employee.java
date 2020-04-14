@@ -9,6 +9,16 @@ public class Employee extends Person
 		currentFloor = 1;
 	}
 	
+	private void randomNewGoal()
+	{
+		newGoal();
+		if(previousGoal.equals(getCurrentGoal()))
+		{
+			removeGoal();
+			randomNewGoal();
+		}
+	}
+	
 	@Override
 	public void updateGoals()
 	{
@@ -17,11 +27,7 @@ public class Employee extends Person
 			double p = random.nextDouble();
 			if(p < returnProbP())
 			{
-				newGoal();
-				if(previousGoal.equals(getCurrentGoal()))
-				{
-					removeGoal();
-				}
+				randomNewGoal();
 			}
 		}
 	}
