@@ -51,6 +51,7 @@ public class ElevatorSimulation
     		}
 
 	        System.out.println("There are " + Building.getAnElevator("e1").getPeopleInElevator() + " people in first the elevator"); 
+	        System.out.println("There are " + Building.getAnElevator("e2").getPeopleInElevator() + " people in second the elevator"); 
 	        Building.showPeopleOnEachFloor();
 		}
 	}

@@ -41,8 +41,8 @@ public class Elevator
 	{
 		if(!(getElevatorOccupancyGoalRequirements() 
 				|| doesElevatorContinueDirection())
-				|| (Building.getAnElevator("e1").getCurrentFloor() == Building.getSizeOfFloors() - 1 && isElevatorUp)
-				|| (Building.getAnElevator("e1").getCurrentFloor() == 0 && !isElevatorUp))
+				|| (getCurrentFloor() == Building.getSizeOfFloors() - 1 && isElevatorUp)
+				|| (getCurrentFloor() == 0 && !isElevatorUp))
 		{
 			isElevatorUp =  !isElevatorUp;
 		}
