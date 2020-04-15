@@ -26,10 +26,9 @@ final class Building
 		return floors.get(floorNumber);
 	}
 	
-	public static void setElevators(String Elevators)
+	public static void setElevators(int Elevators)
 	{
-		int elevatorNumbers = Integer.parseInt(Elevators);
-		for(int i = 0; i < elevatorNumbers; i++)
+		for(int i = 0; i < Elevators; i++)
 		{
 			Elevator currentElevator = new Elevator("e" + (i + 1));
 			elevators.add(currentElevator);

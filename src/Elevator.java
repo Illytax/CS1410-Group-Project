@@ -217,6 +217,7 @@ public class Elevator
 	
 	public void elevatorTick()
 	{
+		System.out.println("There are "  + getPeopleInElevator() + " in Elevator " + getElevatorName());
 		if(doesAnyoneHaveAGoal())
 		{
 			if(tickCounter == 0)
