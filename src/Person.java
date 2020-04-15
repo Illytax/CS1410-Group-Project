@@ -8,9 +8,6 @@ public class Person implements Comparable<Person>, Visitor
 	protected int tick;
 	protected boolean toBeDisposed = false;
 	protected int[] accessLevel;
-	protected int priorityLevel;
-	protected int capacityNeeded;
-	protected int currentFloor; 
 	protected static float probabilityP;
 	protected static float probabilityQ;
 	protected int maxWaitTime;
@@ -19,9 +16,8 @@ public class Person implements Comparable<Person>, Visitor
 	protected Integer previousGoal;
 	protected static Random random;
 	
-	public Person(int currentFloor, int[] accessLevel)
+	public Person(int[] accessLevel)
 	{
-		this.currentFloor =  currentFloor;
 		this.accessLevel = accessLevel;
 		floorGoals = new LinkedList<Integer>();
 		floorGoals.add(accessLevel[random.nextInt(accessLevel.length)]);

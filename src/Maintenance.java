@@ -3,13 +3,11 @@ public class Maintenance extends Person
 	private int count = 0;
 	private int deathTickInt;
 	
-	public Maintenance(int currentFloor)
+	public Maintenance()
 	{
-		super(currentFloor,  new int[] {6});
+		super(new int[] {6});
 		
 		deathTickInt = random.nextInt(240 - 120) + 120;
-		capacityNeeded = 1;
-		currentFloor = 1;
 	}
 	
 	public static double newQ()

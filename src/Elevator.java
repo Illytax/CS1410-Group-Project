@@ -16,7 +16,12 @@ public class Elevator
 	{
 		this.elevatorName = elevatorName;
 	}
-
+	
+	public int getElevatorOccupancySize()
+	{
+		return elevatorOccupancy.size();
+	}
+	
 	public String getPeopleInElevator()
 	{
 		return elevatorOccupancy.toString();

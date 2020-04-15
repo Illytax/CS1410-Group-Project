@@ -37,11 +37,6 @@ final class Building
 	
 	public static void createPeopleInBuilding(int seed)
 	{
-		
-		for(int i = 0; i < getSizeOfFloors(); i++) 
-		{
-		   floors.add(new LinkedList<Person>());
-		}
 		Queue<Person> tempQueue = floors.get(0);
 		Collections.shuffle(personList, new Random(seed));
 		//System.out.println(personList.toString());
@@ -55,7 +50,7 @@ final class Building
 	{
 		if(Client.newQ() < Person.returnProbQ())
 		{
-			Person newClient = new Client(0);
+			Person newClient = new Client();
 			floors.get(0).add(newClient);
 		}
 	}
@@ -64,7 +59,7 @@ final class Building
 	{
 		for(Integer i = 0; i < totalDevelopers; i++)
 		{
-			Person newDevelopers = new Developer(0, "Mugtome");
+			Person newDevelopers = new Developer("Mugtome");
 			personList.add(newDevelopers);
 		}
 	}
@@ -73,7 +68,7 @@ final class Building
 	{
 		for(Integer i = 0; i < totalDevelopers; i++)
 		{
-			Person newDevelopers = new Developer(0, "Goggles");
+			Person newDevelopers = new Developer("Goggles");
 			personList.add(newDevelopers);
 		}
 	}
@@ -82,7 +77,7 @@ final class Building
 	{
 		for(Integer i = 0; i < totalEmployees; i++)
 		{
-			Person newEmployees = new Employee(0);
+			Person newEmployees = new Employee();
 			personList.add(newEmployees);
 		}
 	}
@@ -91,19 +86,8 @@ final class Building
 	{
 		if(Maintenance.newQ() < 0.005)
 		{
-			Person newMaintenance = new Maintenance(0);
+			Person newMaintenance = new Maintenance();
 			floors.get(0).add(newMaintenance);
-		}
-	}
-	
-	public static void leaveBuilding(String personLeaving)
-	{
-		for(Person checkPerson : floors.get(0))
-		{
-			if(checkPerson == new Client(0))
-			{
-				floors.get(0).remove(checkPerson);	
-			}
 		}
 	}
 	
@@ -115,6 +99,10 @@ final class Building
 	public static void setFloors(int floorNumbers)
 	{
 		floorsInBuilding = floorNumbers;
+		for(int i = 0; i < getSizeOfFloors(); i++) 
+		{
+		   floors.add(new LinkedList<Person>());
+		}
 	}
 	
 	public static Elevator getAnElevator(String name)

@@ -1,12 +1,9 @@
 
 public class Employee extends Person
 {
-	public Employee(int currentFloor)
+	public Employee()
 	{
-		super(currentFloor, new int[] {1, 2, 3, 4, 5, 6});
-		
-		capacityNeeded = 1;
-		currentFloor = 1;
+		super(new int[] {1, 2, 3, 4, 5, 6});
 	}
 	
 	private void randomNewGoal()
