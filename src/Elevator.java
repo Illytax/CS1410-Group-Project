@@ -16,7 +16,12 @@ public class Elevator
 	{
 		this.elevatorName = elevatorName;
 	}
-
+	
+	public int getElevatorOccupancySize()
+	{
+		return elevatorOccupancy.size();
+	}
+	
 	public String getPeopleInElevator()
 	{
 		return elevatorOccupancy.toString();
@@ -121,7 +126,7 @@ public class Elevator
 		if(doorsOpen)
 		{
 			Queue<Person> peopleInElevator = new LinkedList<>(elevatorOccupancy);
-			Queue<Person> peopleToAdd = Building.getPeople(currentFloor);
+			Queue<Person> peopleToAdd = Building.getPeopleOnAFloor(currentFloor);
 			for(Person person : peopleInElevator)
 			{
 				if(person.getCurrentGoal() != null && person.getCurrentGoal() == currentFloor)
@@ -146,7 +151,7 @@ public class Elevator
 	{
 		if(doorsOpen)
 		{
-			Queue<Person> peopleOnFloor = new LinkedList<>(Building.getPeople(currentFloor));
+			Queue<Person> peopleOnFloor = new LinkedList<>(Building.getPeopleOnAFloor(currentFloor));
 			Queue<Person> peopleToAdd = elevatorOccupancy;
 			for(Person person : peopleOnFloor)
 			{
@@ -166,7 +171,7 @@ public class Elevator
 							}
 						}
 						elevatorOccupancy.add(person);
-						Building.getPeople(currentFloor).remove(person);
+						Building.getPeopleOnAFloor(currentFloor).remove(person);
 					}
 					else
 					{
@@ -186,7 +191,7 @@ public class Elevator
 				return true;
 			}
 		}
-		for(Person buildingPeople : Building.getPeople(currentFloor))
+		for(Person buildingPeople : Building.getPeopleOnAFloor(currentFloor))
 		{
 			if(buildingPeople.getCurrentGoal() != null)
 			{
@@ -217,6 +222,7 @@ public class Elevator
 	
 	public void elevatorTick()
 	{
+		System.out.println("There are "  + getPeopleInElevator() + " in Elevator " + getElevatorName());
 		if(doesAnyoneHaveAGoal())
 		{
 			if(tickCounter == 0)

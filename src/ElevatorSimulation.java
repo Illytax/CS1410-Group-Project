@@ -1,3 +1,5 @@
+import java.util.Random;
+
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -39,7 +41,7 @@ public class ElevatorSimulation
     		tickInt++;
     		System.out.println("--- Tick " + tickInt);
     		Building.createClientInBuilding();
-    		Building.createMaintenanceInBuilding();
+    		Building.createMaintenanceInBuilding(Maintenance.newQ());
     		for(Person person : Building.getAllPeopleInAllFloors())
     		{
     			person.updateGoals();
@@ -49,9 +51,6 @@ public class ElevatorSimulation
     		{
     			elevators.elevatorTick();
     		}
-
-	        System.out.println("There are " + Building.getAnElevator("e1").getPeopleInElevator() + " people in first the elevator"); 
-	        System.out.println("There are " + Building.getAnElevator("e2").getPeopleInElevator() + " people in second the elevator"); 
 	        Building.showPeopleOnEachFloor();
 		}
 	}
@@ -72,8 +71,10 @@ public class ElevatorSimulation
 		TextField floorInput = new TextField();
 		Label setElevatorsLabel = new Label();
 		TextField elevatorInput = new TextField();
-		Label setDeveloperLabel = new Label();
-		TextField developerInput = new TextField();
+		Label setMugtomeDeveloperLabel = new Label();
+		TextField mugtomeDeveloperInput = new TextField();
+		Label setGogglesDeveloperLabel = new Label();
+		TextField gogglesDeveloperInput = new TextField();
 		Label setEmployeeLabel = new Label();
 		TextField employeeInput = new TextField();
 		
@@ -91,13 +92,13 @@ public class ElevatorSimulation
 		floorInput.setText("7");
 		setElevatorsLabel.setText("Set the buildings Elevators");
 		//Spec = 2
-		elevatorInput.setText("1");
-		setDeveloperLabel.setText("Set the buildings Developers");
+		elevatorInput.setText("2");
+		setMugtomeDeveloperLabel.setText("Set the buildings Developers");
 		//Spec = 10
-		developerInput.setText("4");
+		mugtomeDeveloperInput.setText("10");
 		setEmployeeLabel.setText("Set the buildings Employees");
 		//Spec = 10
-		employeeInput.setText("4");
+		employeeInput.setText("10");
 		
 		submitParameters = new Button("Submit");
 		
@@ -113,7 +114,8 @@ public class ElevatorSimulation
 				String tickNumber = ticksInput.getText();	
 				String floorsNumber = floorInput.getText();
 				String setElevators =  elevatorInput.getText();
-				String setDeveloper = developerInput.getText();
+				String setMugtomDeveloper = mugtomeDeveloperInput.getText();
+				String setGogglesDeveloper = gogglesDeveloperInput.getText();
 				String setEmployee = employeeInput.getText();
 				
 				if(pNumber.equals("0"))
@@ -147,19 +149,15 @@ public class ElevatorSimulation
 				{
 					throw new Exception();
 				}
-				Building.setElevators(setElevators);
+				int elevatorNumbers = Integer.parseInt(setElevators);
+				Building.setElevators(elevatorNumbers);
 				
-				if(setDeveloper.equals("0"))
-				{
-					throw new Exception();
-				}
-				int developerInt = Integer.parseInt(setDeveloper);
-				Building.createMugtomeDevelopersInBuilding(developerInt);
+				int mugtomeDevInt = Integer.parseInt(setMugtomDeveloper);
+				Building.createMugtomeDevelopersInBuilding(mugtomeDevInt);
 				
-				if(setEmployee.equals("0"))
-				{
-					throw new Exception();
-				}
+				int gogglesDevInt = Integer.parseInt(setGogglesDeveloper);
+				Building.createGogglesDevelopersInBuilding(gogglesDevInt);
+				
 				int employeeInt = Integer.parseInt(setEmployee);
 				Building.createEmployeesInBuilding(employeeInt);
 	            
@@ -193,8 +191,10 @@ public class ElevatorSimulation
 				floorInput, 
 				setElevatorsLabel, 
 				elevatorInput,
-				setDeveloperLabel,
-				developerInput,
+				setMugtomeDeveloperLabel,
+				mugtomeDeveloperInput,
+				setGogglesDeveloperLabel,
+				gogglesDeveloperInput,
 				setEmployeeLabel,
 				employeeInput,
 				submitParameters);
