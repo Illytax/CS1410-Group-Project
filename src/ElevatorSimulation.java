@@ -69,8 +69,10 @@ public class ElevatorSimulation
 		TextField floorInput = new TextField();
 		Label setElevatorsLabel = new Label();
 		TextField elevatorInput = new TextField();
-		Label setDeveloperLabel = new Label();
-		TextField developerInput = new TextField();
+		Label setMugtomeDeveloperLabel = new Label();
+		TextField mugtomeDeveloperInput = new TextField();
+		Label setGogglesDeveloperLabel = new Label();
+		TextField gogglesDeveloperInput = new TextField();
 		Label setEmployeeLabel = new Label();
 		TextField employeeInput = new TextField();
 		
@@ -89,9 +91,9 @@ public class ElevatorSimulation
 		setElevatorsLabel.setText("Set the buildings Elevators");
 		//Spec = 2
 		elevatorInput.setText("1");
-		setDeveloperLabel.setText("Set the buildings Developers");
+		setMugtomeDeveloperLabel.setText("Set the buildings Developers");
 		//Spec = 10
-		developerInput.setText("4");
+		mugtomeDeveloperInput.setText("4");
 		setEmployeeLabel.setText("Set the buildings Employees");
 		//Spec = 10
 		employeeInput.setText("4");
@@ -110,7 +112,8 @@ public class ElevatorSimulation
 				String tickNumber = ticksInput.getText();	
 				String floorsNumber = floorInput.getText();
 				String setElevators =  elevatorInput.getText();
-				String setDeveloper = developerInput.getText();
+				String setMugtomDeveloper = mugtomeDeveloperInput.getText();
+				String setGogglesDeveloper = gogglesDeveloperInput.getText();
 				String setEmployee = employeeInput.getText();
 				
 				if(pNumber.equals("0"))
@@ -147,17 +150,12 @@ public class ElevatorSimulation
 				int elevatorNumbers = Integer.parseInt(setElevators);
 				Building.setElevators(elevatorNumbers);
 				
-				if(setDeveloper.equals("0"))
-				{
-					throw new Exception();
-				}
-				int developerInt = Integer.parseInt(setDeveloper);
-				Building.createMugtomeDevelopersInBuilding(developerInt);
+				int mugtomeDevInt = Integer.parseInt(setMugtomDeveloper);
+				Building.createMugtomeDevelopersInBuilding(mugtomeDevInt);
 				
-				if(setEmployee.equals("0"))
-				{
-					throw new Exception();
-				}
+				int gogglesDevInt = Integer.parseInt(setGogglesDeveloper);
+				Building.createGogglesDevelopersInBuilding(gogglesDevInt);
+				
 				int employeeInt = Integer.parseInt(setEmployee);
 				Building.createEmployeesInBuilding(employeeInt);
 	            
@@ -191,8 +189,10 @@ public class ElevatorSimulation
 				floorInput, 
 				setElevatorsLabel, 
 				elevatorInput,
-				setDeveloperLabel,
-				developerInput,
+				setMugtomeDeveloperLabel,
+				mugtomeDeveloperInput,
+				setGogglesDeveloperLabel,
+				gogglesDeveloperInput,
 				setEmployeeLabel,
 				employeeInput,
 				submitParameters);
