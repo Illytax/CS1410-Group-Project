@@ -1,3 +1,5 @@
+import java.util.Random;
+
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -39,7 +41,7 @@ public class ElevatorSimulation
     		tickInt++;
     		System.out.println("--- Tick " + tickInt);
     		Building.createClientInBuilding();
-    		Building.createMaintenanceInBuilding();
+    		Building.createMaintenanceInBuilding(Maintenance.newQ());
     		for(Person person : Building.getAllPeopleInAllFloors())
     		{
     			person.updateGoals();

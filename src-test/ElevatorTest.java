@@ -39,6 +39,6 @@ public class ElevatorTest
 		}
 		int value1 = elevator.getElevatorOccupancySize();
 		assertEquals(value1, 0);
-		assertEquals(Building.getPeople(4).size(), 1);
+		assertEquals(Building.getPeopleOnAFloor(4).size(), 1);
 	}
 }

@@ -27,4 +27,13 @@ public class PeopleTests
 		person.newGoal();
 		assertEquals((int)person.getCurrentGoal(), 5);
 	}
+	
+	@Test
+	public void testCreateMaintanance()
+	{
+		Building.setFloors(1);
+		assertEquals(Building.getPeopleOnAFloor(0).size(), 0);
+		Building.createMaintenanceInBuilding(0.002);
+		assertEquals(Building.getPeopleOnAFloor(0).size(), 1);
+	}
 }

@@ -21,7 +21,7 @@ final class Building
 		return floors;
 	}
 
-	public static Queue<Person> getPeople(int floorNumber)
+	public static Queue<Person> getPeopleOnAFloor(int floorNumber)
 	{
 		return floors.get(floorNumber);
 	}
@@ -82,9 +82,9 @@ final class Building
 		}
 	}
 	
-	public static void createMaintenanceInBuilding()
+	public static void createMaintenanceInBuilding(double probability)
 	{
-		if(Maintenance.newQ() < 0.005)
+		if(probability < 0.005)
 		{
 			Person newMaintenance = new Maintenance();
 			floors.get(0).add(newMaintenance);
