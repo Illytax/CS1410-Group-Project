@@ -1,94 +1,142 @@
 import java.util.ArrayList;
-import java.util.PriorityQueue;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Random;
 
 final class Building
 {
 	private static int floorsInBuilding;
 	private static ArrayList<Elevator> elevators = new ArrayList<Elevator>();
-	private static ArrayList<PriorityQueue<Person>> floors = new ArrayList<PriorityQueue<Person>>();
-	private static int elevatorList;
-
+	private static ArrayList<Person> personList = new ArrayList<Person>();
+	private static ArrayList<Queue<Person>> floors = new ArrayList<Queue<Person>>();
 	
 	public static int getSizeOfFloors()
 	{
 		return floorsInBuilding;
 	}
 	
-	public static ArrayList<PriorityQueue<Person>> getFloors()
+	public static ArrayList<Queue<Person>> getFloors()
 	{
 		return floors;
 	}
 
-	public static PriorityQueue<Person> getPeople(int floorNumber)
+	public static Queue<Person> getPeopleOnAFloor(int floorNumber)
 	{
 		return floors.get(floorNumber);
 	}
 	
-	public static void setElevators(String Elevators)
+	public static void setElevators(int Elevators)
 	{
-		int elevatorNumbers = Integer.parseInt(Elevators);
-		for(int i = 0; i < elevatorNumbers; i++)
+		for(int i = 0; i < Elevators; i++)
 		{
 			Elevator currentElevator = new Elevator("e" + (i + 1));
 			elevators.add(currentElevator);
 		}
 	}
 	
-	public static void createPeopleInBuilding(int totalPeople)
+	public static void createPeopleInBuilding(int seed)
 	{
-		for(int i = 0; i < getSizeOfFloors(); i++) 
+		Queue<Person> tempQueue = floors.get(0);
+		Collections.shuffle(personList, new Random(seed));
+		//System.out.println(personList.toString());
+		for(Person allPeople : personList)
 		{
-		   floors.add(new PriorityQueue<Person>());
-		}
-		for(Integer i = 0; i < totalPeople; i++)
-		{
-			PriorityQueue<Person> tempQueue = floors.get(0);
-			tempQueue.add(new Person(i.toString(), 0));
+			tempQueue.add(allPeople);
 		}
 	}
 	
-	public static int getElevators()
+	public static void createClientInBuilding()
 	{
-		for(int elevList = 0; elevList < elevators.size(); elevList++)
+		if(Client.newQ() < Person.returnProbQ())
 		{
-			elevatorList = elevList + 1;
+			Person newClient = new Client();
+			floors.get(0).add(newClient);
 		}
-		return elevatorList;
+	}
+	
+	public static void createMugtomeDevelopersInBuilding(int totalDevelopers)
+	{
+		for(Integer i = 0; i < totalDevelopers; i++)
+		{
+			Person newDevelopers = new Developer("Mugtome");
+			personList.add(newDevelopers);
+		}
+	}
+	
+	public static void createGogglesDevelopersInBuilding(int totalDevelopers)
+	{
+		for(Integer i = 0; i < totalDevelopers; i++)
+		{
+			Person newDevelopers = new Developer("Goggles");
+			personList.add(newDevelopers);
+		}
+	}
+	
+	public static void createEmployeesInBuilding(int totalEmployees)
+	{
+		for(Integer i = 0; i < totalEmployees; i++)
+		{
+			Person newEmployees = new Employee();
+			personList.add(newEmployees);
+		}
+	}
+	
+	public static void createMaintenanceInBuilding(double probability)
+	{
+		if(probability < 0.005)
+		{
+			Person newMaintenance = new Maintenance();
+			floors.get(0).add(newMaintenance);
+		}
+	}
+	
+	public static ArrayList<Elevator> getElevators()
+	{
+		return elevators;
 	}
 	
 	public static void setFloors(int floorNumbers)
 	{
-		floorsInBuilding =floorNumbers;
+		floorsInBuilding = floorNumbers;
+		for(int i = 0; i < getSizeOfFloors(); i++) 
+		{
+		   floors.add(new LinkedList<Person>());
+		}
 	}
 	
 	public static Elevator getAnElevator(String name)
 	{
-		for(Elevator e : elevators)
+		for(Elevator allElevators : elevators)
 		{
-			if(e.getElevatorName().equals(name))
+			if(allElevators.getElevatorName().equals(name))
 			{
-				return e;
+				return allElevators;
 			}
 		}
 		return null;
 	}
-
-	public static int getPeopleInBuilding()
+	
+	public static LinkedList<Person> getAllPeopleInAllFloors()
 	{
-		int count = 0;
-		for(PriorityQueue<Person> currentQueue : floors)
+		LinkedList<Person> allPeople = new LinkedList<Person>();
+		for(Queue<Person> peopleInFloors : floors)
 		{
-			count += currentQueue.size();
+			for(Person people : peopleInFloors)
+			{
+				allPeople.add(people);
+			}
 		}
-		return count;
+		return allPeople;
 	}
 	
 	public static void showPeopleOnEachFloor()
 	{
 		int floorNumber = 0;
-		for(PriorityQueue<Person> peopleInFloors : floors)
+		for(Queue<Person> peopleInFloors : floors)
 		{
-			System.out.println("There are " + peopleInFloors.size() + " People on floor " + floorNumber);
+			//Change from .toString() to .size() to see absolute numbers instead of element identities
+			System.out.println("Floor " + floorNumber + ": " + peopleInFloors.toString());
 			floorNumber++;
 		}
 	}

@@ -1,45 +1,77 @@
-@SuppressWarnings("rawtypes")
-public class Person implements Comparable, Visitor
+public class Person
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Random;
+
+
+public class Person
 {
+	protected int tick;
+	protected boolean toBeDisposed = false;
 	protected int[] accessLevel;
-	protected int priorityLevel;
-	protected int capacityNeeded;
-	protected int currentFloor; 
-	protected double probabilityP;
-	protected double probabilityQ;
+	protected static float probabilityP;
+	protected static float probabilityQ;
 	protected int maxWaitTime;
 	protected int currentWaitTime;
-	protected String company;
-	protected String personName;
+	protected Queue<Integer> floorGoals;
+	protected Integer previousGoal;
+	protected static Random random;
 	
-	public Person(String personName, int currentFloor)
+	public Person(int[] accessLevel)
 	{
-		this.personName = personName;
-		this.currentFloor =  currentFloor;
+		this.accessLevel = accessLevel;
+		floorGoals = new LinkedList<Integer>();
+		floorGoals.add(accessLevel[random.nextInt(accessLevel.length)]);
 	}
 	
-	
-	public String getPeopleName()
+	public Integer getCurrentGoal()
 	{
-		return personName;
+		return floorGoals.peek();
 	}
 	
-	public double getprobabilityP() {
+	public int getGoalsSize()
+	{
+		return floorGoals.size();
+	}
+	
+	public void removeGoal()
+	{
+		previousGoal = floorGoals.poll();
+	}
+	
+	public static void newRandom(int seed)
+	{
+		random = new Random(seed);
+	}
+	
+	public void updateGoals()
+	{
 		
+	}
+	
+	public void newGoal()
+	{
+		floorGoals.add(accessLevel[random.nextInt(accessLevel.length)]);
+	}
+	
+	public static void setProbP(float p) 
+	{
+		probabilityP = p;
+	}
+	
+	public static float returnProbP() 
+	{
 		return probabilityP;
 	}
 	
-	public double getprobabilityQ() {
-		
+	public static void setProbQ(float q) 
+	{
+		probabilityQ = q;
+	}
+	
+	public static float returnProbQ() 
+	{
 		return probabilityQ;
 	}
 
-
-
-	@Override
-	public int compareTo(Object o) 
-	{
-		return 0;
-	}
-	
 }

@@ -1,9 +1,12 @@
+import java.util.Random;
+
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -11,29 +14,18 @@ public class ElevatorSimulation
  extends Application
 {
 	//Initialise all buttons
-	Button travelUpElevator1;
-	Button travelUpElevator2;
-    Button travelDownElevator1;
-    Button travelDownElevator2;
-    Button numberOfFloors;
-    Button floorSetup;
-    Button currentElevatorPosition;
-    Button currentElevator2Position;
-    Button numberOfElevators;
-    Button numberOfPeople;
-    Button currentPeopleInElevator;
-    Button currentPeopleOnEachFloor;
-    Button movePeopleIntoElevator1;
-    Button movePeopleOutOfElevator1;
-    Button movePeopleIntoElevator2;
-    Button movePeopleOutOfElevator2;
-    
-    int currentFloor = 0;
+    Button buildingSetup;
+    Button tickButton;
+    Button tickButton10;
+    Button tickButton100;
+    int tickMax;
+    int tickCounter = 1;
+    int tickInt = 0;
     
     //Create UI for Number of floors
 	VBox startWindow = new VBox(10);
     //Create UI for elevator movement
-    VBox mainWindow = new VBox(10);
+    HBox mainWindow = new HBox(10);
     
     public Stage mStage;
 	
@@ -41,32 +33,114 @@ public class ElevatorSimulation
     {
     	launch(args);    
     }
+	
+	public void tickButton()
+	{
+    	if(tickInt < tickMax)
+    	{
+    		tickInt++;
+    		System.out.println("--- Tick " + tickInt);
+    		Building.createClientInBuilding();
+    		Building.createMaintenanceInBuilding(Maintenance.newQ());
+    		for(Person person : Building.getAllPeopleInAllFloors())
+    		{
+    			person.updateGoals();
+    		}
+    		
+    		for(Elevator elevators : Building.getElevators())
+    		{
+    			elevators.elevatorTick();
+    		}
+	        Building.showPeopleOnEachFloor();
+		}
+	}
     
     public void setParameters(String title)
 	{
-		Stage floorSetStage =  new Stage();
+		Stage parameterSetStage =  new Stage();
 		Button submitParameters;
+		Label setpProbabilityLabel = new Label();
+		TextField pProbabilityInput = new TextField();
+		Label setqProbabilityLabel = new Label();
+		TextField qProbabilityInput = new TextField();
+		Label setSeedsLabel = new Label();
+		TextField seedInput = new TextField();
+		Label setTicksLabel = new Label();
+		TextField ticksInput = new TextField();
 		Label setFloorsLabel = new Label();
-		TextField numberInput = new TextField();
+		TextField floorInput = new TextField();
 		Label setElevatorsLabel = new Label();
 		TextField elevatorInput = new TextField();
-		Label setPeopleLabel = new Label();
-		TextField peopleInput = new TextField();
+		Label setMugtomeDeveloperLabel = new Label();
+		TextField mugtomeDeveloperInput = new TextField();
+		Label setGogglesDeveloperLabel = new Label();
+		TextField gogglesDeveloperInput = new TextField();
+		Label setEmployeeLabel = new Label();
+		TextField employeeInput = new TextField();
 		
-		floorSetStage.setTitle(title);
-		floorSetStage.setMinWidth(250);
-		setFloorsLabel.setText("Set the buildings floors");
-		setElevatorsLabel.setText("Set the buildings elevators");
-		setPeopleLabel.setText("Set the buildings people");
+		parameterSetStage.setTitle(title);
+		parameterSetStage.setMinWidth(250);
+		pProbabilityInput.setText("0.005");
+		setpProbabilityLabel.setText("Set the p Probability");
+		qProbabilityInput.setText("0.005");
+		setqProbabilityLabel.setText("Set the q Probability");
+		setSeedsLabel.setText("Set the Seed");
+		seedInput.setText("1");
+		setTicksLabel.setText("Set the Tickrate");
+		ticksInput.setText("2880");
+		setFloorsLabel.setText("Set the buildings Floors");
+		floorInput.setText("7");
+		setElevatorsLabel.setText("Set the buildings Elevators");
+		//Spec = 2
+		elevatorInput.setText("2");
+		setMugtomeDeveloperLabel.setText("Set the buildings Mugtome Developers");
+		//Spec = 10
+		mugtomeDeveloperInput.setText("10");
+		setGogglesDeveloperLabel.setText("Set the buildings Goggles Developers");
+		//Spec = 10
+		gogglesDeveloperInput.setText("10");
+		setEmployeeLabel.setText("Set the buildings Employees");
+		//Spec = 10
+		employeeInput.setText("10");
+		
 		submitParameters = new Button("Submit");
 		
 		submitParameters.setOnAction(e ->
 		{
 			try
 			{
-				String floorsNumber = numberInput.getText();
+				String pNumber = pProbabilityInput.getText();
+				String qNumber = qProbabilityInput.getText();
+				String seedNumber = seedInput.getText();
+				int sd = Integer.parseInt(seedNumber);
+				Person.newRandom(sd);
+				String tickNumber = ticksInput.getText();	
+				String floorsNumber = floorInput.getText();
 				String setElevators =  elevatorInput.getText();
-				String setPeople = peopleInput.getText();
+				String setMugtomDeveloper = mugtomeDeveloperInput.getText();
+				String setGogglesDeveloper = gogglesDeveloperInput.getText();
+				String setEmployee = employeeInput.getText();
+				
+				if(pNumber.equals("0"))
+				{
+					throw new Exception();
+				}
+				float pInteger = Float.parseFloat(pNumber);
+				Person.setProbP(pInteger);
+				
+				if(qNumber.equals("0"))
+				{
+					throw new Exception();
+				}
+				float qInteger = Float.parseFloat(qNumber);
+				Person.setProbQ(qInteger);
+				
+				if(tickNumber.equals("0"))
+				{
+					throw new Exception();
+				}
+				int tickInteger = Integer.parseInt(tickNumber);
+				tickMax = tickInteger;
 				
 				if(floorsNumber.equals("0"))
 				{
@@ -78,42 +152,58 @@ public class ElevatorSimulation
 				{
 					throw new Exception();
 				}
-				Building.setElevators(setElevators);
+				int elevatorNumbers = Integer.parseInt(setElevators);
+				Building.setElevators(elevatorNumbers);
 				
-				if(setPeople.equals("0"))
-				{
-					throw new Exception();
-				}
-				int peopleInt = Integer.parseInt(setPeople);
-	            Building.createPeopleInBuilding(peopleInt);
-	            System.out.println(peopleInt);
+				int mugtomeDevInt = Integer.parseInt(setMugtomDeveloper);
+				Building.createMugtomeDevelopersInBuilding(mugtomeDevInt);
+				
+				int gogglesDevInt = Integer.parseInt(setGogglesDeveloper);
+				Building.createGogglesDevelopersInBuilding(gogglesDevInt);
+				
+				int employeeInt = Integer.parseInt(setEmployee);
+				Building.createEmployeesInBuilding(employeeInt);
 	            
-				floorSetStage.close();
+				Building.createPeopleInBuilding(sd);
+				parameterSetStage.close();
 				mStage.close();
-				Scene scene = new Scene(mainWindow, 400, 400);
+				Scene scene = new Scene(mainWindow, 400, 200);
 				mStage.setScene(scene);
 				mStage.show();
 			}
 			catch(Exception f)
 			{
 				System.out.println("Insert a postive number");
+			
 			}
 		});
 		
-		VBox floorWindow = new VBox(10);
-		Scene floorStage = new Scene(floorWindow, 300, 300);
+		VBox parameterWindow = new VBox(10);
+		Scene parameterStage = new Scene(parameterWindow, 400, 600);
 		
-		floorWindow.getChildren().addAll(
+		parameterWindow.getChildren().addAll(
+				setpProbabilityLabel,
+				pProbabilityInput,
+				setqProbabilityLabel,
+				qProbabilityInput,
+				setSeedsLabel,
+				seedInput,
+				setTicksLabel,
+				ticksInput,
 				setFloorsLabel, 
-				numberInput, 
+				floorInput, 
 				setElevatorsLabel, 
 				elevatorInput,
-				setPeopleLabel,
-				peopleInput,
+				setMugtomeDeveloperLabel,
+				mugtomeDeveloperInput,
+				setGogglesDeveloperLabel,
+				gogglesDeveloperInput,
+				setEmployeeLabel,
+				employeeInput,
 				submitParameters);
-		floorWindow.setAlignment(Pos.CENTER);
-		floorSetStage.setScene(floorStage);
-		floorSetStage.showAndWait();
+		parameterWindow.setAlignment(Pos.CENTER);
+		parameterSetStage.setScene(parameterStage);
+		parameterSetStage.showAndWait();
 	}
     
 	@Override
@@ -121,166 +211,40 @@ public class ElevatorSimulation
 	{
     	mStage = mainStage;
     	
-    	//Set window name
-    	mainStage.setTitle("Elevator Management");
+        tickButton = new Button("+1 Tick");
+        tickButton10 =  new Button("+10 Tick");
+        tickButton100 =  new Button("+100 Tick");
     	
-    	//Set the number of Floors in the Building
-    	floorSetup =  new Button("Set Number Of Floors");
-        //Move Elevator 1 up
-    	travelUpElevator1 = new Button("Elevator 1 Up");
-    	//Move Elevator 1 down
-    	travelDownElevator1 =  new Button("Elevator 1 Down");
-    	//Move Elevator 2 up
-    	travelUpElevator2 = new Button("Elevator 2 Up");
-    	//Move Elevator 2 down
-    	travelDownElevator2 = new Button("Elevator 1 Down");
-        //Show number of Floors in the Building
-    	numberOfFloors = new Button( "All Floors");
-    	//Show current position of the Elevator in the Building
-        currentElevatorPosition = new Button("Current First Elevator Position");
-        //Show current position of the 2nd Elevator in the Building
-        currentElevator2Position = new Button("Current Second Elevator Position");
-        //Show the amount of Elevators in the Building
-        numberOfElevators = new Button("All Elevators");
-        //Show the number of created People
-        numberOfPeople =  new Button("All People");
-        //Move People into the 1st Elevator
-        movePeopleIntoElevator1 = new Button("Move Into Elevator 1");
-        //Move People out of the 1sr Elevator
-        movePeopleOutOfElevator1 = new Button("Move Out Of Elevator 1");
-        //Move People into the 2st Elevator
-        movePeopleIntoElevator2 = new Button("Move Into Elevator 2");
-        //Move People out of the 2sr Elevator
-        movePeopleOutOfElevator2 = new Button("Move Out Of Elevator 2");
-        //Show all People in the Elevator
-        currentPeopleInElevator = new Button("Show Elevator Population");
-        //Show the People on each Floor
-        currentPeopleOnEachFloor = new Button("Show All People");
-    	
-        //Add the buttons to the main window
-        mainWindow.getChildren().addAll(
-        		travelUpElevator1, 
-        		travelDownElevator1, 
-        		travelUpElevator2, 
-        		travelDownElevator2,  
-        		currentElevatorPosition, 
-        		currentElevator2Position,
-        		numberOfFloors,
-        		numberOfElevators,
-        		numberOfPeople,
-        		movePeopleIntoElevator1,
-        		movePeopleOutOfElevator1,
-        		movePeopleIntoElevator2,
-        		movePeopleOutOfElevator2,
-        		currentPeopleInElevator,
-        		currentPeopleOnEachFloor);
         
-        //Add Buttons to the start window
-        startWindow.getChildren().addAll(floorSetup);
+        mStage.setTitle("Tick Buttons");
+        //Add the tick buttons to the main window
+        mainWindow.getChildren().addAll(tickButton, tickButton10, tickButton100);
+        
         //Align buttons in the CENTER
         mainWindow.setAlignment(Pos.CENTER);
-        startWindow.setAlignment(Pos.CENTER);
 
+        setParameters("Set Building Parameters");
         
-        floorSetup.setOnAction(e -> 
+        tickButton.setOnAction(e ->
         {
-        	setParameters("Set Building Parameters");
+        	tickButton();
         });
         
-        //Tell Button to print to console 1 Floor higher than current or inform using maximum Floor has been reached for Elevator 1
-        // e = lambda expression
-        travelUpElevator1.setOnAction(e ->
+        tickButton10.setOnAction(e ->
         {
-        	Building.getAnElevator("e1").elevatorUp();
+        	for(int i = 0; i < 10; i++)
+        	{
+        		tickButton();
+        	}
         });
         
-        //Tell Button to print to console 1 Floor lower than current or inform that minimum Floor has been reached for Elevator 1
-        travelDownElevator1.setOnAction(e ->
+        tickButton100.setOnAction(e ->
         {
-        	Building.getAnElevator("e1").elevatorDown();
+        	for(int i = 0; i < 100; i++)
+        	{
+        		tickButton();
+        	}
         });
-        
-        //Tell Button to print to console 1 Floor higher than current or inform using maximum Floor has been reached for Elevator 2
-        travelUpElevator2.setOnAction(e ->
-        {
-        	Building.getAnElevator("e2").elevatorUp();
-        });
-        
-        //Tell Button to print to console 1 Floor lower than current or inform that minimum Floor has been reached for Elevator 2
-        travelDownElevator2.setOnAction(e ->
-        {
-        	Building.getAnElevator("e2").elevatorDown();
-        });
-        
-        //Get the number of Floors in the Building
-        numberOfFloors.setOnAction(e ->
-        {
-        	System.out.println("There are " + Building.getSizeOfFloors() + " floors in the building");
-        });
-        
-        //Get the number of Elevators in the Building
-        
-        numberOfElevators.setOnAction(e ->
-        {
-        	System.out.println("There are " + Building.getElevators() + " elevators in the building");
-        });
-        //Get the current Floor for Elevator 1
-        currentElevatorPosition.setOnAction(e ->
-        {
-        	System.out.println("Elevator 1 is on floor " + Building.getAnElevator("e1").getCurrentFloor());
-        });
-        
-        //Get the current Floor for Elevator 2
-        currentElevator2Position.setOnAction(e ->
-        {
-        	System.out.println("Elevator 2 is on floor " + Building.getAnElevator("e2").getCurrentFloor());
-        });
-        
-        //Get the current number of People in the Building
-        numberOfPeople.setOnAction(e ->
-        {
-        	System.out.println("There are " + Building.getPeopleInBuilding() + " people in the Building");
-        });
-        
-        //Move People into the first Elevator
-        movePeopleIntoElevator1.setOnAction(e ->
-        {
-        	Building.getAnElevator("e1").addPeopleToElevator();
-        });
-        
-        //Move People out of the Elevator
-        movePeopleOutOfElevator1.setOnAction(e ->
-        {
-        	Building.getAnElevator("e1").removePeopleFromElevator();
-        });
-        
-        //Move People into the first Elevator
-        movePeopleIntoElevator2.setOnAction(e ->
-        {
-        	Building.getAnElevator("e2").addPeopleToElevator();
-        });
-        
-        //Move People out of the Elevator
-        movePeopleOutOfElevator2.setOnAction(e ->
-        {
-        	Building.getAnElevator("e2").removePeopleFromElevator();
-        });
-        
-        //Show the occupants of the Elevator
-        currentPeopleInElevator.setOnAction(e ->
-        {
-        	System.out.println("There are " + Elevator.getPeopleInElevator() + " people in the elevator");
-        });
-        
-        //Show the People on each floor
-        currentPeopleOnEachFloor.setOnAction(e ->
-        {
-        	Building.showPeopleOnEachFloor();
-        });
-        
-        //Add the VBox to the window and show the window
-        Scene startStage = new Scene(startWindow, 400, 400);
-        mainStage.setScene(startStage);
-        mainStage.show();
 	}
+	
 }

@@ -1,20 +1,13 @@
-public class Client extends Person
+public class Maintenance extends Person
 {
 	private int count = 0;
 	private int deathTickInt;
 	
-	public Client()
+	public Maintenance()
 	{
-		super(new int[] {1, 2, 3});
+		super(new int[] {6});
 		
-		deathTickInt = random.nextInt(180 - 60) + 60;
-	}
-	
-	public void fileComplaint() 
-	{
-		int currentNumberOfComplaints = 0;
-		currentNumberOfComplaints++;
-		System.out.println("Complaint numnber " + currentNumberOfComplaints + " filed");
+		deathTickInt = random.nextInt(240 - 120) + 120;
 	}
 	
 	public static double newQ()
@@ -23,7 +16,6 @@ public class Client extends Person
 		return q;
 	}
 
-	
 	@Override
 	public void updateGoals()
 	{
@@ -37,6 +29,5 @@ public class Client extends Person
 			}
 		}
 	}
+
 }
-
-

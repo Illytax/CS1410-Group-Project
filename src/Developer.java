@@ -1,11 +1,36 @@
 public class Developer extends Person
 {
-	public Developer(String developerName, int currentFloor)
+	@SuppressWarnings("unused")
+	private String companyName;
+
+	public Developer(String companyName)
 	{
-		super(developerName, currentFloor);
+		super(new int[] {4, 5, 6});
 		
-		accessLevel = new int[] {5, 6, 7};
-		capacityNeeded = 1;
-		currentFloor = 1;
+		this.companyName =  companyName;
 	}
+	
+	private void randomNewGoal()
+	{
+		newGoal();
+		if(previousGoal.equals(getCurrentGoal()))
+		{
+			removeGoal();
+			randomNewGoal();
+		}
+	}
+	
+	@Override
+	public void updateGoals()
+	{
+		if(getCurrentGoal() == null)
+		{
+			double p = random.nextDouble();
+			if(p < returnProbP())
+			{
+				randomNewGoal();
+			}
+		}
+	}
+
 }

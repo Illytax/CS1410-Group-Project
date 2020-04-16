@@ -1,11 +1,32 @@
+
 public class Employee extends Person
 {
-	public Employee(String employeeName, int currentFloor)
+	public Employee()
 	{
-		super(employeeName, currentFloor);
-		
-		accessLevel = new int[] {1, 2, 3, 4, 5, 6, 7};
-		capacityNeeded = 4;
-		currentFloor = 1;
+		super(new int[] {1, 2, 3, 4, 5, 6});
 	}
+	
+	private void randomNewGoal()
+	{
+		newGoal();
+		if(previousGoal.equals(getCurrentGoal()))
+		{
+			removeGoal();
+			randomNewGoal();
+		}
+	}
+	
+	@Override
+	public void updateGoals()
+	{
+		if(getCurrentGoal() == null)
+		{
+			double p = random.nextDouble();
+			if(p < returnProbP())
+			{
+				randomNewGoal();
+			}
+		}
+	}
+	
 }
