@@ -1,5 +1,6 @@
 public class Developer extends Person
 {
+	@SuppressWarnings("unused")
 	private String companyName;
 
 	public Developer(String companyName)

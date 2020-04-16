@@ -3,7 +3,7 @@ import java.util.Queue;
 import java.util.Random;
 
 
-public class Person implements Comparable<Person>, Visitor
+public class Person
 {
 	protected int tick;
 	protected boolean toBeDisposed = false;
@@ -71,12 +71,6 @@ public class Person implements Comparable<Person>, Visitor
 	public static float returnProbQ() 
 	{
 		return probabilityQ;
-	}
-
-	@Override
-	public int compareTo(Person o) 
-	{
-		return 0;
 	}
 
 }
