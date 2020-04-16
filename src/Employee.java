@@ -1,6 +1,10 @@
+import javafx.scene.control.Slider;
 
 public class Employee extends Person
 {
+	
+	private static Slider pValueSlider;
+	
 	public Employee(int currentFloor)
 	{
 		super(currentFloor, new int[] {1, 2, 3, 4, 5, 6});
@@ -24,7 +28,7 @@ public class Employee extends Person
 	{
 		if(getCurrentGoal() == null)
 		{
-			double p = random.nextDouble();
+			double p = pValueSlider.getValue();
 			if(p < returnProbP())
 			{
 				randomNewGoal();

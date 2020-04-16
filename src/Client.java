@@ -1,7 +1,10 @@
+import javafx.scene.control.Slider;
+
 public class Client extends Person
 {
 	private int count = 0;
 	private int deathTickInt;
+	private static Slider qValueSlider;
 	
 	public Client(int currentFloor)
 	{
@@ -21,7 +24,7 @@ public class Client extends Person
 	
 	public static double newQ()
 	{
-		double q = random.nextDouble();
+		double q = qValueSlider.getValue();
 		return q;
 	}
 

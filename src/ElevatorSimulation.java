@@ -3,6 +3,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -11,12 +12,31 @@ import javafx.stage.Stage;
 public class ElevatorSimulation
  extends Application
 {
+	//FXML Components
+	private static TextField ticks_TextField;
+	private static TextField employee_TextField;
+	private static TextField goggleDev_TextField;
+	private static TextField mugtomeDev_TextField;
+	private static TextField floors_TextField;
+	private static TextField elevators_TextField;
+	private static Slider pValue_Slider;
+	private static Slider qValue_Slider;
+	
+	//Assign FXML data to variables
+	double qValue = qValue_Slider.getValue();
+	double pValue = pValue_Slider.getValue();
+	int numberOfFloors = Integer.parseInt(floors_TextField.getText());
+	int numberOfElevators = Integer.parseInt(elevators_TextField.getText());
+	int numberOfEmployees = Integer.parseInt(employee_TextField.getText());
+	int numberofGoggDev = Integer.parseInt(goggleDev_TextField.getText());
+	int numberofmugTDev = Integer.parseInt(mugtomeDev_TextField.getText());
+	
 	//Initialise all buttons
     Button buildingSetup;
     Button tickButton;
     Button tickButton10;
     Button tickButton100;
-    int tickMax;
+    int tickMax = Integer.parseInt(ticks_TextField.getText());
     int tickCounter = 1;
     int tickInt = 0;
     
@@ -105,16 +125,22 @@ public class ElevatorSimulation
 		{
 			try
 			{
-				String pNumber = pProbabilityInput.getText();
-				String qNumber = qProbabilityInput.getText();
+				//String pNumber = pProbabilityInput.getText();
+				//String qNumber = qProbabilityInput.getText();
+				String pNumber = String.valueOf(pValue);
+				String qNumber = String.valueOf(qValue);
 				String seedNumber = seedInput.getText();
 				int sd = Integer.parseInt(seedNumber);
 				Person.newRandom(sd);
 				String tickNumber = ticksInput.getText();	
-				String floorsNumber = floorInput.getText();
-				String setElevators =  elevatorInput.getText();
-				String setDeveloper = developerInput.getText();
-				String setEmployee = employeeInput.getText();
+				//String floorsNumber = floorInput.getText();
+				String floorsNumber = String.valueOf(numberOfFloors); 
+				//String setElevators =  elevatorInput.getText();
+				String setElevators = String.valueOf(numberOfElevators);
+				//String setDeveloper = developerInput.getText();
+				String setDeveloper = String.valueOf(numberofmugTDev); 
+				//String setEmployee = employeeInput.getText();
+				String setEmployee = String.valueOf(numberOfEmployees);
 				
 				if(pNumber.equals("0"))
 				{

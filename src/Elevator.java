@@ -2,10 +2,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import javafx.scene.control.TextField;
+
 public class Elevator
 {    
+	private static TextField elevatorCapacity_TextField;
 	private int currentFloor = 0;
-	private int maxCapacity = 4;
+	private int maxCapacity = Integer.parseInt(elevatorCapacity_TextField.getText());
 	private String elevatorName;
 	private Queue<Person> elevatorOccupancy = new LinkedList<Person>();
 	private Boolean isElevatorUp = true;
