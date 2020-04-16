@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</VBox>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="382.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="498.0" prefWidth="385.0" style="-fx-spacing: 5; -fx-padding: 5;">
+         <children>
+            <Label id="pValue_Label" prefHeight="17.0" prefWidth="78.0" text="P:  0.000" />
+            <Slider id="pValue_Slider" />
+            <Label id="qValue_Label" layoutX="162.0" layoutY="10.0" prefHeight="17.0" prefWidth="78.0" text="Q:  0.000" />
+            <Slider id="qValue_Slider" layoutX="10.0" layoutY="27.0" />
+            <Label text="Number of Floors" />
+            <TextField id="floor_TextField" promptText="7" />
+            <Label id="elevator_Label" text="Number of Elevators" />
+            <TextField id="elevator_TextField" layoutX="10.0" layoutY="91.0" promptText="2" />
+            <Label id="elevatorCapacity_Label" layoutX="147.0" layoutY="116.0" text="Elevator Capacity" />
+            <TextField id="elevatorCapacity_TextField" layoutX="10.0" layoutY="133.0" />
+            <Label id="ticks_Label" layoutX="134.0" layoutY="284.0" text="Ticks" />
+            <TextField id="ticks_TextField" layoutX="10.0" layoutY="301.0" promptText="1" />
+            <Label id="elevator_Label" layoutX="147.0" layoutY="158.0" text="Set Employees" />
+            <TextField id="employee_TextField" layoutX="10.0" layoutY="175.0" />
+            <Label id="goggleDev_Label" layoutX="147.0" layoutY="200.0" text="Set Goggle Developers" />
+            <TextField id="goggleDev_TextField" layoutX="10.0" layoutY="217.0" />
+            <Label id="mugtomeDev_Label" layoutX="147.0" layoutY="242.0" text="Set Mugtome Developers" />
+            <TextField id="mugtomeDev_TextField" layoutX="10.0" layoutY="259.0" />
+            <Button id="submit_Button" mnemonicParsing="false" text="Submit" />
+         </children>
+      </VBox>
+   </children>
+</Pane>
 
