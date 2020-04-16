@@ -6,13 +6,11 @@ public class Client extends Person
 	private int deathTickInt;
 	private static Slider qValueSlider;
 	
-	public Client(int currentFloor)
+	public Client()
 	{
-		super(currentFloor, new int[] {1, 2, 3});
+		super(new int[] {1, 2, 3});
 		
 		deathTickInt = random.nextInt(180 - 60) + 60;
-		capacityNeeded = 1;
-		currentFloor = 1;
 	}
 	
 	public void fileComplaint() 
