@@ -271,4 +271,15 @@ public class ElevatorSimulation
         });
 	}
 	
+	@FXML
+	private void initialize(){
+		pValue_Slider.valueProperty().addListener((property,old,pValueText) -> {
+		pValue_Label.setText("P: " + pValue_Slider.getValue());
+		
+		qValue_Slider.valueProperty().addListener((property,old,qValueText) -> {
+		qValue_Label.setText("Q: " + qValue_Slider.getValue());
+	}
+	
+	
+	
 }
