@@ -1,6 +1,5 @@
 public class Developer extends Person
 {
-	@SuppressWarnings("unused")
 	private String companyName;
 
 	public Developer(String companyName)
@@ -32,5 +31,15 @@ public class Developer extends Person
 			}
 		}
 	}
-
+	
+	public String getCompanyName()
+	{
+		return companyName;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "Developer " + companyName + " " + hashCode();
+	}
 }
