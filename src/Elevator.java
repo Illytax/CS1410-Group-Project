@@ -2,6 +2,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * The elevator class is held within the building and used to
+ * transport different people to there desired floor 
+ * @author
+ * @version 1.0
+ *
+ */
+
 public class Elevator
 {    
 	private int currentFloor = 0;
@@ -16,31 +24,58 @@ public class Elevator
 	{
 		this.elevatorName = elevatorName;
 	}
+	/**
+	 * how much space there is in the elevator
+	 * @return the number of elements in the elevator
+	 */
 	
 	public int getElevatorOccupancySize()
 	{
 		return elevatorOccupancy.size();
 	}
+	/**
+	 * converts elevatorOccupancy to a string
+	 * @return  the string representation of the elevatorOccupancy
+	 */
 	
 	public String getPeopleInElevator()
 	{
 		return elevatorOccupancy.toString();
-	}		
+	}
+	/**
+	 * the floor the elevator is currently on
+	 * @return currentFloor the floor the elevator is on
+	 */
 	
 	public int getCurrentFloor()
 	{
 		return currentFloor;
 	}
+	/**
+	 * 
+	 * @return the name of the elevator
+	 */
 	
 	public String getElevatorName()
 	{
 		return elevatorName;
 	}
+	/**
+	 * this opens the door so people can enter the elevator
+	 * @param newDoorStatus new status of the door
+	 */
 	
 	public void setDoorStatus(Boolean newDoorStatus)
 	{
 		this.doorsOpen = newDoorStatus;
 	}
+	
+	/**
+	 * checks if the capacity of the elevator is meet
+	 * if not and the elevator want to move in the same direction
+	 * and it has not reached the highest or lowest floor
+	 * then the elevator will either go up or down a floor
+	 */
 
 	public void elavatorMove()
 	{
@@ -62,9 +97,10 @@ public class Elevator
 	}
 	
 	/**
+	 * checks if there are any goal in the floors above or below the elevator 
+	 * @return true if there is a goal on another floor
+	 * @return false otherwise
 	 * 
-	 * @return 
-	 * true if there are people that want to continue travelling in the same direction
 	 */
 	
 	public boolean getElevatorOccupancyGoalRequirements()
@@ -84,6 +120,12 @@ public class Elevator
 		}
 		return false;
 	}
+	/**
+	 * this checks if the elevator is going up or not then
+	 * it checks the goals of the people in the elevator and determines 
+	 * if the elevator needs to keep going in the same direction
+	 * @return true if there are no goals on the current floor
+	 */
 	
 	public boolean doesElevatorContinueDirection()
 	{
@@ -120,6 +162,10 @@ public class Elevator
 		}
 		return false;	
 	}
+	/**
+	 * removes person from elevator to there desired floor
+	 * creates more capacity in the elevator depending on who leaves
+	 */
 	
 	public void removePeopleFromElevator()
 	{
@@ -146,6 +192,11 @@ public class Elevator
 			}		
 		}
 	}
+	/**
+	 * adds people from the building into the elevator
+	 * only if the doors are open and the occupancy hasen't reached max
+	 * 
+	 */
 	
 	public void addPeopleFromBuilding()
 	{
@@ -181,6 +232,12 @@ public class Elevator
 			}
 		}
 	}
+	/**
+	 * this method determines whether or not the elevator
+	 * stops at a certain floor
+	 * @return true if the elevator should stop
+	 * @return false the elevator continues its direction
+	 */
 	
 	public boolean doesElevatorStop()
 	{
@@ -200,6 +257,11 @@ public class Elevator
 		}
 		return false;
 	}
+	/**
+	 * this boolean method determines if a person has a goal or not
+	 * @return true if people in the elevator or building have a goal
+	 * @return false if the people do not have a current goal
+	 */
 	
 	public boolean doesAnyoneHaveAGoal()
 	{
@@ -219,6 +281,12 @@ public class Elevator
 		}	
 		return false;
 	}
+	/**
+	 * this method is a tick counter that increases every time
+	 * the elevator moves or people go into or leave the elevator
+	 * it then resets when the doors close
+	 * 
+	 */
 	
 	public void elevatorTick()
 	{
