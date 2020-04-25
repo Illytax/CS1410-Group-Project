@@ -22,10 +22,6 @@ public class Person
 	protected Integer previousGoal;
 	protected static Random random;
 	
-	/**
-	 *  @param tick is a counter that changes every time the elevator
-	 *  move floor or a person enter or exits it
-	 */
 	
 	/**
 	 * This decides what floor level a particular person can access
