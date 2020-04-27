@@ -1,7 +1,7 @@
 /**
  * This class represents a maintenance team in this building
  * 
- * @author
+ * @author Edward Jordan 180130678
  * @version 1.0
  * */
 public class Maintenance extends Person
@@ -13,7 +13,6 @@ public class Maintenance extends Person
 	 * death tick generates a random number between 240 and 120
 	 * restricts the maintenance team only the top floor of the building
 	 */
-	
 	public Maintenance()
 	{
 		super(new int[] {6});
@@ -25,7 +24,6 @@ public class Maintenance extends Person
 	 * creates a number between 1 and 0 representing probability
 	 * @return probability denoted by q
 	 */
-	
 	public static double newQ()
 	{
 		double q = random.nextDouble();
@@ -37,7 +35,6 @@ public class Maintenance extends Person
 	 * the death tick then the maintenance team will go to the ground floor 
 	 * and leave the building
 	 */
-
 	@Override
 	public void updateGoals()
 	{

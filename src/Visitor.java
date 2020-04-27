@@ -1,6 +1,8 @@
 import java.util.Random;
 
-public interface Visitor {
+@Deprecated
+public interface Visitor 
+{
 	
 	
 	public static void setprobabilityP(double probP)

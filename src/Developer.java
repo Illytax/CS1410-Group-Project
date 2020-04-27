@@ -1,7 +1,7 @@
 /**
  * This class represents a developer in this building
  * 
- * @author
+ * @author Edward Jordan 180130678
  * @version 1.0
  * */
 public class Developer extends Person
@@ -13,17 +13,16 @@ public class Developer extends Person
 	 * and restricts the developers to top half of the building
 	 * @param companyName the name of the company
 	 */
-
 	public Developer(String companyName)
 	{
 		super(new int[] {4, 5, 6});
 		
 		this.companyName =  companyName;
 	}
+	
 	/**
 	 * this method replaces the old goal with the new goal
 	 */
-	
 	private void randomNewGoal()
 	{
 		newGoal();
@@ -33,10 +32,10 @@ public class Developer extends Person
 			randomNewGoal();
 		}
 	}
+	
 	/**
 	 * this method creates the probability that the developer changes goal
 	 */
-	
 	@Override
 	public void updateGoals()
 	{

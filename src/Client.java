@@ -1,7 +1,7 @@
 /**
  * This class represents a client in this building
  * 
- * @author
+ * @author Edward Jordan 180130678
  * @version 1.0
  * */
 public class Client extends Person
@@ -19,11 +19,11 @@ public class Client extends Person
 		
 		deathTickInt = random.nextInt(180 - 60) + 60;
 	}
+	
 	/**
 	 * this method outputs in console the number of complaints
 	 * by the client
 	 */
-	
 	public void fileComplaint() 
 	{
 		int currentNumberOfComplaints = 0;
@@ -35,7 +35,6 @@ public class Client extends Person
 	 * creates a number between 1 and 0 representing probability
 	 * @return probability denoted by q
 	 */
-	
 	public static double newQ()
 	{
 		double q = random.nextDouble();
