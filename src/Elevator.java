@@ -2,7 +2,17 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
+<<<<<<< HEAD
 import javafx.scene.control.TextField;
+=======
+/**
+ * The elevator class is held within the building and used to
+ * transport different people to there desired floor 
+ * 
+ * @author Edward Jordan 180130678
+ * @version 1.0
+ */
+>>>>>>> master
 
 public class Elevator
 {    
@@ -20,31 +30,56 @@ public class Elevator
 		this.elevatorName = elevatorName;
 	}
 	
+	/**
+	 * how much space there is in the elevator
+	 * @return the number of elements in the elevator
+	 */
 	public int getElevatorOccupancySize()
 	{
 		return elevatorOccupancy.size();
 	}
 	
+	/**
+	 * converts elevatorOccupancy to a string
+	 * @return  the string representation of the elevatorOccupancy
+	 */
 	public String getPeopleInElevator()
 	{
 		return elevatorOccupancy.toString();
-	}		
+	}
 	
+	/**
+	 * the floor the elevator is currently on
+	 * @return currentFloor the floor the elevator is on
+	 */
 	public int getCurrentFloor()
 	{
 		return currentFloor;
 	}
 	
+	/**
+	 * @return the name of the elevator
+	 */
 	public String getElevatorName()
 	{
 		return elevatorName;
 	}
 	
+	/**
+	 * this opens the door so people can enter the elevator
+	 * @param newDoorStatus new status of the door
+	 */
 	public void setDoorStatus(Boolean newDoorStatus)
 	{
 		this.doorsOpen = newDoorStatus;
 	}
-
+	
+	/**
+	 * checks if the capacity of the elevator is meet
+	 * if not and the elevator want to move in the same direction
+	 * and it has not reached the highest or lowest floor
+	 * then the elevator will either go up or down a floor
+	 */
 	public void elavatorMove()
 	{
 		if(!(getElevatorOccupancyGoalRequirements() 
@@ -65,11 +100,9 @@ public class Elevator
 	}
 	
 	/**
-	 * 
-	 * @return 
-	 * true if there are people that want to continue travelling in the same direction
+	 * checks if there are any goal in the floors above or below the elevator 
+	 * @return true if there is a goal on another floor
 	 */
-	
 	public boolean getElevatorOccupancyGoalRequirements()
 	{
 		for(Person people : elevatorOccupancy)
@@ -88,6 +121,12 @@ public class Elevator
 		return false;
 	}
 	
+	/**
+	 * this checks if the elevator is going up or not then
+	 * it checks the goals of the people in the elevator and determines 
+	 * if the elevator needs to keep going in the same direction
+	 * @return true if there are no goals on the current floor
+	 */
 	public boolean doesElevatorContinueDirection()
 	{
 		ArrayList<Queue<Person>> floorsCheck = new ArrayList<Queue<Person>>();
@@ -124,6 +163,10 @@ public class Elevator
 		return false;	
 	}
 	
+	/**
+	 * removes person from elevator to there desired floor
+	 * creates more capacity in the elevator depending on who leaves
+	 */
 	public void removePeopleFromElevator()
 	{
 		if(doorsOpen)
@@ -150,6 +193,10 @@ public class Elevator
 		}
 	}
 	
+	/**
+	 * adds people from the building into the elevator
+	 * only if the doors are open and the occupancy hasen't reached max
+	 */
 	public void addPeopleFromBuilding()
 	{
 		if(doorsOpen)
@@ -185,6 +232,12 @@ public class Elevator
 		}
 	}
 	
+	/**
+	 * this method determines whether or not the elevator
+	 * stops at a certain floor
+	 * @return true if the elevator should stop
+	 * else the elevator continues its direction
+	 */
 	public boolean doesElevatorStop()
 	{
 		for(Person elevatorPeople : elevatorOccupancy)
@@ -204,6 +257,10 @@ public class Elevator
 		return false;
 	}
 	
+	/**
+	 * this boolean method determines if a person has a goal or not
+	 * @return true if people in the elevator or building have a goal
+	 */
 	public boolean doesAnyoneHaveAGoal()
 	{
 		for(Person allPeople : Building.getAllPeopleInAllFloors())
@@ -223,6 +280,11 @@ public class Elevator
 		return false;
 	}
 	
+	/**
+	 * this method is a tick counter that increases every time
+	 * the elevator moves or people go into or leave the elevator
+	 * it then resets when the doors close
+	 */
 	public void elevatorTick()
 	{
 		System.out.println("There are "  + getPeopleInElevator() + " in Elevator " + getElevatorName());

@@ -1,5 +1,3 @@
-import java.util.Random;
-
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -113,9 +111,12 @@ public class ElevatorSimulation
 		setElevatorsLabel.setText("Set the buildings Elevators");
 		//Spec = 2
 		elevatorInput.setText("2");
-		setMugtomeDeveloperLabel.setText("Set the buildings Developers");
+		setMugtomeDeveloperLabel.setText("Set the buildings Mugtome Developers");
 		//Spec = 10
 		mugtomeDeveloperInput.setText("10");
+		setGogglesDeveloperLabel.setText("Set the buildings Goggles Developers");
+		//Spec = 10
+		gogglesDeveloperInput.setText("10");
 		setEmployeeLabel.setText("Set the buildings Employees");
 		//Spec = 10
 		employeeInput.setText("10");
