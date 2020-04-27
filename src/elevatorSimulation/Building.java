@@ -1,13 +1,12 @@
+package elevatorSimulation;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
-<<<<<<< HEAD
 import javafx.scene.control.TextField;
 
-=======
 /**
  * This class is the building that will contain the elevators
  * and the people inside them
@@ -15,7 +14,6 @@ import javafx.scene.control.TextField;
  * @version 1.0
  *
  */
->>>>>>> master
 final class Building
 {
 	private static TextField floor_TextField;

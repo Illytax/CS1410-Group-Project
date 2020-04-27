@@ -1,19 +1,14 @@
-<<<<<<< HEAD
-import javafx.scene.control.Slider;
-
-=======
+package elevatorSimulation;
 /**
  * This class represents a client in this building
  * 
  * @author Edward Jordan 180130678
  * @version 1.0
  * */
->>>>>>> master
 public class Client extends Person
 {
 	private int count = 0;
 	private int deathTickInt;
-	private static Slider qValueSlider;
 	
 	/**
 	 * death tick generates a random number between 180 and 60
@@ -43,7 +38,7 @@ public class Client extends Person
 	 */
 	public static double newQ()
 	{
-		double q = qValueSlider.getValue();
+		double q = random.nextDouble();;
 		return q;
 	}
 

@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-import javafx.scene.control.Slider;
-
-public class Employee extends Person
-{
-	
-	private static Slider pValueSlider;
-=======
+package elevatorSimulation;
 /**
  * This class represents an employee in this building
  * 
@@ -18,7 +11,6 @@ public class Employee extends Person
 	/**
 	 * employees will have an equal chance to go to any floor
 	 */
->>>>>>> master
 	public Employee()
 	{
 		super(new int[] {1, 2, 3, 4, 5, 6});
@@ -45,7 +37,7 @@ public class Employee extends Person
 	{
 		if(getCurrentGoal() == null)
 		{
-			double p = pValueSlider.getValue();
+			double p = random.nextDouble();
 			if(p < returnProbP())
 			{
 				randomNewGoal();

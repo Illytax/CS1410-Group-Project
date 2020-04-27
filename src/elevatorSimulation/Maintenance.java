@@ -1,3 +1,4 @@
+package elevatorSimulation;
 /**
  * This class represents a maintenance team in this building
  * 

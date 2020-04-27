@@ -1,7 +1,12 @@
+package elevatorSimulation;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import elevatorSimulation.Building;
+import elevatorSimulation.Developer;
+import elevatorSimulation.Person;
 
 public class PeopleTests
 {

@@ -1,10 +1,10 @@
+package elevatorSimulation;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-<<<<<<< HEAD
 import javafx.scene.control.TextField;
-=======
+
 /**
  * The elevator class is held within the building and used to
  * transport different people to there desired floor 
@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
  * @author Edward Jordan 180130678
  * @version 1.0
  */
->>>>>>> master
 
 public class Elevator
 {    

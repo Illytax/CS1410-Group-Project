@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="382.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="382.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="elevatorSimulation.Launcher">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="498.0" prefWidth="385.0" style="-fx-spacing: 5; -fx-padding: 5;">
          <children>
@@ -29,7 +29,7 @@
             <TextField id="goggleDev_TextField" layoutX="10.0" layoutY="217.0" />
             <Label id="mugtomeDev_Label" layoutX="147.0" layoutY="242.0" text="Set Mugtome Developers" />
             <TextField id="mugtomeDev_TextField" layoutX="10.0" layoutY="259.0" />
-            <Button id="submit_Button" mnemonicParsing="false" text="Submit" />
+            <Button id="submit_Button" mnemonicParsing="false" onAction="#submitPressed" text="Submit" />
          </children>
       </VBox>
    </children>

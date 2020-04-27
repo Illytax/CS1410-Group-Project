@@ -1,4 +1,9 @@
+package elevatorSimulation;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -6,38 +11,51 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class ElevatorSimulation
- extends Application
+public class ElevatorSimulation extends Application
 {
 	//FXML Components
-	private static TextField ticks_TextField;
-	private static TextField employee_TextField;
-	private static TextField goggleDev_TextField;
-	private static TextField mugtomeDev_TextField;
-	private static TextField floors_TextField;
-	private static TextField elevators_TextField;
-	private static Slider pValue_Slider;
-	private static Slider qValue_Slider;
+	@FXML
+	private TextField ticks_TextField;
+	@FXML
+	private TextField employee_TextField;
+	@FXML
+	private TextField goggleDev_TextField;
+	@FXML
+	private TextField mugtomeDev_TextField;
+	@FXML
+	private TextField floors_TextField;
+	@FXML
+	private TextField elevators_TextField;
+	private Slider pValue_Slider;
+	@FXML
+	private Slider qValue_Slider;
+	@FXML
+	private Label pValue_Label;
+	@FXML
+	private Label qValue_Label;
+	@FXML
+	private Button submit_Button;
 	
 	//Assign FXML data to variables
-	double qValue = qValue_Slider.getValue();
-	double pValue = pValue_Slider.getValue();
-	int numberOfFloors = Integer.parseInt(floors_TextField.getText());
-	int numberOfElevators = Integer.parseInt(elevators_TextField.getText());
-	int numberOfEmployees = Integer.parseInt(employee_TextField.getText());
-	int numberofGoggDev = Integer.parseInt(goggleDev_TextField.getText());
-	int numberofmugTDev = Integer.parseInt(mugtomeDev_TextField.getText());
+	double qValue;
+	double pValue;
+	int numberOfFloors;
+	int numberOfElevators;
+	int numberOfEmployees;
+	int numberofGoggDev;
+	int numberofmugTDev;
 	
 	//Initialise all buttons
     Button buildingSetup;
     Button tickButton;
     Button tickButton10;
     Button tickButton100;
-    int tickMax = Integer.parseInt(ticks_TextField.getText());
     int tickCounter = 1;
+    int tickMax;
     int tickInt = 0;
     
     //Create UI for Number of floors
@@ -46,7 +64,7 @@ public class ElevatorSimulation
     HBox mainWindow = new HBox(10);
     
     public Stage mStage;
-	
+    
 	public static void main(String[] args)
     {
     	launch(args);    
@@ -73,6 +91,24 @@ public class ElevatorSimulation
 		}
 	}
     
+	public void newSetParameters(String title)
+	{
+		try 
+		{
+			Pane root = (Pane)FXMLLoader.load(getClass().getResource("SimulationSetup.fxml"));
+			Scene scene = new Scene(root, 400, 600);
+			mStage.setScene(scene);
+			mStage.setTitle("Elevator Simulation");
+			mStage.show();
+		} 
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+			System.out.print("Loader error");
+		}
+	}
+	
+	@Deprecated
     public void setParameters(String title)
 	{
 		Stage parameterSetStage =  new Stage();
@@ -112,11 +148,11 @@ public class ElevatorSimulation
 		//Spec = 2
 		elevatorInput.setText("2");
 		setMugtomeDeveloperLabel.setText("Set the buildings Mugtome Developers");
-		//Spec = 10
-		mugtomeDeveloperInput.setText("10");
+		//Spec = 5
+		mugtomeDeveloperInput.setText("5");
 		setGogglesDeveloperLabel.setText("Set the buildings Goggles Developers");
-		//Spec = 10
-		gogglesDeveloperInput.setText("10");
+		//Spec = 5
+		gogglesDeveloperInput.setText("5");
 		setEmployeeLabel.setText("Set the buildings Employees");
 		//Spec = 10
 		employeeInput.setText("10");
@@ -132,6 +168,8 @@ public class ElevatorSimulation
 				String pNumber = String.valueOf(pValue);
 				String qNumber = String.valueOf(qValue);
 				String seedNumber = seedInput.getText();
+				String setMugtomeDeveloper = mugtomeDeveloperInput.getText();
+				String setGogglesDeveloper = gogglesDeveloperInput.getText();
 				int sd = Integer.parseInt(seedNumber);
 				Person.newRandom(sd);
 				String tickNumber = ticksInput.getText();	
@@ -180,7 +218,7 @@ public class ElevatorSimulation
 				int elevatorNumbers = Integer.parseInt(setElevators);
 				Building.setElevators(elevatorNumbers);
 				
-				int mugtomeDevInt = Integer.parseInt(setMugtomDeveloper);
+				int mugtomeDevInt = Integer.parseInt(setMugtomeDeveloper);
 				Building.createMugtomeDevelopersInBuilding(mugtomeDevInt);
 				
 				int gogglesDevInt = Integer.parseInt(setGogglesDeveloper);
@@ -199,7 +237,6 @@ public class ElevatorSimulation
 			catch(Exception f)
 			{
 				System.out.println("Insert a postive number");
-			
 			}
 		});
 		
@@ -232,15 +269,14 @@ public class ElevatorSimulation
 	}
     
 	@Override
-	public void start(Stage mainStage) throws Exception 
+	public void start(Stage mainStage)
 	{
-    	mStage = mainStage;
+		mStage = mainStage;
     	
         tickButton = new Button("+1 Tick");
         tickButton10 =  new Button("+10 Tick");
         tickButton100 =  new Button("+100 Tick");
-    	
-        
+		
         mStage.setTitle("Tick Buttons");
         //Add the tick buttons to the main window
         mainWindow.getChildren().addAll(tickButton, tickButton10, tickButton100);
@@ -248,7 +284,7 @@ public class ElevatorSimulation
         //Align buttons in the CENTER
         mainWindow.setAlignment(Pos.CENTER);
 
-        setParameters("Set Building Parameters");
+        newSetParameters("Set Building Parameters");
         
         tickButton.setOnAction(e ->
         {
@@ -273,14 +309,43 @@ public class ElevatorSimulation
 	}
 	
 	@FXML
-	public void initialize(){
-		pValue_Slider.valueProperty().addListener((property,old,pValueText) -> {
-		pValue_Label.setText("P: " + pValue_Slider.getValue());
-		
-		qValue_Slider.valueProperty().addListener((property,old,qValueText) -> {
-		qValue_Label.setText("Q: " + qValue_Slider.getValue());
+	public void submitPressed()
+	{
+		try
+		{
+		   {
+			   qValue  = qValue_Slider.getValue();
+			   pValue = pValue_Slider.getValue();
+			   numberOfFloors  = Integer.parseInt(floors_TextField.getText());
+			   numberOfElevators = Integer.parseInt(elevators_TextField.getText());
+			   numberOfEmployees = Integer.parseInt(employee_TextField.getText());
+			   numberofGoggDev = Integer.parseInt(goggleDev_TextField.getText());
+			   numberofmugTDev = Integer.parseInt(mugtomeDev_TextField.getText());
+			   tickMax = Integer.parseInt(ticks_TextField.getText());  
+			   System.out.println(qValue);
+		   }
+		}
+		catch(Exception F)
+		{
+			System.out.println("Insert a postive number");
+		}
 	}
 	
-	
+	@FXML
+	public void initialize()
+	{
+		
+		pValue_Slider.valueProperty().addListener((property,old,pValueText) -> 
+		{
+		  pValue_Label.setText("P: " + pValue_Slider.getValue());
+		});
+		
+		qValue_Slider.valueProperty().addListener((property,old,qValueText) -> 
+		{
+		  qValue_Label.setText("Q: " + qValue_Slider.getValue());
+		});
+		
+		pValue_Label.setText("0.1");
+	}
 	
 }
