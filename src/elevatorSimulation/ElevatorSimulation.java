@@ -1,76 +1,34 @@
 package elevatorSimulation;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class ElevatorSimulation extends Application
+/**
+ * This class represents a maintenance team in this building
+ * 
+ * @author Edward Jordan 180130678
+ * @version 1.0
+ * */
+public class ElevatorSimulation
 {
-	//FXML Components
-	@FXML
-	private TextField ticks_TextField;
-	@FXML
-	private TextField employee_TextField;
-	@FXML
-	private TextField goggleDev_TextField;
-	@FXML
-	private TextField mugtomeDev_TextField;
-	@FXML
-	private TextField floors_TextField;
-	@FXML
-	private TextField elevators_TextField;
-	private Slider pValue_Slider;
-	@FXML
-	private Slider qValue_Slider;
-	@FXML
-	private Label pValue_Label;
-	@FXML
-	private Label qValue_Label;
-	@FXML
-	private Button submit_Button;
-	
-	//Assign FXML data to variables
-	double qValue;
-	double pValue;
-	int numberOfFloors;
-	int numberOfElevators;
-	int numberOfEmployees;
-	int numberofGoggDev;
-	int numberofmugTDev;
-	
-	//Initialise all buttons
-    Button buildingSetup;
-    Button tickButton;
-    Button tickButton10;
-    Button tickButton100;
     int tickCounter = 1;
-    int tickMax;
+    static int tickMax;
     int tickInt = 0;
     
-    //Create UI for Number of floors
-	VBox startWindow = new VBox(10);
-    //Create UI for elevator movement
-    HBox mainWindow = new HBox(10);
-    
-    public Stage mStage;
-    
-	public static void main(String[] args)
-    {
-    	launch(args);    
-    }
+    @Deprecated HBox mainWindow = new HBox(10);
+    @Deprecated public Stage mStage;
 	
-	public void tickButton()
+	public static void setTickMax(int tMax)
+	{
+		tickMax = tMax;
+	}
+	
+	public void simulationTick()
 	{
     	if(tickInt < tickMax)
     	{
@@ -90,26 +48,9 @@ public class ElevatorSimulation extends Application
 	        Building.showPeopleOnEachFloor();
 		}
 	}
-    
-	public void newSetParameters(String title)
-	{
-		try 
-		{
-			Pane root = (Pane)FXMLLoader.load(getClass().getResource("SimulationSetup.fxml"));
-			Scene scene = new Scene(root, 400, 600);
-			mStage.setScene(scene);
-			mStage.setTitle("Elevator Simulation");
-			mStage.show();
-		} 
-		catch(Exception e) 
-		{
-			e.printStackTrace();
-			System.out.print("Loader error");
-		}
-	}
 	
 	@Deprecated
-    public void setParameters(String title)
+    public void setParameters()
 	{
 		Stage parameterSetStage =  new Stage();
 		Button submitParameters;
@@ -132,7 +73,6 @@ public class ElevatorSimulation extends Application
 		Label setEmployeeLabel = new Label();
 		TextField employeeInput = new TextField();
 		
-		parameterSetStage.setTitle(title);
 		parameterSetStage.setMinWidth(250);
 		pProbabilityInput.setText("0.005");
 		setpProbabilityLabel.setText("Set the p Probability");
@@ -159,29 +99,51 @@ public class ElevatorSimulation extends Application
 		
 		submitParameters = new Button("Submit");
 		
+		VBox parameterWindow = new VBox(10);
+		Scene parameterStage = new Scene(parameterWindow, 400, 600);
+		
+		parameterWindow.getChildren().addAll(
+				setpProbabilityLabel,
+				pProbabilityInput,
+				setqProbabilityLabel,
+				qProbabilityInput,
+				setSeedsLabel,
+				seedInput,
+				setTicksLabel,
+				ticksInput,
+				setFloorsLabel, 
+				floorInput, 
+				setElevatorsLabel, 
+				elevatorInput,
+				setMugtomeDeveloperLabel,
+				mugtomeDeveloperInput,
+				setGogglesDeveloperLabel,
+				gogglesDeveloperInput,
+				setEmployeeLabel,
+				employeeInput,
+				submitParameters);
+		parameterWindow.setAlignment(Pos.CENTER);
+		parameterSetStage.setScene(parameterStage);
+		parameterSetStage.showAndWait();
+		
 		submitParameters.setOnAction(e ->
 		{
 			try
 			{
 				//String pNumber = pProbabilityInput.getText();
 				//String qNumber = qProbabilityInput.getText();
-				String pNumber = String.valueOf(pValue);
-				String qNumber = String.valueOf(qValue);
+				String pNumber = String.valueOf(pProbabilityInput);
+				String qNumber = String.valueOf(qProbabilityInput);
 				String seedNumber = seedInput.getText();
 				String setMugtomeDeveloper = mugtomeDeveloperInput.getText();
 				String setGogglesDeveloper = gogglesDeveloperInput.getText();
 				int sd = Integer.parseInt(seedNumber);
 				Person.newRandom(sd);
-				String tickNumber = ticksInput.getText();	
+				String tickNumber = ticksInput.getText();
 
-				//String floorsNumber = floorInput.getText();
-				String floorsNumber = String.valueOf(numberOfFloors); 
-				//String setElevators =  elevatorInput.getText();
-				String setElevators = String.valueOf(numberOfElevators);
-				//String setDeveloper = developerInput.getText();
-				String setDeveloper = String.valueOf(numberofmugTDev); 
-				//String setEmployee = employeeInput.getText();
-				String setEmployee = String.valueOf(numberOfEmployees);
+				String floorsNumber = floorInput.getText();
+				String setElevators =  elevatorInput.getText();
+				String setEmployee = employeeInput.getText();
 
 				
 				if(pNumber.equals("0"))
@@ -239,113 +201,6 @@ public class ElevatorSimulation extends Application
 				System.out.println("Insert a postive number");
 			}
 		});
-		
-		VBox parameterWindow = new VBox(10);
-		Scene parameterStage = new Scene(parameterWindow, 400, 600);
-		
-		parameterWindow.getChildren().addAll(
-				setpProbabilityLabel,
-				pProbabilityInput,
-				setqProbabilityLabel,
-				qProbabilityInput,
-				setSeedsLabel,
-				seedInput,
-				setTicksLabel,
-				ticksInput,
-				setFloorsLabel, 
-				floorInput, 
-				setElevatorsLabel, 
-				elevatorInput,
-				setMugtomeDeveloperLabel,
-				mugtomeDeveloperInput,
-				setGogglesDeveloperLabel,
-				gogglesDeveloperInput,
-				setEmployeeLabel,
-				employeeInput,
-				submitParameters);
-		parameterWindow.setAlignment(Pos.CENTER);
-		parameterSetStage.setScene(parameterStage);
-		parameterSetStage.showAndWait();
-	}
-    
-	@Override
-	public void start(Stage mainStage)
-	{
-		mStage = mainStage;
-    	
-        tickButton = new Button("+1 Tick");
-        tickButton10 =  new Button("+10 Tick");
-        tickButton100 =  new Button("+100 Tick");
-		
-        mStage.setTitle("Tick Buttons");
-        //Add the tick buttons to the main window
-        mainWindow.getChildren().addAll(tickButton, tickButton10, tickButton100);
-        
-        //Align buttons in the CENTER
-        mainWindow.setAlignment(Pos.CENTER);
-
-        newSetParameters("Set Building Parameters");
-        
-        tickButton.setOnAction(e ->
-        {
-        	tickButton();
-        });
-        
-        tickButton10.setOnAction(e ->
-        {
-        	for(int i = 0; i < 10; i++)
-        	{
-        		tickButton();
-        	}
-        });
-        
-        tickButton100.setOnAction(e ->
-        {
-        	for(int i = 0; i < 100; i++)
-        	{
-        		tickButton();
-        	}
-        });
-	}
-	
-	@FXML
-	public void submitPressed()
-	{
-		try
-		{
-		   {
-			   qValue  = qValue_Slider.getValue();
-			   pValue = pValue_Slider.getValue();
-			   numberOfFloors  = Integer.parseInt(floors_TextField.getText());
-			   numberOfElevators = Integer.parseInt(elevators_TextField.getText());
-			   numberOfEmployees = Integer.parseInt(employee_TextField.getText());
-			   numberofGoggDev = Integer.parseInt(goggleDev_TextField.getText());
-			   numberofmugTDev = Integer.parseInt(mugtomeDev_TextField.getText());
-			   tickMax = Integer.parseInt(ticks_TextField.getText());  
-			   System.out.println(qValue);
-		   }
-		}
-		catch(Exception F)
-		{
-			System.out.println("Insert a postive number");
-		}
-	}
-	
-	@FXML
-	public void initialize()
-	{
-		
-		pValue_Slider.valueProperty().addListener((property,old,pValueText) -> 
-		{
-		  pValue_Label.setText("P: " + pValue_Slider.getValue());
-		});
-		
-		qValue_Slider.valueProperty().addListener((property,old,qValueText) -> 
-		{
-		  qValue_Label.setText("Q: " + qValue_Slider.getValue());
-		});
-		
-		pValue_Label.setText("0.1");
 	}
 	
 }

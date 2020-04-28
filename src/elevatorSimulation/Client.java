@@ -60,4 +60,10 @@ public class Client extends Person
 			}
 		}
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "Client "+ hashCode();
+	}
 }

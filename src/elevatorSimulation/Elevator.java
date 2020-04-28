@@ -14,10 +14,9 @@ import javafx.scene.control.TextField;
  */
 
 public class Elevator
-{    
-	private static TextField elevatorCapacity_TextField;
+{
 	private int currentFloor = 0;
-	private int maxCapacity = Integer.parseInt(elevatorCapacity_TextField.getText());
+	private int currentMaxCapacity = 4;
 	private String elevatorName;
 	private Queue<Person> elevatorOccupancy = new LinkedList<Person>();
 	private Boolean isElevatorUp = true;
@@ -181,7 +180,7 @@ public class Elevator
 					peopleToAdd.add(person);
 					if(person instanceof Maintenance)
 					{
-						maxCapacity = 4;
+						currentMaxCapacity = 4;
 					}
 				}
 				if(currentFloor == 0  && person.toBeDisposed)
@@ -206,11 +205,11 @@ public class Elevator
 			{
 				if(person.getCurrentGoal() != null)
 				{
-					if(elevatorOccupancy.size() < maxCapacity)
+					if(elevatorOccupancy.size() < currentMaxCapacity)
 					{
 						if((person instanceof Maintenance) && (elevatorOccupancy.size() == 0))
 						{
-							maxCapacity = 1;
+							currentMaxCapacity = 1;
 						}
 						else if((person instanceof Maintenance) && (elevatorOccupancy.size() > 0))
 						{
@@ -286,7 +285,6 @@ public class Elevator
 	 */
 	public void elevatorTick()
 	{
-		System.out.println("There are "  + getPeopleInElevator() + " in Elevator " + getElevatorName());
 		if(doesAnyoneHaveAGoal())
 		{
 			if(tickCounter == 0)
@@ -298,6 +296,7 @@ public class Elevator
 				{
 					tickCounter = 0;
 				}
+				System.out.println("There are "  + getPeopleInElevator() + " in Elevator " + getElevatorName());
 				System.out.println("Elevator (At floor " + getCurrentFloor() + ", Elevator Closed)");
 			}
 			
@@ -306,6 +305,7 @@ public class Elevator
 				removePeopleFromElevator();
 				addPeopleFromBuilding();
 				tickCounter++;
+				System.out.println("There are "  + getPeopleInElevator() + " in Elevator " + getElevatorName());
 				System.out.println("Elevator (At floor " + getCurrentFloor() + ", Elevator Open)");
 			}
 			
@@ -313,6 +313,7 @@ public class Elevator
 			{
 				setDoorStatus(false);
 				tickCounter=0;
+				System.out.println("There are "  + getPeopleInElevator() + " in Elevator " + getElevatorName());
 				System.out.println("Elevator (At Floor " + getCurrentFloor() + ", Elevator Closed)");
 			}
 		}
@@ -320,7 +321,12 @@ public class Elevator
 		{
 			isElevatorUp = false;
 			currentFloor--;
+			System.out.println("There are "  + getPeopleInElevator() + " in Elevator " + getElevatorName());
 			System.out.println("Elevator (At Floor " + getCurrentFloor() + ") ,Elevator Returning to 0)");
+		}
+		else
+		{
+			System.out.println("Elevator " + getElevatorName() + " is currently not in use");
 		}
 	}
 

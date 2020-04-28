@@ -16,14 +16,7 @@ import javafx.scene.control.TextField;
  */
 final class Building
 {
-	private static TextField floor_TextField;
-	private static TextField elevator_TextField;
-	private static TextField elevatprCapacity_TextField;
-	private static TextField ticks_TextField;
-	private static TextField employee_TextField;
-	private static TextField goggleDev_TextField;
-	private static TextField mugtomeDev_TextField;
-	private static int floorsInBuilding = Integer.parseInt(floor_TextField.getText());
+	private static int floorsInBuilding;
 	private static ArrayList<Elevator> elevators = new ArrayList<Elevator>();
 	private static ArrayList<Person> personList = new ArrayList<Person>();
 	private static ArrayList<Queue<Person>> floors = new ArrayList<Queue<Person>>();

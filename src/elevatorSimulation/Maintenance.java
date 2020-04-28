@@ -49,5 +49,11 @@ public class Maintenance extends Person
 			}
 		}
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "Maintenance "+ hashCode();
+	}
 
 }
