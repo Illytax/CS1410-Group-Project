@@ -1,6 +1,7 @@
 package elevatorSimulation;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,9 +15,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 
 /**
- * This class represents a maintenance team in this building
+ * This class 
  * 
- * @author Edward Jordan 180130678, Alex Lougheed 
+ * @author Edward Jordan 180130678, Alex Lougheed 190045601
  * @version 1.0
  * */
 public class Launcher extends Application 
@@ -32,6 +33,8 @@ public class Launcher extends Application
 	@FXML private Slider qValue_Slider;
 	@FXML private Label pValue_Label;
 	@FXML private Label qValue_Label;
+    @FXML private Label seed_Label;
+    @FXML private TextField seed_TextField;
 	
 	//Initialise all buttons
     Button buildingSetup;
@@ -76,8 +79,14 @@ public class Launcher extends Application
 	{
 		try
 		{
-			int sd = 0;
-			Person.newRandom(sd);
+            int seed = Integer.parseInt(seed_TextField.getText());
+            if (seed == 0) 
+            {
+                throw new Exception();
+            }
+			
+			Person.newRandom(seed);
+			
 			double pValue = pValue_Slider.getValue();
 			if(pValue == 0)
 			{
@@ -122,7 +131,7 @@ public class Launcher extends Application
 			}
 			ElevatorSimulation.setTickMax(tickMax);
 			
-			Building.createPeopleInBuilding(sd);
+			Building.createPeopleInBuilding(seed);
 			
 			stage.close();
 			stage.setTitle("Tick Buttons");
@@ -156,23 +165,29 @@ public class Launcher extends Application
 		catch(Exception F)
 		{
 			System.out.println("Insert a postive number");
-			F.printStackTrace();
 		}
 	}
 	
 	@FXML
 	public void initialize()
 	{
-		
-		pValue_Slider.valueProperty().addListener((property,old,pValueText) -> 
-		{
-		  pValue_Label.setText("P: " + pValue_Slider.getValue());
-		});
-		
-		qValue_Slider.valueProperty().addListener((property,old,qValueText) -> 
-		{
-		  qValue_Label.setText("Q: " + qValue_Slider.getValue());
-		});
+        pValue_Label.textProperty().bind
+        (
+                Bindings.format
+                (
+                    "%.4f",
+                    pValue_Slider.valueProperty()
+                )
+        );
+
+        qValue_Label.textProperty().bind
+        (
+                Bindings.format
+                (
+                    "%.4f",
+                    qValue_Slider.valueProperty()
+                )
+        );
 	}
 
 }

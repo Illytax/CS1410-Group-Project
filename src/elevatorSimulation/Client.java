@@ -1,6 +1,6 @@
 package elevatorSimulation;
 /**
- * This class represents a client in this building
+ * This class represents a Client in the Building
  * 
  * @author Edward Jordan 180130678
  * @version 1.0

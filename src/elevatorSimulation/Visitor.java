@@ -19,7 +19,8 @@ public interface Visitor
 		
 		
 	
-	public static void goToFloor() {
+	public static void goToFloor() 
+	{
 			
 	}
 	
