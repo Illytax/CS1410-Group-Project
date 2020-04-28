@@ -1,12 +1,15 @@
+package elevatorSimulation;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
+import javafx.scene.control.TextField;
+
 /**
- * This class is the building that will contain the elevators
- * and the people inside them
+ * This class is the building that creates the Elevator(s), floors
+ * and the Person(s) inside the Building
  * @author Edward Jordan 180130678
  * @version 1.0
  *
@@ -19,7 +22,7 @@ final class Building
 	private static ArrayList<Queue<Person>> floors = new ArrayList<Queue<Person>>();
 	
 	/**
-	 * number of floors in the building
+	 * Number of floors in the building
 	 * @return the number of floors in the building
 	 */
 	public static int getSizeOfFloors()
@@ -28,8 +31,8 @@ final class Building
 	}
 	
 	/**
-	 * gets people in each floor
-	 * @return number of people in floor
+	 * Gets total number of queues of people
+	 * @return the number of Queue<Person> within the ArrayList<Queue<Person>> floors
 	 */
 	public static ArrayList<Queue<Person>> getFloors()
 	{
@@ -37,9 +40,9 @@ final class Building
 	}
 	
 	/**
-	 * this methods gets the floor each person is on
+	 * This methods gets the number of people on each floor
 	 * @param floorNumber the floor level in the building
-	 * @return what floor the elevator was on
+	 * @return the number of Person within that Queue<Person>
 	 */
 	public static Queue<Person> getPeopleOnAFloor(int floorNumber)
 	{
@@ -47,8 +50,8 @@ final class Building
 	}
 	
 	/**
-	 * determines how many elevator in the building
-	 * @param Elevators this is the objects that transports people from floor to floor
+	 * Creates the Elevator(s) in the Building
+	 * @param Elevators creates as many Elevator(s) as that amount
 	 */
 	public static void setElevators(int Elevators)
 	{
@@ -60,9 +63,8 @@ final class Building
 	}
 	
 	/**
-	 * this method creates people in the building and puts them on the ground floor
-	 * and then randomises the list the people are in
-	 * @param seed is used to generate a pseudo-random number 
+	 * This method randomises the order of created people in the Building
+	 * @param seed gets and int that allows Random to create repeatable results
 	 */
 	public static void createPeopleInBuilding(int seed)
 	{
@@ -76,7 +78,8 @@ final class Building
 	}
 	
 	/**
-	 * a Client will arrive if the probability is less than probability of q
+	 * A Client will arrive on the ground floor of the Building
+	 * if the probability is less than probability of q
 	 */
 	public static void createClientInBuilding()
 	{
@@ -88,13 +91,12 @@ final class Building
 	}
 	
 	/**
-	 * this method creates how many Mugtome developers are in the simulation at the beginning
-	 * and restricts any more developers from entering
-	 * @param totalDevelopers the maximum number of developers in the building
+	 * This method creates the amount of Mugtome Developer(s) in the simulation
+	 * @param totalMugtomeDevelopers the number of Mugtome Developer created in the Building
 	 */
-	public static void createMugtomeDevelopersInBuilding(int totalDevelopers)
+	public static void createMugtomeDevelopersInBuilding(int totalMugtomeDevelopers)
 	{
-		for(Integer i = 0; i < totalDevelopers; i++)
+		for(Integer i = 0; i < totalMugtomeDevelopers; i++)
 		{
 			Person newDevelopers = new Developer("Mugtome");
 			personList.add(newDevelopers);
@@ -102,13 +104,12 @@ final class Building
 	}
 	
 	/**
-	 * this method creates how many Goggles developers are in the simulation at the beginning
-	 * and restricts any more developers from entering
-	 * @param totalDevelopers the maximum number of developers in the building
+	 * This method creates the amount of Goggles Developer(s) in the simulation
+	 * @param totalGogglesDevelopers the number of Goggles Developer created in the Building
 	 */
-	public static void createGogglesDevelopersInBuilding(int totalDevelopers)
+	public static void createGogglesDevelopersInBuilding(int totalGogglesDevelopers)
 	{
-		for(Integer i = 0; i < totalDevelopers; i++)
+		for(Integer i = 0; i < totalGogglesDevelopers; i++)
 		{
 			Person newDevelopers = new Developer("Goggles");
 			personList.add(newDevelopers);
@@ -116,9 +117,8 @@ final class Building
 	}
 	
 	/**
-	 * this method creates how many employees are in the simulation at the beginning
-	 * and restricts any more developers from entering
-	 * @param totalEmployees the maximum number of developers in the building
+	 * This method creates the amount of Employee(s) in the simulation
+	 * @param totalEmployees the maximum number of Employee(s) in the Building
 	 */
 	public static void createEmployeesInBuilding(int totalEmployees)
 	{
@@ -130,8 +130,7 @@ final class Building
 	}
 	
 	/**
-	 * this method create a maintenance team in the building depending
-	 * on the chosen probability
+	 * This method creates a Maintenance team in the Building
 	 * @param probability the likelihood a maintenance team will be created
 	 */
 	public static void createMaintenanceInBuilding(double probability)
@@ -144,7 +143,7 @@ final class Building
 	}
 	
 	/**
-	 * this is a simple return method that gets the elevators in the building
+	 * This method returns the Elevator(s) in the Building
 	 * @return all the elevator in the building
 	 */
 	public static ArrayList<Elevator> getElevators()
@@ -153,8 +152,7 @@ final class Building
 	}
 	
 	/**
-	 * creates the floors in the building
-	 * then adds people to the building
+	 * Creates the floors in the Building
 	 * @param floorNumbers number of floors in the building
 	 */
 	public static void setFloors(int floorNumbers)
@@ -167,9 +165,10 @@ final class Building
 	}
 	
 	/**
-	 * gives each elevator a unique name so they can be identified 
-	 * @param name the name of the elevator
-	 * @return allElevators elevator if name is equal, otherwise null
+	 * Iterates through all created Elevator(s)
+	 * to find any with a name matching the parameter
+	 * @param name the name of the Elevator
+	 * @return allElevators if an Elevator has the same name as the given parameter
 	 */
 	public static Elevator getAnElevator(String name)
 	{
@@ -184,8 +183,8 @@ final class Building
 	}
 	
 	/**
-	 * this method is used to extract how many people are in each floor
-	 * @return allPeople shows how many people in each floor
+	 * This method is used to iterate through all Person(s) in the Building
+	 * @return allPeople shows how many Person(s) are in the Building
 	 */
 	public static LinkedList<Person> getAllPeopleInAllFloors()
 	{
@@ -201,7 +200,7 @@ final class Building
 	}
 	
 	/**
-	 * this method outputs in console how many people are in each floor
+	 * This method outputs in console how many people are in each floor
 	 * @param floorNumber the current floor the method is referring to
 	 */
 	public static void showPeopleOnEachFloor()

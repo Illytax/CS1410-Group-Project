@@ -1,3 +1,4 @@
+package elevatorSimulation;
 /**
  * This class represents an employee in this building
  * 
@@ -42,5 +43,11 @@ public class Employee extends Person
 				randomNewGoal();
 			}
 		}
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "Employee "+ hashCode();
 	}
 }

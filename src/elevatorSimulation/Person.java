@@ -1,3 +1,4 @@
+package elevatorSimulation;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
@@ -14,8 +15,8 @@ public class Person
 	protected int tick;
 	protected boolean toBeDisposed = false;
 	protected int[] accessLevel;
-	protected static float probabilityP;
-	protected static float probabilityQ;
+	protected static double probabilityP;
+	protected static double probabilityQ;
 	protected int maxWaitTime;
 	protected int currentWaitTime;
 	protected Queue<Integer> floorGoals;
@@ -25,7 +26,7 @@ public class Person
 	
 	/**
 	 * This decides what floor level a particular person can access
-	 * @param accessLevel the highest floor a person can go to
+	 * @param accessLevel the floor a person can access
 	 */
 	public Person(int[] accessLevel)
 	{
@@ -87,7 +88,7 @@ public class Person
 	/**
 	 * @param p proabilityP
 	 */
-	public static void setProbP(float p) 
+	public static void setProbP(double p) 
 	{
 		probabilityP = p;
 	}
@@ -95,7 +96,7 @@ public class Person
 	/**
 	 * @return probabilityP
 	 */
-	public static float returnProbP() 
+	public static double returnProbP() 
 	{
 		return probabilityP;
 	}
@@ -103,7 +104,7 @@ public class Person
 	/**
 	 * @param q probabilityQ
 	 */
-	public static void setProbQ(float q) 
+	public static void setProbQ(double q) 
 	{
 		probabilityQ = q;
 	}
@@ -111,7 +112,7 @@ public class Person
 	/**
 	 * @return probabilityQ
 	 */
-	public static float returnProbQ() 
+	public static double returnProbQ() 
 	{
 		return probabilityQ;
 	}

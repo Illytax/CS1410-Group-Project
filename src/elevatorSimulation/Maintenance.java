@@ -1,3 +1,4 @@
+package elevatorSimulation;
 /**
  * This class represents a maintenance team in this building
  * 
@@ -47,6 +48,12 @@ public class Maintenance extends Person
 				floorGoals.add(0);
 			}
 		}
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "Maintenance "+ hashCode();
 	}
 
 }

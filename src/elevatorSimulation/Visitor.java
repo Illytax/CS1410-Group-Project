@@ -1,3 +1,4 @@
+package elevatorSimulation;
 import java.util.Random;
 
 @Deprecated
@@ -18,7 +19,8 @@ public interface Visitor
 		
 		
 	
-	public static void goToFloor() {
+	public static void goToFloor() 
+	{
 			
 	}
 	

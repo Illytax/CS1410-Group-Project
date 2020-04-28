@@ -1,4 +1,4 @@
-import javafx.application.Application;
+package elevatorSimulation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -8,31 +8,27 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * This class represents a maintenance team in this building
+ * 
+ * @author Edward Jordan 180130678
+ * @version 1.0
+ * */
 public class ElevatorSimulation
- extends Application
 {
-	//Initialise all buttons
-    Button buildingSetup;
-    Button tickButton;
-    Button tickButton10;
-    Button tickButton100;
-    int tickMax;
     int tickCounter = 1;
+    static int tickMax;
     int tickInt = 0;
     
-    //Create UI for Number of floors
-	VBox startWindow = new VBox(10);
-    //Create UI for elevator movement
-    HBox mainWindow = new HBox(10);
-    
-    public Stage mStage;
+    @Deprecated HBox mainWindow = new HBox(10);
+    @Deprecated public Stage mStage;
 	
-	public static void main(String[] args)
-    {
-    	launch(args);    
-    }
+	public static void setTickMax(int tMax)
+	{
+		tickMax = tMax;
+	}
 	
-	public void tickButton()
+	public void simulationTick()
 	{
     	if(tickInt < tickMax)
     	{
@@ -52,8 +48,9 @@ public class ElevatorSimulation
 	        Building.showPeopleOnEachFloor();
 		}
 	}
-    
-    public void setParameters(String title)
+	
+	@Deprecated
+    public void setParameters()
 	{
 		Stage parameterSetStage =  new Stage();
 		Button submitParameters;
@@ -76,7 +73,6 @@ public class ElevatorSimulation
 		Label setEmployeeLabel = new Label();
 		TextField employeeInput = new TextField();
 		
-		parameterSetStage.setTitle(title);
 		parameterSetStage.setMinWidth(250);
 		pProbabilityInput.setText("0.005");
 		setpProbabilityLabel.setText("Set the p Probability");
@@ -92,32 +88,63 @@ public class ElevatorSimulation
 		//Spec = 2
 		elevatorInput.setText("2");
 		setMugtomeDeveloperLabel.setText("Set the buildings Mugtome Developers");
-		//Spec = 10
-		mugtomeDeveloperInput.setText("10");
+		//Spec = 5
+		mugtomeDeveloperInput.setText("5");
 		setGogglesDeveloperLabel.setText("Set the buildings Goggles Developers");
-		//Spec = 10
-		gogglesDeveloperInput.setText("10");
+		//Spec = 5
+		gogglesDeveloperInput.setText("5");
 		setEmployeeLabel.setText("Set the buildings Employees");
 		//Spec = 10
 		employeeInput.setText("10");
 		
 		submitParameters = new Button("Submit");
 		
+		VBox parameterWindow = new VBox(10);
+		Scene parameterStage = new Scene(parameterWindow, 400, 600);
+		
+		parameterWindow.getChildren().addAll(
+				setpProbabilityLabel,
+				pProbabilityInput,
+				setqProbabilityLabel,
+				qProbabilityInput,
+				setSeedsLabel,
+				seedInput,
+				setTicksLabel,
+				ticksInput,
+				setFloorsLabel, 
+				floorInput, 
+				setElevatorsLabel, 
+				elevatorInput,
+				setMugtomeDeveloperLabel,
+				mugtomeDeveloperInput,
+				setGogglesDeveloperLabel,
+				gogglesDeveloperInput,
+				setEmployeeLabel,
+				employeeInput,
+				submitParameters);
+		parameterWindow.setAlignment(Pos.CENTER);
+		parameterSetStage.setScene(parameterStage);
+		parameterSetStage.showAndWait();
+		
 		submitParameters.setOnAction(e ->
 		{
 			try
 			{
-				String pNumber = pProbabilityInput.getText();
-				String qNumber = qProbabilityInput.getText();
+				//String pNumber = pProbabilityInput.getText();
+				//String qNumber = qProbabilityInput.getText();
+				String pNumber = String.valueOf(pProbabilityInput);
+				String qNumber = String.valueOf(qProbabilityInput);
 				String seedNumber = seedInput.getText();
+				String setMugtomeDeveloper = mugtomeDeveloperInput.getText();
+				String setGogglesDeveloper = gogglesDeveloperInput.getText();
 				int sd = Integer.parseInt(seedNumber);
 				Person.newRandom(sd);
-				String tickNumber = ticksInput.getText();	
+				String tickNumber = ticksInput.getText();
+
 				String floorsNumber = floorInput.getText();
 				String setElevators =  elevatorInput.getText();
-				String setMugtomDeveloper = mugtomeDeveloperInput.getText();
-				String setGogglesDeveloper = gogglesDeveloperInput.getText();
 				String setEmployee = employeeInput.getText();
+
 				
 				if(pNumber.equals("0"))
 				{
@@ -153,7 +180,7 @@ public class ElevatorSimulation
 				int elevatorNumbers = Integer.parseInt(setElevators);
 				Building.setElevators(elevatorNumbers);
 				
-				int mugtomeDevInt = Integer.parseInt(setMugtomDeveloper);
+				int mugtomeDevInt = Integer.parseInt(setMugtomeDeveloper);
 				Building.createMugtomeDevelopersInBuilding(mugtomeDevInt);
 				
 				int gogglesDevInt = Integer.parseInt(setGogglesDeveloper);
@@ -172,77 +199,8 @@ public class ElevatorSimulation
 			catch(Exception f)
 			{
 				System.out.println("Insert a postive number");
-			
 			}
 		});
-		
-		VBox parameterWindow = new VBox(10);
-		Scene parameterStage = new Scene(parameterWindow, 400, 600);
-		
-		parameterWindow.getChildren().addAll(
-				setpProbabilityLabel,
-				pProbabilityInput,
-				setqProbabilityLabel,
-				qProbabilityInput,
-				setSeedsLabel,
-				seedInput,
-				setTicksLabel,
-				ticksInput,
-				setFloorsLabel, 
-				floorInput, 
-				setElevatorsLabel, 
-				elevatorInput,
-				setMugtomeDeveloperLabel,
-				mugtomeDeveloperInput,
-				setGogglesDeveloperLabel,
-				gogglesDeveloperInput,
-				setEmployeeLabel,
-				employeeInput,
-				submitParameters);
-		parameterWindow.setAlignment(Pos.CENTER);
-		parameterSetStage.setScene(parameterStage);
-		parameterSetStage.showAndWait();
-	}
-    
-	@Override
-	public void start(Stage mainStage) throws Exception 
-	{
-    	mStage = mainStage;
-    	
-        tickButton = new Button("+1 Tick");
-        tickButton10 =  new Button("+10 Tick");
-        tickButton100 =  new Button("+100 Tick");
-    	
-        
-        mStage.setTitle("Tick Buttons");
-        //Add the tick buttons to the main window
-        mainWindow.getChildren().addAll(tickButton, tickButton10, tickButton100);
-        
-        //Align buttons in the CENTER
-        mainWindow.setAlignment(Pos.CENTER);
-
-        setParameters("Set Building Parameters");
-        
-        tickButton.setOnAction(e ->
-        {
-        	tickButton();
-        });
-        
-        tickButton10.setOnAction(e ->
-        {
-        	for(int i = 0; i < 10; i++)
-        	{
-        		tickButton();
-        	}
-        });
-        
-        tickButton100.setOnAction(e ->
-        {
-        	for(int i = 0; i < 100; i++)
-        	{
-        		tickButton();
-        	}
-        });
 	}
 	
 }

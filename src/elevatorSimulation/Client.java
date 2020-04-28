@@ -1,5 +1,6 @@
+package elevatorSimulation;
 /**
- * This class represents a client in this building
+ * This class represents a Client in the Building
  * 
  * @author Edward Jordan 180130678
  * @version 1.0
@@ -37,7 +38,7 @@ public class Client extends Person
 	 */
 	public static double newQ()
 	{
-		double q = random.nextDouble();
+		double q = random.nextDouble();;
 		return q;
 	}
 
@@ -58,5 +59,11 @@ public class Client extends Person
 				floorGoals.add(0);
 			}
 		}
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "Client "+ hashCode();
 	}
 }
