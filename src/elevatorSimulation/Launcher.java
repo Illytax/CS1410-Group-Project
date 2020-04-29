@@ -29,11 +29,11 @@ public class Launcher extends Application
 	@FXML private TextField mugtomeDev_TextField;
 	@FXML private TextField floor_TextField;
 	@FXML private TextField elevator_TextField;
+	@FXML private TextField elevatorCapacity_TextField;
 	@FXML private Slider pValue_Slider;
 	@FXML private Slider qValue_Slider;
 	@FXML private Label pValue_Label;
 	@FXML private Label qValue_Label;
-    @FXML private Label seed_Label;
     @FXML private TextField seed_TextField;
 	
 	//Initialise all buttons
@@ -67,7 +67,6 @@ public class Launcher extends Application
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Elevator Simulation");
 			primaryStage.show();
-			
 		} 
 		catch(Exception e) 
 		{
@@ -80,13 +79,12 @@ public class Launcher extends Application
 		try
 		{
             int seed = Integer.parseInt(seed_TextField.getText());
-            if (seed == 0) 
-            {
-                throw new Exception();
-            }
-			
 			Person.newRandom(seed);
-			
+			if(seed == 0)
+			{
+				seed = (int) System.currentTimeMillis();
+			}
+
 			double pValue = pValue_Slider.getValue();
 			if(pValue == 0)
 			{
@@ -107,6 +105,13 @@ public class Launcher extends Application
 				throw new Exception();
 			}
 			Building.setFloors(numberOfFloors);
+			
+			int elevatorCapacity = Integer.parseInt(elevatorCapacity_TextField.getText());
+			if(elevatorCapacity == 0)
+			{
+				throw new Exception();
+			}
+			Elevator.maxElevatorCapacity(elevatorCapacity);
 			
 			int numberOfElevators = Integer.parseInt(elevator_TextField.getText());
 			if(numberOfElevators == 0)
@@ -131,7 +136,7 @@ public class Launcher extends Application
 			}
 			ElevatorSimulation.setTickMax(tickMax);
 			
-			Building.createPeopleInBuilding(seed);
+			Building.shufflePeopleInBuilding(seed);
 			
 			stage.close();
 			stage.setTitle("Tick Buttons");
@@ -164,7 +169,7 @@ public class Launcher extends Application
 		}
 		catch(Exception F)
 		{
-			System.out.println("Insert a postive number");
+			System.out.println("Please insert a postive integer");
 		}
 	}
 	

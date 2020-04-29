@@ -189,7 +189,7 @@ public class ElevatorSimulation
 				int employeeInt = Integer.parseInt(setEmployee);
 				Building.createEmployeesInBuilding(employeeInt);
 	            
-				Building.createPeopleInBuilding(sd);
+				Building.shufflePeopleInBuilding(sd);
 				parameterSetStage.close();
 				mStage.close();
 				Scene scene = new Scene(mainWindow, 400, 200);

@@ -1,6 +1,6 @@
 package elevatorSimulation;
 /**
- * This class represents an employee in this building
+ * This class represents an Employee in the Building
  * 
  * @author Edward Jordan 180130678
  * @version 1.0
@@ -9,7 +9,9 @@ public class Employee extends Person
 {
 	
 	/**
-	 * employees will have an equal chance to go to any floor
+	 * Allows the Employee to move through any of the 
+	 * Buildings floors not including the ground floor
+	 * {@inheritDoc}
 	 */
 	public Employee()
 	{
@@ -17,7 +19,8 @@ public class Employee extends Person
 	}
 	
 	/**
-	 * this method changes the employee's goal to its new goal
+	 * Creates a new goal for the Employee 
+	 * that isn't the same as the previous goal
 	 */
 	private void randomNewGoal()
 	{
@@ -30,7 +33,8 @@ public class Employee extends Person
 	}
 	
 	/**
-	 * this method is the probability that the employee will change goal
+	 * Creates a new goal for the Employee when a 
+	 * Random value is less than the current value of probability p
 	 */
 	@Override
 	public void updateGoals()
@@ -45,6 +49,9 @@ public class Employee extends Person
 		}
 	}
 	
+	/**
+	 * Changes the string representation of the class
+	 */
 	@Override
 	public String toString()
 	{

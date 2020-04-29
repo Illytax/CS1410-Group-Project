@@ -11,8 +11,8 @@ public class Client extends Person
 	private int deathTickInt;
 	
 	/**
-	 * death tick generates a random number between 180 and 60
-	 * restricts the clients to bottom half of the building
+	 * Death tick generates a Random number between 180 and 60
+	 * {@inheritDoc}
 	 */
 	public Client()
 	{
@@ -22,8 +22,8 @@ public class Client extends Person
 	}
 	
 	/**
-	 * this method outputs in console the number of complaints
-	 * by the client
+	 * This method outputs in the console the total number of complaints
+	 * made by Client(s)
 	 */
 	public void fileComplaint() 
 	{
@@ -33,19 +33,19 @@ public class Client extends Person
 	}
 	
 	/**
-	 * creates a number between 1 and 0 representing probability
+	 * Creates a number between 0.000 and 1.000 representing probability
 	 * @return probability denoted by q
 	 */
 	public static double newQ()
 	{
-		double q = random.nextDouble();;
+		double q = random.nextDouble();
 		return q;
 	}
 
 	/**
-	 * if the client doesn't have any more goals
-	 * then it will increase a counter and if that is greater than
-	 * the death tick then the client will go to the ground floor and leave the building
+	 * When the Client reaches its target floor
+	 * its count will increase with every tick until it reaches a random
+	 * death tick that will cause the Client to the ground floor and leave the Building
 	 */
 	@Override
 	public void updateGoals()
@@ -61,9 +61,12 @@ public class Client extends Person
 		}
 	}
 	
+	/**
+	 * Changes the string representation of the class
+	 */
 	@Override
 	public String toString()
 	{
-		return "Client "+ hashCode();
+		return "Client " + hashCode();
 	}
 }

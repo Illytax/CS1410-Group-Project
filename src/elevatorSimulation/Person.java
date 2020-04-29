@@ -4,8 +4,8 @@ import java.util.Queue;
 import java.util.Random;
 
 /**
- * This class represents a person in this building
- * Person can be many different entities
+ * This class represents a Person in this Building
+ * Person is the super for all types of people
  * 
  * @author Edward Jordan 180130678
  * @version 1.0
@@ -25,19 +25,19 @@ public class Person
 	
 	
 	/**
-	 * This decides what floor level a particular person can access
-	 * @param accessLevel the floor a person can access
+	 * This determines what floors each type of Person can access
+	 * @param accessLevel is and array of the floors a Person can access
 	 */
 	public Person(int[] accessLevel)
 	{
 		this.accessLevel = accessLevel;
 		floorGoals = new LinkedList<Integer>();
-		floorGoals.add(accessLevel[random.nextInt(accessLevel.length)]);
+		newGoal();
 	}
 	
 	/**
-	 * makes a list of all the floor requests
-	 * @return elements in list
+	 * Gets the head of the Queue
+	 * @return the head of the queue (Person's current goal)
 	 */
 	public Integer getCurrentGoal()
 	{
@@ -45,8 +45,8 @@ public class Person
 	}
 	
 	/**
-	 * determines how many requests there are
-	 * @return the current size of the list of floor goals
+	 * Determines if a Person has a goal
+	 * @return the current size of floor goals
 	 */
 	public int getGoalsSize()
 	{
@@ -54,8 +54,7 @@ public class Person
 	}
 	
 	/**
-	 * it pushes the previous element to the head of the queue
-	 * so the new goal will take priority over the previous one
+	 * Removes the Person's current goal and stores it in an integer
 	 */	
 	public void removeGoal()
 	{
@@ -63,8 +62,9 @@ public class Person
 	}
 	
 	/**
-	 * generates a random number
-	 * @param seed Random number generation algorithm works on the seed value
+	 * Generates a random number
+	 * @param seed allows Random to take a value
+	 * that can be used to create repeatable results
 	 */
 	public static void newRandom(int seed)
 	{
@@ -77,8 +77,8 @@ public class Person
 	}
 	
 	/**
-	 * creates a number between 1 and 0 representing probability
-	 * which will determine what floor the person will go
+	 * Creates an initial goal for a newly created Person when they enter the Building
+	 * based on the floors they are allowed to access
 	 */
 	public void newGoal()
 	{

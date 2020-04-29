@@ -8,7 +8,7 @@ import java.util.Random;
 import javafx.scene.control.TextField;
 
 /**
- * This class is the building that creates the Elevator(s), floors
+ * This class is the Building that creates the Elevator(s), floors
  * and the Person(s) inside the Building
  * @author Edward Jordan 180130678
  * @version 1.0
@@ -32,7 +32,7 @@ final class Building
 	
 	/**
 	 * Gets total number of queues of people
-	 * @return the number of Queue<Person> within the ArrayList<Queue<Person>> floors
+	 * @return the number of Queue<Person> within the ArrayList<> floors
 	 */
 	public static ArrayList<Queue<Person>> getFloors()
 	{
@@ -42,7 +42,7 @@ final class Building
 	/**
 	 * This methods gets the number of people on each floor
 	 * @param floorNumber the floor level in the building
-	 * @return the number of Person within that Queue<Person>
+	 * @return the number of Person(s) within that Queue<Person>
 	 */
 	public static Queue<Person> getPeopleOnAFloor(int floorNumber)
 	{
@@ -66,7 +66,7 @@ final class Building
 	 * This method randomises the order of created people in the Building
 	 * @param seed gets and int that allows Random to create repeatable results
 	 */
-	public static void createPeopleInBuilding(int seed)
+	public static void shufflePeopleInBuilding(int seed)
 	{
 		Queue<Person> tempQueue = floors.get(0);
 		Collections.shuffle(personList, new Random(seed));
@@ -201,7 +201,6 @@ final class Building
 	
 	/**
 	 * This method outputs in console how many people are in each floor
-	 * @param floorNumber the current floor the method is referring to
 	 */
 	public static void showPeopleOnEachFloor()
 	{
@@ -212,5 +211,6 @@ final class Building
 			System.out.println("Floor " + floorNumber + ": " + peopleInFloors.toString());
 			floorNumber++;
 		}
+		System.out.println("");
 	}
 }

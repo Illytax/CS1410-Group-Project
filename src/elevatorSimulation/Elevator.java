@@ -16,16 +16,19 @@ import javafx.scene.control.TextField;
 public class Elevator
 {
 	private int currentFloor = 0;
-	private int currentMaxCapacity = 4;
+	private static int maxElevatorCapacity;
+	private int currentMaxCapacity;
 	private String elevatorName;
 	private Queue<Person> elevatorOccupancy = new LinkedList<Person>();
 	private Boolean isElevatorUp = true;
 	private boolean doorsOpen = true;
-	private int tickCounter = 1;;
+	private int tickCounter = 1;
+	private int elevatorUses = 0;
 	
 	public Elevator(String elevatorName)
 	{
 		this.elevatorName = elevatorName;
+		currentMaxCapacity = maxElevatorCapacity;
 	}
 	
 	/**
@@ -70,6 +73,11 @@ public class Elevator
 	public void setDoorStatus(Boolean newDoorStatus)
 	{
 		this.doorsOpen = newDoorStatus;
+	}
+	
+	public static void maxElevatorCapacity(int capMax)
+	{
+		maxElevatorCapacity = capMax;
 	}
 	
 	/**
@@ -180,7 +188,7 @@ public class Elevator
 					peopleToAdd.add(person);
 					if(person instanceof Maintenance)
 					{
-						currentMaxCapacity = 4;
+						currentMaxCapacity = maxElevatorCapacity;
 					}
 				}
 				if(currentFloor == 0  && person.toBeDisposed)
@@ -220,6 +228,7 @@ public class Elevator
 						}
 						elevatorOccupancy.add(person);
 						Building.getPeopleOnAFloor(currentFloor).remove(person);
+						elevatorUses++;
 					}
 					else
 					{
@@ -328,6 +337,7 @@ public class Elevator
 		{
 			System.out.println("Elevator " + getElevatorName() + " is currently not in use");
 		}
+		System.out.println("Elevator " + getElevatorName() + " has been used " + elevatorUses + " times" + "\n");
 	}
 
 }

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
@@ -7,31 +10,31 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="595.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="elevatorSimulation.Launcher">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="595.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="elevatorSimulation.Launcher">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="559.0" prefWidth="385.0" style="-fx-spacing: 5; -fx-padding: 5;">
          <children>
-            <Label fx:id="pValue_Label" prefHeight="17.0" prefWidth="78.0" text="P:  0.000" />
+            <Label fx:id="pValue_Label" prefHeight="17.0" prefWidth="78.0" text="P:  0.0025" />
             <Slider fx:id="pValue_Slider" majorTickUnit="0.001" max="0.005" minorTickCount="5" prefHeight="38.0" prefWidth="352.0" showTickLabels="true" showTickMarks="true" />
             <Label fx:id="qValue_Label" layoutX="162.0" layoutY="10.0" prefHeight="17.0" prefWidth="78.0" text="Q:  0.000" />
             <Slider fx:id="qValue_Slider" layoutX="10.0" layoutY="27.0" majorTickUnit="0.002" max="0.01" showTickLabels="true" showTickMarks="true" />
             <Label text="Number of Floors" />
             <TextField fx:id="floor_TextField" Text="7" />
-            <Label fx:id="elevator_Label" text="Number of Elevators" />
+            <Label id="elevator_Label" text="Number of Elevators" />
             <TextField fx:id="elevator_TextField" Text="2" layoutX="10.0" layoutY="91.0" promptText="2" />
-            <Label fx:id="elevatorCapacity_Label" layoutX="147.0" layoutY="116.0" text="Elevator Capacity" />
+            <Label id="elevatorCapacity_Label" layoutX="147.0" layoutY="116.0" text="Elevator Capacity" />
             <TextField fx:id="elevatorCapacity_TextField" Text="4" layoutX="10.0" layoutY="133.0" />
-            <Label fx:id="ticks_Label" layoutX="134.0" layoutY="284.0" text="Ticks" />
+            <Label id="ticks_Label" layoutX="134.0" layoutY="284.0" text="Ticks" />
             <TextField fx:id="ticks_TextField" Text="2880" layoutX="10.0" layoutY="301.0" />
-            <Label fx:id="seedLabel" text="Seed:" />
-            <TextField fx:id="seed_TextField" />
-            <Label fx:id="elevator_Label" layoutX="147.0" layoutY="158.0" text="Set Employees" />
+            <Label id="seedLabel" text="Seed:" />
+            <TextField fx:id="seed_TextField" Text="0" />
+            <Label id="elevator_Label" layoutX="147.0" layoutY="158.0" text="Set Employees" />
             <TextField fx:id="employee_TextField" Text="10" layoutX="10.0" layoutY="175.0" />
-            <Label fx:id="goggleDev_Label" layoutX="147.0" layoutY="200.0" text="Set Goggle Developers" />
+            <Label id="goggleDev_Label" layoutX="147.0" layoutY="200.0" text="Set Goggle Developers" />
             <TextField fx:id="goggleDev_TextField" Text="5" layoutX="10.0" layoutY="217.0" />
-            <Label fx:id="mugtomeDev_Label" layoutX="147.0" layoutY="242.0" text="Set Mugtome Developers" />
+            <Label id="mugtomeDev_Label" layoutX="147.0" layoutY="242.0" text="Set Mugtome Developers" />
             <TextField fx:id="mugtomeDev_TextField" Text="5" layoutX="10.0" layoutY="259.0" />
-            <Button fx:id="submit_Button" mnemonicParsing="false" onAction="#submitPressed" text="Submit" />
+            <Button id="submit_Button" mnemonicParsing="false" onAction="#submitPressed" text="Submit" />
          </children>
       </VBox>
    </children>

@@ -1,6 +1,6 @@
 package elevatorSimulation;
 /**
- * This class represents a maintenance team in this building
+ * This class represents a Maintenance team in this Building
  * 
  * @author Edward Jordan 180130678
  * @version 1.0
@@ -11,8 +11,8 @@ public class Maintenance extends Person
 	private int deathTickInt;
 	
 	/**
-	 * death tick generates a random number between 240 and 120
-	 * restricts the maintenance team only the top floor of the building
+	 * Death tick generates a Random number between 240 and 120
+	 * {@inheritDoc}
 	 */
 	public Maintenance()
 	{
@@ -22,7 +22,7 @@ public class Maintenance extends Person
 	}
 	
 	/**
-	 * creates a number between 1 and 0 representing probability
+	 * Creates a number between 0.000 and 1.000 representing probability
 	 * @return probability denoted by q
 	 */
 	public static double newQ()
@@ -30,11 +30,12 @@ public class Maintenance extends Person
 		double q = random.nextDouble();
 		return q;
 	}
+	
 	/**
-	 * if the maintenance team doesn't have any more goals
+	 * If the Maintenance team doesn't have any more goals
 	 * then it will increase a counter and if that is greater than
-	 * the death tick then the maintenance team will go to the ground floor 
-	 * and leave the building
+	 * the death tick then the Maintenance team will go to the ground floor 
+	 * and leave the Building
 	 */
 	@Override
 	public void updateGoals()
@@ -50,6 +51,9 @@ public class Maintenance extends Person
 		}
 	}
 	
+	/**
+	 * Changes the string representation of the class
+	 */
 	@Override
 	public String toString()
 	{

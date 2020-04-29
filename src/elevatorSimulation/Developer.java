@@ -10,9 +10,9 @@ public class Developer extends Person
 	private String companyName;
 	
 	/**
-	 * this method chooses what company the developer is coming from
-	 * and restricts the developers to top half of the building
-	 * @param companyName the name of the company
+	 * This Constructor chooses what company the Developer is coming from
+	 * and restricts the Developer to top 3 floors of the Building
+	 * @param companyName the name of the company the Developer works for
 	 */
 	public Developer(String companyName)
 	{
@@ -22,7 +22,8 @@ public class Developer extends Person
 	}
 	
 	/**
-	 * this method replaces the old goal with the new goal
+	 * Creates a new goal for the Developer 
+	 * that isn't the same as the previous goal
 	 */
 	private void randomNewGoal()
 	{
@@ -35,7 +36,8 @@ public class Developer extends Person
 	}
 	
 	/**
-	 * this method creates the probability that the developer changes goal
+	 * Creates a new goal for the Developer when a 
+	 * Random value is less than the current value of probability p
 	 */
 	@Override
 	public void updateGoals()
@@ -50,11 +52,17 @@ public class Developer extends Person
 		}
 	}
 	
+	/**
+	 * @return companyName of the Developer
+	 */
 	public String getCompanyName()
 	{
 		return companyName;
 	}
 	
+	/**
+	 * Changes the string representation of the class
+	 */
 	@Override
 	public String toString()
 	{
