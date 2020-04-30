@@ -13,9 +13,21 @@ public class Employee extends Person
 	 * Buildings floors not including the ground floor
 	 * {@inheritDoc}
 	 */
-	public Employee()
+	public Employee(int numberOfFloors)
 	{
-		super(new int[] {1, 2, 3, 4, 5, 6});
+		super();
+		setAccessLevels(numberOfFloors);
+		newGoal();
+	}
+	
+	private void setAccessLevels(int numberOfFloors) 
+	{
+		int[] accessLevel = new int[numberOfFloors - 1];
+		for(int i = 1, j = 0; i < numberOfFloors; i++, j++)
+		{
+			accessLevel[j] = i;
+		}
+		this.accessLevel = accessLevel;
 	}
 	
 	/**

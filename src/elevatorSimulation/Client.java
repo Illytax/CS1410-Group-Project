@@ -14,11 +14,22 @@ public class Client extends Person
 	 * Death tick generates a Random number between 180 and 60
 	 * {@inheritDoc}
 	 */
-	public Client()
+	public Client(int numberOfFloors)
 	{
-		super(new int[] {1, 2, 3});
-		
+		super();
+		setAccessLevels(numberOfFloors);
 		deathTickInt = random.nextInt(180 - 60) + 60;
+		newGoal();
+	}
+	
+	private void setAccessLevels(int numberOfFloors) 
+	{
+		int[] accessLevel = new int[(int) ((numberOfFloors - 0.5f) / 2f)];
+		for(int i = 0, j = 0; i <  accessLevel.length; i++, j++)
+		{
+			accessLevel[j] = i + 1;
+		}
+		this.accessLevel = accessLevel;
 	}
 	
 	/**

@@ -19,7 +19,7 @@ public class PeopleTests
 	@Test
 	public void testDeveloperGoals()
 	{
-		Person person = new Developer("Mugtome");
+		Person person = new Developer("Mugtome", 7);
 		assertEquals((int)person.getCurrentGoal(), 4);
 	}
 	
@@ -27,7 +27,7 @@ public class PeopleTests
 	@Test
 	public void testGetNewGoal()
 	{
-		Person person = new Developer("Mugtome");
+		Person person = new Developer("Mugtome", 7);
 		person.floorGoals.poll();
 		person.newGoal();
 		assertEquals((int)person.getCurrentGoal(), 5);
@@ -38,7 +38,7 @@ public class PeopleTests
 	{
 		Building.setFloors(1);
 		assertEquals(Building.getPeopleOnAFloor(0).size(), 0);
-		Building.createMaintenanceInBuilding(0.002);
+		Building.createMaintenanceInBuilding(0.002, 7);
 		assertEquals(Building.getPeopleOnAFloor(0).size(), 1);
 	}
 }

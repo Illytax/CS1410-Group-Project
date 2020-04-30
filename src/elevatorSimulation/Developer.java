@@ -1,4 +1,7 @@
 package elevatorSimulation;
+
+import java.util.LinkedList;
+
 /**
  * This class represents a developer in this building
  * 
@@ -14,14 +17,26 @@ public class Developer extends Person
 	 * and restricts the Developer to top 3 floors of the Building
 	 * @param companyName the name of the company the Developer works for
 	 */
-	public Developer(String companyName)
+	public Developer(String companyName, int floorNumbers)
 	{
-		super(new int[] {4, 5, 6});
-		
+		super();
+		setAccessLevels(floorNumbers);
 		this.companyName =  companyName;
+		newGoal();
 	}
 	
-	/**
+	private void setAccessLevels(int numberOfFloors) 
+	{
+		int[] accessLevel = new int[(int) (Math.floor(numberOfFloors / 2))];
+		for(int i = Math.round(((numberOfFloors) / 2f)), j = 0; i < numberOfFloors; i++, j++)
+		{
+			accessLevel[j] = i;
+		}
+		this.accessLevel = accessLevel;
+	}
+	
+	
+     /**
 	 * Creates a new goal for the Developer 
 	 * that isn't the same as the previous goal
 	 */

@@ -81,11 +81,11 @@ final class Building
 	 * A Client will arrive on the ground floor of the Building
 	 * if the probability is less than probability of q
 	 */
-	public static void createClientInBuilding()
+	public static void createClientInBuilding(int nubmerOfFloors)
 	{
 		if(Client.newQ() < Person.returnProbQ())
 		{
-			Person newClient = new Client();
+			Person newClient = new Client(nubmerOfFloors);
 			floors.get(0).add(newClient);
 		}
 	}
@@ -94,11 +94,11 @@ final class Building
 	 * This method creates the amount of Mugtome Developer(s) in the simulation
 	 * @param totalMugtomeDevelopers the number of Mugtome Developer created in the Building
 	 */
-	public static void createMugtomeDevelopersInBuilding(int totalMugtomeDevelopers)
+	public static void createMugtomeDevelopersInBuilding(int totalMugtomeDevelopers, int  numberOfFloors)
 	{
 		for(Integer i = 0; i < totalMugtomeDevelopers; i++)
 		{
-			Person newDevelopers = new Developer("Mugtome");
+			Person newDevelopers = new Developer("Mugtome",  numberOfFloors);
 			personList.add(newDevelopers);
 		}
 	}
@@ -107,11 +107,11 @@ final class Building
 	 * This method creates the amount of Goggles Developer(s) in the simulation
 	 * @param totalGogglesDevelopers the number of Goggles Developer created in the Building
 	 */
-	public static void createGogglesDevelopersInBuilding(int totalGogglesDevelopers)
+	public static void createGogglesDevelopersInBuilding(int totalGogglesDevelopers, int numberOfFloors)
 	{
 		for(Integer i = 0; i < totalGogglesDevelopers; i++)
 		{
-			Person newDevelopers = new Developer("Goggles");
+			Person newDevelopers = new Developer("Goggles", numberOfFloors);
 			personList.add(newDevelopers);
 		}
 	}
@@ -120,11 +120,11 @@ final class Building
 	 * This method creates the amount of Employee(s) in the simulation
 	 * @param totalEmployees the maximum number of Employee(s) in the Building
 	 */
-	public static void createEmployeesInBuilding(int totalEmployees)
+	public static void createEmployeesInBuilding(int totalEmployees, int numberOfFloors)
 	{
 		for(Integer i = 0; i < totalEmployees; i++)
 		{
-			Person newEmployees = new Employee();
+			Person newEmployees = new Employee(numberOfFloors);
 			personList.add(newEmployees);
 		}
 	}
@@ -133,11 +133,11 @@ final class Building
 	 * This method creates a Maintenance team in the Building
 	 * @param probability the likelihood a maintenance team will be created
 	 */
-	public static void createMaintenanceInBuilding(double probability)
+	public static void createMaintenanceInBuilding(double probability, int numberOfFloors)
 	{
 		if(probability < 0.005)
 		{
-			Person newMaintenance = new Maintenance();
+			Person newMaintenance = new Maintenance(numberOfFloors);
 			floors.get(0).add(newMaintenance);
 		}
 	}

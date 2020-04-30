@@ -35,6 +35,11 @@ public class Person
 		newGoal();
 	}
 	
+	public Person()
+	{
+		floorGoals = new LinkedList<Integer>();
+	}
+	
 	/**
 	 * Gets the head of the Queue
 	 * @return the head of the queue (Person's current goal)

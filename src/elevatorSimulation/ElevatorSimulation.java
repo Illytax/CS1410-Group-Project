@@ -34,8 +34,8 @@ public class ElevatorSimulation
     	{
     		tickInt++;
     		System.out.println("--- Tick " + tickInt);
-    		Building.createClientInBuilding();
-    		Building.createMaintenanceInBuilding(Maintenance.newQ());
+    		Building.createClientInBuilding(Building.getSizeOfFloors());
+    		Building.createMaintenanceInBuilding(Maintenance.newQ(), Building.getSizeOfFloors());
     		for(Person person : Building.getAllPeopleInAllFloors())
     		{
     			person.updateGoals();
@@ -181,13 +181,13 @@ public class ElevatorSimulation
 				Building.setElevators(elevatorNumbers);
 				
 				int mugtomeDevInt = Integer.parseInt(setMugtomeDeveloper);
-				Building.createMugtomeDevelopersInBuilding(mugtomeDevInt);
+				//Building.createMugtomeDevelopersInBuilding(mugtomeDevInt);
 				
 				int gogglesDevInt = Integer.parseInt(setGogglesDeveloper);
-				Building.createGogglesDevelopersInBuilding(gogglesDevInt);
+				//Building.createGogglesDevelopersInBuilding(gogglesDevInt);
 				
 				int employeeInt = Integer.parseInt(setEmployee);
-				Building.createEmployeesInBuilding(employeeInt);
+				//Building.createEmployeesInBuilding(employeeInt);
 	            
 				Building.shufflePeopleInBuilding(sd);
 				parameterSetStage.close();

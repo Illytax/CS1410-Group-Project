@@ -14,11 +14,17 @@ public class Maintenance extends Person
 	 * Death tick generates a Random number between 240 and 120
 	 * {@inheritDoc}
 	 */
-	public Maintenance()
+	public Maintenance(int numberOfFloors)
 	{
-		super(new int[] {6});
-		
+		super();
+		setAccessLevels(numberOfFloors - 1);
 		deathTickInt = random.nextInt(240 - 120) + 120;
+		newGoal();
+	}
+	
+	private void setAccessLevels(int numberOfFloors) 
+	{
+		accessLevel = new int[] {numberOfFloors};
 	}
 	
 	/**

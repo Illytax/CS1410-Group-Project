@@ -22,7 +22,7 @@ public class ElevatorTest
 	@Test
 	public void testElevatorPersonMovement()
 	{
-		Building.createMugtomeDevelopersInBuilding(1);
+		Building.createMugtomeDevelopersInBuilding(1, 7);
 		Building.shufflePeopleInBuilding(1);
 		Elevator elevator = Building.getAnElevator("e1");
 		int value1 = elevator.getElevatorOccupancySize();
@@ -35,7 +35,7 @@ public class ElevatorTest
 	@Test
 	public void testPersonBuildingMovement()
 	{
-		Building.createMugtomeDevelopersInBuilding(1);
+		Building.createMugtomeDevelopersInBuilding(1, 7);
 		Building.shufflePeopleInBuilding(1);
 		Elevator elevator = Building.getAnElevator("e1");
 		for(int i = 0; i < 6; i++)

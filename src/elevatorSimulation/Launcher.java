@@ -121,13 +121,13 @@ public class Launcher extends Application
 			Building.setElevators(numberOfElevators);
 			
 			int numberOfEmployees = Integer.parseInt(employee_TextField.getText());
-			Building.createEmployeesInBuilding(numberOfEmployees);
+			Building.createEmployeesInBuilding(numberOfEmployees, numberOfFloors);
 			
 			int numberofGoggDev = Integer.parseInt(goggleDev_TextField.getText());
-			Building.createGogglesDevelopersInBuilding(numberofGoggDev);
+			Building.createGogglesDevelopersInBuilding(numberofGoggDev, numberOfFloors);
 			
 			int numberofmugTDev = Integer.parseInt(mugtomeDev_TextField.getText());
-			Building.createMugtomeDevelopersInBuilding(numberofmugTDev);
+			Building.createMugtomeDevelopersInBuilding(numberofmugTDev, numberOfFloors);
 			
 			int tickMax = Integer.parseInt(ticks_TextField.getText());
 			if(tickMax == 0)
@@ -170,6 +170,7 @@ public class Launcher extends Application
 		catch(Exception F)
 		{
 			System.out.println("Please insert a postive integer");
+			F.printStackTrace();
 		}
 	}
 	
