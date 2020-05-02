@@ -83,7 +83,7 @@ final class Building
 	 */
 	public static void createClientInBuilding(int nubmerOfFloors)
 	{
-		if(Client.newQ() < Person.returnProbQ())
+		if(0.001 < Person.returnProbQ())
 		{
 			Person newClient = new Client(nubmerOfFloors);
 			floors.get(0).add(newClient);
@@ -94,7 +94,7 @@ final class Building
 	 * This method creates the amount of Mugtome Developer(s) in the simulation
 	 * @param totalMugtomeDevelopers the number of Mugtome Developer created in the Building
 	 */
-	public static void createMugtomeDevelopersInBuilding(int totalMugtomeDevelopers, int  numberOfFloors)
+	public static void createMugtomeDevelopersInBuilding(int totalMugtomeDevelopers, int numberOfFloors)
 	{
 		for(Integer i = 0; i < totalMugtomeDevelopers; i++)
 		{

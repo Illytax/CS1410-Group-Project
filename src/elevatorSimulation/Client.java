@@ -7,7 +7,9 @@ package elevatorSimulation;
  * */
 public class Client extends Person
 {
-	private int count = 0;
+	private int deathCount = 0;
+	private int willComplainCount = 0;
+	private static int currentNumberOfComplaints = 0;
 	private int deathTickInt;
 	
 	/**
@@ -22,6 +24,11 @@ public class Client extends Person
 		newGoal();
 	}
 	
+	/**
+	 * Sets the Client floor access to be the bottom floors of the Building
+	 * excluding the ground floor
+	 * @param numberOfFloors takes the number of floors in the Building
+	 */
 	private void setAccessLevels(int numberOfFloors) 
 	{
 		int[] accessLevel = new int[(int) ((numberOfFloors - 0.5f) / 2f)];
@@ -38,9 +45,8 @@ public class Client extends Person
 	 */
 	public void fileComplaint() 
 	{
-		int currentNumberOfComplaints = 0;
 		currentNumberOfComplaints++;
-		System.out.println("Complaint numnber " + currentNumberOfComplaints + " filed");
+		System.out.println("Number of complaints filed : " + currentNumberOfComplaints);
 	}
 	
 	/**
@@ -61,10 +67,22 @@ public class Client extends Person
 	@Override
 	public void updateGoals()
 	{
-		if(getCurrentGoal() == null)	
+		if(getCurrentGoal() != null && isInElevator == false)
 		{
-			count++;
-			if(count > deathTickInt)
+			willComplainCount++;
+			if(willComplainCount == 60)
+			{
+				fileComplaint();
+			}
+		}
+		else if(getCurrentGoal() != null && isInElevator == true)
+		{
+			willComplainCount = 0;
+		}
+		else if(getCurrentGoal() == null)	
+		{
+			deathCount++;
+			if(deathCount > deathTickInt)
 			{
 				toBeDisposed = true;
 				floorGoals.add(0);

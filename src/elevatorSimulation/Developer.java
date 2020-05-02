@@ -13,9 +13,9 @@ public class Developer extends Person
 	private String companyName;
 	
 	/**
-	 * This Constructor chooses what company the Developer is coming from
-	 * and restricts the Developer to top 3 floors of the Building
+	 * This Constructor chooses what company the Developer is working for
 	 * @param companyName the name of the company the Developer works for
+	 * @param floorNumbers total number of floors in the Building
 	 */
 	public Developer(String companyName, int floorNumbers)
 	{
@@ -25,6 +25,11 @@ public class Developer extends Person
 		newGoal();
 	}
 	
+	/**
+	 * Sets the Developer floor access to be the top half of the 
+	 * floors of the Building excluding the ground floor
+	 * @param numberOfFloors takes the number of floors in the Building
+	 */
 	private void setAccessLevels(int numberOfFloors) 
 	{
 		int[] accessLevel = new int[(int) (Math.floor(numberOfFloors / 2))];

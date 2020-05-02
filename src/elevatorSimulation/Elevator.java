@@ -31,6 +31,11 @@ public class Elevator
 		currentMaxCapacity = maxElevatorCapacity;
 	}
 	
+	public Queue<Person> getElevatorOccupancy()
+	{
+		return elevatorOccupancy;
+	}
+	
 	/**
 	 * how much space there is in the elevator
 	 * @return the number of elements in the elevator
@@ -186,6 +191,7 @@ public class Elevator
 					person.removeGoal();
 					elevatorOccupancy.remove(person);
 					peopleToAdd.add(person);
+					person.isInElevator(false);
 					if(person instanceof Maintenance)
 					{
 						currentMaxCapacity = maxElevatorCapacity;
@@ -194,9 +200,38 @@ public class Elevator
 				if(currentFloor == 0  && person.toBeDisposed)
 				{
 					peopleToAdd.remove(person);
+					person.isInElevator(false);
 				}
 			}		
 		}
+	}
+	
+	/**
+	 * 
+	 * @param person
+	 * @return
+	 */
+	private boolean checkDeveloperCompanies(Person person)
+	{
+		if(person instanceof Developer)
+		{
+			Developer developer = (Developer) person;
+			developer.getCompanyName();
+			for(Person elevatorPeople : elevatorOccupancy)
+			{
+				if(elevatorPeople instanceof Developer)
+				{
+					Developer elevatorDeveloper = (Developer) elevatorPeople;
+					if(!(developer.getCompanyName().equals(elevatorDeveloper.getCompanyName())))
+					{
+						Building.getPeopleOnAFloor(currentFloor).remove(person);
+						Building.getPeopleOnAFloor(currentFloor).add(person);
+						return false;
+					}
+				}
+			}
+		}
+		return true;
 	}
 	
 	/**
@@ -215,6 +250,24 @@ public class Elevator
 				{
 					if(elevatorOccupancy.size() < currentMaxCapacity)
 					{
+						if(person instanceof Developer)
+						{
+							Developer developer = (Developer) person;
+							developer.getCompanyName();
+							for(Person elevatorPeople : elevatorOccupancy)
+							{
+								if(elevatorPeople instanceof Developer)
+								{
+									Developer elevatorDeveloper = (Developer) elevatorPeople;
+									if(!(developer.getCompanyName().equals(elevatorDeveloper.getCompanyName())))
+									{
+										Building.getPeopleOnAFloor(currentFloor).remove(person);
+										Building.getPeopleOnAFloor(currentFloor).add(person);
+										break;
+									}
+								}
+							}
+						}
 						if((person instanceof Maintenance) && (elevatorOccupancy.size() == 0))
 						{
 							currentMaxCapacity = 1;
@@ -226,9 +279,13 @@ public class Elevator
 								break;
 							}
 						}
-						elevatorOccupancy.add(person);
-						Building.getPeopleOnAFloor(currentFloor).remove(person);
-						elevatorUses++;
+						if(checkDeveloperCompanies(person))
+						{
+							elevatorOccupancy.add(person);
+							person.isInElevator(true);
+							Building.getPeopleOnAFloor(currentFloor).remove(person);
+							elevatorUses++;
+						}
 					}
 					else
 					{

@@ -22,19 +22,13 @@ public class Person
 	protected Queue<Integer> floorGoals;
 	protected Integer previousGoal;
 	protected static Random random;
+	protected boolean isInElevator;
 	
 	
 	/**
 	 * This determines what floors each type of Person can access
 	 * @param accessLevel is and array of the floors a Person can access
-	 */
-	public Person(int[] accessLevel)
-	{
-		this.accessLevel = accessLevel;
-		floorGoals = new LinkedList<Integer>();
-		newGoal();
-	}
-	
+	 */	
 	public Person()
 	{
 		floorGoals = new LinkedList<Integer>();
@@ -120,6 +114,11 @@ public class Person
 	public static double returnProbQ() 
 	{
 		return probabilityQ;
+	}
+	
+	public void isInElevator(boolean inElevator)
+	{
+		isInElevator = inElevator;
 	}
 
 }

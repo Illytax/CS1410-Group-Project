@@ -22,6 +22,10 @@ public class Maintenance extends Person
 		newGoal();
 	}
 	
+	/**
+	 * Sets the Client floor access to be the top floor of the Building
+	 * @param numberOfFloors takes the number of floors in the Building
+	 */
 	private void setAccessLevels(int numberOfFloors) 
 	{
 		accessLevel = new int[] {numberOfFloors};

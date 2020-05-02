@@ -20,6 +20,11 @@ public class Employee extends Person
 		newGoal();
 	}
 	
+	/**
+	 * Sets the Employee floor access to be all the floors of the Building
+	 * excluding the ground floor
+	 * @param numberOfFloors takes the number of floors in the Building
+	 */
 	private void setAccessLevels(int numberOfFloors) 
 	{
 		int[] accessLevel = new int[numberOfFloors - 1];
