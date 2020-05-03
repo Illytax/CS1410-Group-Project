@@ -83,7 +83,7 @@ final class Building
 	 */
 	public static void createClientInBuilding(int nubmerOfFloors)
 	{
-		if(0.001 < Person.returnProbQ())
+		if(Client.newQ() < Person.returnProbQ())
 		{
 			Person newClient = new Client(nubmerOfFloors);
 			floors.get(0).add(newClient);
