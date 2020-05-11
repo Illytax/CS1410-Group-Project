@@ -12,6 +12,7 @@ public class Maintenance extends Person
 	
 	/**
 	 * Death tick generates a Random number between 240 and 120
+	 * @param numberOfFloors takes the number of floors in the Building
 	 * {@inheritDoc}
 	 */
 	public Maintenance(int numberOfFloors)
@@ -23,7 +24,7 @@ public class Maintenance extends Person
 	}
 	
 	/**
-	 * Sets the Client floor access to be the top floor of the Building
+	 * Sets the Maintenance floor access to be the top floor of the Building
 	 * @param numberOfFloors takes the number of floors in the Building
 	 */
 	private void setAccessLevels(int numberOfFloors) 

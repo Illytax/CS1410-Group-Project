@@ -14,6 +14,7 @@ public class Client extends Person
 	
 	/**
 	 * Death tick generates a Random number between 180 and 60
+	 * @param numberOfFloors takes the number of floors in the Building
 	 * {@inheritDoc}
 	 */
 	public Client(int numberOfFloors)
@@ -41,12 +42,17 @@ public class Client extends Person
 	
 	/**
 	 * This method outputs in the console the total number of complaints
+	 * and increments the complaints, then removes the Client
 	 * made by Client(s)
 	 */
 	public void fileComplaint() 
 	{
 		currentNumberOfComplaints++;
 		System.out.println("Number of complaints filed : " + currentNumberOfComplaints);
+		toBeDisposed = true;
+		floorGoals.poll();
+		floorGoals.add(0);
+		Building.removeAComplainingClient();
 	}
 	
 	/**

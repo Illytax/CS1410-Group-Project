@@ -1,7 +1,5 @@
 package elevatorSimulation;
 
-import java.util.LinkedList;
-
 /**
  * This class represents a developer in this building
  * 
@@ -16,6 +14,7 @@ public class Developer extends Person
 	 * This Constructor chooses what company the Developer is working for
 	 * @param companyName the name of the company the Developer works for
 	 * @param floorNumbers total number of floors in the Building
+	 * {@inheritDoc}
 	 */
 	public Developer(String companyName, int floorNumbers)
 	{

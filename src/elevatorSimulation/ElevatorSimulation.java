@@ -9,7 +9,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * This class represents a maintenance team in this building
+ * This class represents the simulation tick that controls
+ * Person movement, Client and Maintenance creation and 
+ * Elevator movement
  * 
  * @author Edward Jordan 180130678
  * @version 1.0
@@ -23,11 +25,21 @@ public class ElevatorSimulation
     @Deprecated HBox mainWindow = new HBox(10);
     @Deprecated public Stage mStage;
 	
+    /**
+     * Sets the max tick for the simulation
+     * @param tMax takes the max tick for the simulation
+     */
 	public static void setTickMax(int tMax)
 	{
 		tickMax = tMax;
 	}
 	
+	/**
+	 * When tick max hasn't been reached, run any of the methods
+	 * that should be called each tick including making a Client or
+	 * Maintenance, updating anyone in the Building(s) goals and
+	 * and moving the Elevator(s)
+	 */
 	public void simulationTick()
 	{
     	if(tickInt < tickMax)

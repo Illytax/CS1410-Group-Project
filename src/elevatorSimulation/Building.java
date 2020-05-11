@@ -213,4 +213,24 @@ final class Building
 		}
 		System.out.println("");
 	}
+	
+	/**
+	 * Checks through the ground floor to see if a Client
+	 * has complained, if so they leave the Building
+	 */
+	public static void removeAComplainingClient()
+	{
+		Queue<Person> peopleOnGroundFloor = Building.getPeopleOnAFloor(0);
+		for(Person person : peopleOnGroundFloor)
+		{
+			if(person instanceof Client)
+			{
+				Client complainingClient = (Client) person;
+				if(complainingClient.toBeDisposed)
+				{
+					Building.getPeopleOnAFloor(0).remove(person);
+				}	
+			}
+		}
+	}
 }

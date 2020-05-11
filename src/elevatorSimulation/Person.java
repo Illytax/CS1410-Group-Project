@@ -17,8 +17,6 @@ public class Person
 	protected int[] accessLevel;
 	protected static double probabilityP;
 	protected static double probabilityQ;
-	protected int maxWaitTime;
-	protected int currentWaitTime;
 	protected Queue<Integer> floorGoals;
 	protected Integer previousGoal;
 	protected static Random random;
@@ -27,7 +25,6 @@ public class Person
 	
 	/**
 	 * This determines what floors each type of Person can access
-	 * @param accessLevel is and array of the floors a Person can access
 	 */	
 	public Person()
 	{
@@ -116,6 +113,10 @@ public class Person
 		return probabilityQ;
 	}
 	
+	/**
+	 * Sets the boolean for when a Person is in an Elevator
+	 * @param inElevator
+	 */
 	public void isInElevator(boolean inElevator)
 	{
 		isInElevator = inElevator;

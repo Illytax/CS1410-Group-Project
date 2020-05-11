@@ -11,6 +11,7 @@ public class Employee extends Person
 	/**
 	 * Allows the Employee to move through any of the 
 	 * Buildings floors not including the ground floor
+	 * @param numberOfFloors takes the number of floors in the Building
 	 * {@inheritDoc}
 	 */
 	public Employee(int numberOfFloors)

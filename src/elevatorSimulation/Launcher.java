@@ -15,7 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 
 /**
- * This class 
+ * This Class controls the FXML and UI
  * 
  * @author Edward Jordan 180130678, Alex Lougheed 190045601
  * @version 1.0
@@ -46,16 +46,28 @@ public class Launcher extends Application
     static Stage stage;
     HBox mainWindow = new HBox(10);
     
+    /**
+     * Creates a new instance of ElevatorSimulation
+     */
     public Launcher()
     {
     	elevatorSimulation = new ElevatorSimulation();
     }
 	
+    /**
+     * The main() method is ignored in a correctly deployed JavaFX application
+     * @param args the command line arguments
+     */
+    		
 	public static void main(String[] args)
     {
     	launch(args);    
     }
     
+	/**
+	 * Setup for the FXML
+	 * @param primaryStage creates a new Stage for the FXML
+	 */
 	@Override
 	public void start(Stage primaryStage) 
 	{
@@ -70,10 +82,16 @@ public class Launcher extends Application
 		} 
 		catch(Exception e) 
 		{
-			e.printStackTrace();
+			
 		}
 	}
 	
+	/**
+	 * Takes the inputs from the FXML and passes them to
+	 * their destinations to set parameters for the Building.
+	 * Also when pressed removes the FXML from the scene and
+	 * adds the buttons to progress the simulation.
+	 */
 	public void submitPressed()
 	{
 		try
@@ -174,6 +192,9 @@ public class Launcher extends Application
 		}
 	}
 	
+	/**
+	 * Controls the visual output on the probability sliders
+	 */
 	@FXML
 	public void initialize()
 	{
