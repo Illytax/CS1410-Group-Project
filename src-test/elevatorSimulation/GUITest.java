@@ -64,14 +64,6 @@ public class GUITest
 		assertEquals(mugtomeDev_TextField.getText(),"");
 		mugtomeDev_TextField.setText("Test");
 		assertEquals(mugtomeDev_TextField.getText(),"Test");
-
-
-
-
-
 	}
-
-		
-	
 
 }
